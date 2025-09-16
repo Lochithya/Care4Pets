@@ -59,7 +59,7 @@ include 'header.php';
                             <form method="POST" style="display:inline;">
                                 <input type="hidden" name="order_id" value="<?php echo $order['id']; ?>">
                                 <select name="status" onchange="this.form.submit()">
-                                    <option value="pending" <?php echo $order['status'] == 'pending' ? 'selected' : ''; ?>>Pending</option>
+                                    <option value="pending" <?php echo $order['status'] == 'pending' ? 'selected' : ''; ?>>Confirmed</option>
                                     <option value="processing" <?php echo $order['status'] == 'processing' ? 'selected' : ''; ?>>Processing</option>
                                     <option value="shipped" <?php echo $order['status'] == 'shipped' ? 'selected' : ''; ?>>Shipped</option>
                                     <option value="delivered" <?php echo $order['status'] == 'delivered' ? 'selected' : ''; ?>>Delivered</option>
