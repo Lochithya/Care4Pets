@@ -64,12 +64,12 @@ $petTypes = getAllPetTypes();
                                     <?php if (isLoggedIn()): ?>
                                         <button class="add-to-cart-btn" data-product-id="<?php echo $product['id']; ?>">
                                             Add to Cart
-                                        </button>
+                                        </button>   
                                     <?php else: ?>
                                         <a href="login.php" class="btn">Login to Purchase</a>
                                     <?php endif; ?>
                                 </div>
-                            </div>
+                            </div>  
                         <?php endforeach; ?>
                     <?php else: ?>
                         <p>No featured products available.</p>

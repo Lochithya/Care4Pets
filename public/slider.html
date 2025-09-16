@@ -9,8 +9,8 @@
     <style>
         .slider-container {
             width: 100%;
-            max-width: 1400px;
-            height: 500px;
+            max-width: 2000px;
+            height: 75vh;
             margin: 0 auto;
             overflow: hidden;
             position: relative;
@@ -21,9 +21,9 @@
 
         .slider {
             display: flex;
-            height: 100%;
+            height: 100vh;
             transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            width: 100%;
+            width: 100vw;
         }
 
         .slide {
@@ -39,7 +39,7 @@
             position: absolute;
             content: "";
             width: 100%;
-            height: 40%;
+            height: 100%;
             bottom: 0;
             left: 0;
             background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.85));
@@ -118,7 +118,6 @@
         }
         @media (max-width: 1024px) {
             .slider-container {
-                height: 450px;
                 max-width: 95%;
             }
 
@@ -129,9 +128,6 @@
             .new-item {
                 width: 280px;
             }
-        }
-        .slider-container {
-            height: 400px;
         }
         .slider-arrow {
             width: 50px;
@@ -147,10 +143,6 @@
 
         .feedback-socials>div:last-child a {
             font-size: 0.9rem;
-        }
-
-        .slider-container {
-            height: 350px;
         }
         .slider-arrow {
             width: 45px;

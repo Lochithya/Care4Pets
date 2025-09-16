@@ -65,7 +65,7 @@ main {
 
 /* Hero section */
 .hero {
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('../images/hero-bg.jpg');
+    background: white;
     background-size: cover;
     background-position: center;
     color: white;
@@ -100,22 +100,23 @@ main {
 }
 
 .btn-primary {
-    background-color: #007bff;
+    background-color:#1C6EA4
     color: white;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
+    background-color:#154D71;
     transform: translateY(-2px);
 }
 
 .btn-secondary {
-    background-color: #6c757d;
+    background-color: #1C6EA4;
     color: white;
 }
 
 .btn-secondary:hover {
-    background-color: #545b62;
+    background-color: #154D71;
+    color: white;
 }
 
 /* Product grid */
@@ -137,7 +138,7 @@ main {
     display: flex;
     flex-direction: column;
     width: 350px ;
-    height : 520px ;    
+    height : 470px ;    
 }
 
 .product-card:hover {
@@ -253,7 +254,7 @@ main {
 }
 
 .add-to-cart-btn {
-      background: linear-gradient(145deg, rgba(42, 179, 74, 0.9), rgba(38, 204, 154, 0.9));
+      background:#1C6EA4;
       color: #fff;
       padding: 12px 25px;
       border: none;
@@ -266,7 +267,7 @@ main {
 .add-to-cart-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      color : black ; 
+      color : #fff;
 }
 
 
@@ -291,7 +292,7 @@ section h2 {
 }
 
 .category-item {
-    background: white;
+    background: #D4EBF8;
     padding: 2rem;
     border-radius: 10px;
     text-align: center;

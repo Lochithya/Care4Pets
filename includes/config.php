@@ -1,13 +1,14 @@
 <?php
 // Database configuration
 define('DB_HOST', 'localhost');
-define('DB_USERNAME', 'petstore_user');
-define('DB_PASSWORD', 'password123');
+define('DB_USERNAME', 'root');
+define('DB_PASSWORD', '');
 define('DB_NAME', 'pet_store');
+define('DB_Port', '4306');
 
 // Create connection
 function getConnection() {
-    $conn = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
+    $conn = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME,DB_Port);
     
     // Check connection
     if ($conn->connect_error) {

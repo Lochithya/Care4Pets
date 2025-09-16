@@ -2,7 +2,7 @@
 session_start(); 
 
 // ✅ Use default port 3306 (or leave it empty)
-$conn = mysqli_connect('localhost', 'root', '', 'pet_store');
+$conn = mysqli_connect('localhost', 'root', '', 'pet_store','4306');
 
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());

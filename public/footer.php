@@ -9,7 +9,7 @@
   <footer>
     <style>
       footer {
-        background: #111111; /* Attractive black */
+        background: #154D71; /* Attractive black */
         color: #ffffff;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         margin-top: 40px;
