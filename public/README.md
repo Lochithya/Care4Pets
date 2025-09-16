@@ -52,26 +52,10 @@ This pet store e-commerce platform is designed as a university project to demons
 
 ### Product Categories
 
-The platform now features a sophisticated two-level filtering system:
-
-#### Pet Types:
-- **Dogs**: Products specifically for dogs
-- **Cats**: Products specifically for cats  
-- **Birds**: Products specifically for birds
-- **Small Pets**: Products for hamsters, rabbits, guinea pigs, etc.
-
-#### Product Types:
-- **Pets**: Live animals available for adoption/purchase
-- **Food**: Nutritional products and treats
-- **Toys**: Entertainment and enrichment items
-- **Accessories**: Collars, leashes, cages, litter, and other supplies
-
-#### Advanced Filtering:
-Users can filter products by:
-1. **Pet Type Only**: See all products for a specific pet (e.g., all dog products)
-2. **Product Type Only**: See specific product categories across all pets (e.g., all food products)
-3. **Combined Filtering**: Precise filtering by both criteria (e.g., dog food, cat toys)
-4. **No Filters**: Browse all available products
+- Dog Products (food, toys, accessories)
+- Cat Products (food, litter, toys)
+- Bird Products (cages, food, accessories)
+- Small Pet Products (hamster wheels, rabbit supplies)
 
 ## Technology Stack
 
@@ -169,13 +153,9 @@ The application uses a well-structured relational database with the following ta
 - `password`: Hashed password using PHP's password_hash()
 - `created_at`: Account creation timestamp
 
-#### Pet Types Table
+#### Categories Table
 - `id`: Primary key (auto-increment)
-- `name`: Pet type name (Dogs, Cats, Birds, Small Pets)
-
-#### Product Types Table
-- `id`: Primary key (auto-increment)
-- `name`: Product type name (Pets, Food, Toys, Accessories)
+- `name`: Category name (Dog Products, Cat Products, etc.)
 
 #### Products Table
 - `id`: Primary key (auto-increment)
@@ -184,8 +164,7 @@ The application uses a well-structured relational database with the following ta
 - `price`: Product price (decimal)
 - `stock_quantity`: Available inventory
 - `image_url`: Product image path
-- `pet_type_id`: Foreign key to pet_types table
-- `product_type_id`: Foreign key to product_types table
+- `category_id`: Foreign key to categories table
 
 #### Orders Table
 - `id`: Primary key (auto-increment)
@@ -210,23 +189,9 @@ The application uses a well-structured relational database with the following ta
 ### Sample Data
 
 The database includes sample data for testing:
-- 4 pet types (Dogs, Cats, Birds, Small Pets)
-- 4 product types (Pets, Food, Toys, Accessories)
-- 10 sample products with proper categorization
+- 4 product categories
+- 10 sample products with images
 - 1 test user account (admin/password123)
-
-### Database Migration
-
-If upgrading from the original single-category system, run the migration script:
-```bash
-mysql -u petstore_user -p pet_store < database/migration_nested_categories.sql
-```
-
-This script will:
-1. Create new pet_types and product_types tables
-2. Migrate existing product data to the new schema
-3. Remove the old categories table
-4. Preserve all existing data while upgrading the structure
 
 ## Project Structure
 
