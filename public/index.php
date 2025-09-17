@@ -16,26 +16,7 @@ $petTypes = getAllPetTypes();
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1><a href="index.php">Pet Store</a></h1>
-            <nav>
-                <ul>
-                    <li><a href="index.php" class="active">Home</a></li>
-                    <li><a href="about.php">About Us</a></li>
-                    <li><a href="products.php">Products</a></li>
-                    <li><a href="cart.php">Cart</a></li>
-                    <li><a href="contact.php">Contact Us</a></li>
-                    <?php if (isLoggedIn()): ?>
-                        <li><a href="logout.php">Logout (<?php echo $_SESSION['username']; ?>)</a></li>
-                    <?php else: ?>
-                        <li><a href="login.php">Login</a></li>
-                    <?php endif; ?>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
+   <?php include 'header.php'; ?>
     <main>
         <section class="hero">
             <div class="container">
@@ -64,7 +45,7 @@ $petTypes = getAllPetTypes();
                                     <?php if (isLoggedIn()): ?>
                                         <button class="add-to-cart-btn" data-product-id="<?php echo $product['id']; ?>">
                                             Add to Cart
-                                        </button>   
+                                        </button>
                                     <?php else: ?>
                                         <a href="login.php" class="btn">Login to Purchase</a>
                                     <?php endif; ?>
@@ -97,9 +78,9 @@ $petTypes = getAllPetTypes();
         </section>
     </main>
 
-    <footer>
+   
         <?php include '../public/footer.php' ?>
-    </footer>
+    
 
     <script src="../js/cart.js"></script>
 </body>

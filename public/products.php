@@ -52,28 +52,46 @@ $products = getProductsByFilters($selectedPetType, $selectedProductType);
       margin-left: 7px;
       cursor: pointer;
     }
+    .search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  max-width: 400px;
+  margin: 20px auto;
+  background: white;
+  border-radius: 50px;
+  padding: 6px 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.search-bar input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  padding: 8px 12px;
+  border-radius: 50px;
+}
+
+.search-bar button {
+ /* professional blue */
+  color: white;
+  border: none;
+  outline: none;
+  padding: 8px 14px;
+  font-size: 1rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+
+
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1><a href="index.php">Pet Store</a></h1>
-            <nav>
-                <ul>
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="about.php">About Us</a></li>
-                    <li><a href="products.php" class="active">Products</a></li>
-                    <li><a href="cart.php">Cart</a></li>
-                    <li><a href="contact.php">Contact Us</a></li>
-                    <?php if (isLoggedIn()): ?>
-                        <li><a href="logout.php">Logout</a></li>
-                    <?php else: ?>
-                        <li><a href="login.php">Login</a></li>
-                    <?php endif; ?>
-                </ul>
-            </nav>
-        </div>
-    </header>
+     <?php include 'header.php'; ?>
     
     <div id="message-bar"></div>
 
@@ -81,6 +99,11 @@ $products = getProductsByFilters($selectedPetType, $selectedProductType);
         <h2>Our Products</h2>
         
         <div class="filter-section">
+            <div class="search-bar">
+  <input type="text" placeholder="Search for products..." />
+  <button type="submit">🔍</button>
+</div>
+
             <h3>Filter by Pet Type:</h3>
             <div class="category-filters">
                 <a href="products.php?product_type=<?php echo htmlspecialchars($selectedProductType ?? ''); ?>" class="filter-btn <?php echo $selectedPetType === null ? 'active' : ''; ?>">All Pets</a>

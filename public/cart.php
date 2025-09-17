@@ -383,22 +383,8 @@ $cartTotal = $_SESSION['checkout']['cart_total'] ??  00.00 ;
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1><a href="index.php">Pet Store</a></h1>
-            <nav>
-                <ul>
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="about.php">About Us</a></li>
-                    <li><a href="products.php">Products</a></li>
-                    <li><a href="cart.php" class="active">Cart</a></li>
-                    <li><a href="contact.php">Contact Us</a></li>
-                    <li><a href="logout.php">Logout</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
+   
+<?php include 'header.php'; ?>
     <div id="message-bar"></div>
     <main class="container">
         <div class="top-section">
@@ -495,11 +481,7 @@ $cartTotal = $_SESSION['checkout']['cart_total'] ??  00.00 ;
     </main>
     <?php unset($_SESSION['checkout']['product_ids']); ?>                <!-- to clear the session so next reload will not have anything checked  -->
     <?php unset($_SESSION['checkout']['cart_total']); ?>
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Pet Store E-commerce</p>
-        </div>
-    </footer>
+    <?php include 'footer.php' ?>
     
 </body>
     <script>

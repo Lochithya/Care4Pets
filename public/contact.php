@@ -22,14 +22,28 @@ $status = isset($_GET['status'])?$_GET['status']:null;
     }
 
     /* Background with cute Labrador */
-    body {
-      background: url('../images/Contact/background.avif')
-                  no-repeat center center fixed;
-      background-size: cover;
-      color: #333;
-      position: relative;
-      min-height: 100vh;
-    }
+   body {
+  background: url('../images/Contact/background.avif')
+              no-repeat center center fixed;
+  background-size: cover;
+  color: #333;
+  position: relative;
+  min-height: 100vh;
+
+  /* ✅ Add zoom-out effect */
+  animation: zoomOut 12s ease-in-out infinite alternate;
+}
+
+/* Keyframes for Background Zoom-Out */
+@keyframes zoomOut {
+  0% {
+    background-size: 115%; /* Start slightly zoomed-in */
+  }
+  100% {
+    background-size: 100%; /* Slowly zoom out to normal */
+  }
+}
+
 
     /* Dark overlay for readability */
     body::before {
@@ -162,27 +176,8 @@ $status = isset($_GET['status'])?$_GET['status']:null;
 </head>
 <body>
 
-  <!-- ===== HEADER ===== -->
-  <header class="topbar">
-      <div class="container">
-          <h1 class="logo"><a href="index.php">🐾 Pet Store</a></h1>
-          <nav>
-              <ul>
-                  <li><a href="index.php">Home</a></li>
-                  <li><a href="about.php">About Us</a></li>
-                  <li><a href="products.php">Products</a></li>
-                  <li><a href="cart.php">Cart</a></li>
-                  <li><a href="contact.php" class="active">Contact Us</a></li>
-                  <?php if (isLoggedIn()): ?>
-                      <li><a href="logout.php" class="btn">Logout</a></li>
-                  <?php else: ?>
-                      <li><a href="login.php" class="btn">Login</a></li>
-                  <?php endif; ?>
-              </ul>
-          </nav>
-      </div>
-  </header>
-
+ 
+<?php include 'header.php'; ?>
   <!-- ===== HERO SECTION ===== -->
   <section class="hero">
       <div class="hero-text">

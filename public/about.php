@@ -24,17 +24,12 @@ body {
 
 .container { width: 90%; max-width: 1200px; margin: auto; }
 
-/* Header */
-.site-header { background: #fff; border-bottom: 1px solid #eee; padding: 15px 0; }
-.header-flex { display: flex; justify-content: space-between; align-items: center; }
-.logo a { text-decoration: none; font-size: 1.5rem; font-weight: bold; color: #222; }
-.main-nav ul { list-style: none; display: flex; gap: 20px; }
-.main-nav ul li a { text-decoration: none; color: #333; font-weight: 500; }
-.main-nav ul li a.active, .main-nav ul li a:hover { color: #ff6600; }
 
 /* Hero */
 .hero {
-  background: #2b4a80;
+  background: url('../images/slider/pexels-peps-silvestro-180443212-14255377.jpg')
+              no-repeat center center fixed;
+  background-size: cover;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -43,12 +38,26 @@ body {
   color: white;
   position: relative;
   overflow: hidden;
+
+  /* ✅ Add this for smooth zoom-out effect */
+  animation: zoomOut 10s ease-in-out infinite alternate;
 }
+
+/* Keyframes for Zoom-Out Effect */
+@keyframes zoomOut {
+  0% {
+    background-size: 120%; /* Start slightly zoomed-in */
+  }
+  100% {
+    background-size: 100%; /* Slowly zoom out to normal size */
+  }
+}
+
 .hero-content { max-width: 500px; }
 .hero .badge {
   display: inline-block;
   background: #fff;
-  color: #ff3366;
+  color: #1C6EA4;
   padding: 5px 15px;
   border-radius: 20px;
   font-size: 0.9rem;
@@ -59,7 +68,7 @@ body {
 .hero .btn {
   display: inline-block;
   padding: 10px 25px;
-  background: #ff6600;
+  background:#1C6EA4;
   color: white;
   font-weight : bolder;
   text-decoration: none;
@@ -106,7 +115,7 @@ body {
   transform: translateY(-8px);
 }
 .mv-card h3 { 
-  color: #6a0dad; 
+  color: #154D71; 
   margin-bottom: 20px; 
   font-size: 1.3rem;
 }
@@ -369,17 +378,19 @@ body {
   gap: 25px;
 }
 .choose-card {
-  background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+  background: rgba(250, 250, 252, 1);
+  width: 200px;
+  height:200px;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   
 }
 
-.choose-card p { font-weight: 500; color: #333; margin-top: 10px; }
+.choose-card p { font-weight: 750; color: #333; margin-top: 10px; }
 
 /* Testimonials */
-.testimonials { background: #eef1f8; padding: 40px 0; text-align: center; }
+.testimonials { background: #eef1f8; padding: 60px 0; text-align: center; }
 .testimonials h2 { font-size: 1.8rem; margin-bottom: 40px; color: #111; }
 
 .testimonials h2 {
@@ -433,27 +444,7 @@ body {
 
 <body>
 
-  <!-- Header -->
-  <header class="site-header">
-    <div class="container header-flex">
-      <h1 class="logo"><a href="index.php">Pet store</a></h1>
-      <nav class="main-nav">
-        <ul>
-          <li><a href="index.php">Home</a></li>
-          <li><a href="about.php" class="active">About Us</a></li>
-          <li><a href="products.php">Products</a></li>
-          <li><a href="cart.php">Cart</a></li>
-          <li><a href="contact.php">Contact Us</a></li>
-          <?php if (isLoggedIn()): ?>
-              <li><a href="logout.php">Logout</a></li>
-          <?php else: ?>
-              <li><a href="login.php">Login</a></li>
-          <?php endif; ?>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
+ <?php include 'header.php'; ?>
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
@@ -462,9 +453,7 @@ body {
       <p>Providing everything your pets need <br> to live happy, healthy lives.</p>
       <a href="products.php" class="btn">Shop Now</a>
     </div>
-    <div class="hero-image">
-      <img src="../images/About/dog-drawing-easy-8.jpg" alt="Pet illustration">
-    </div>
+    
   </section>
 
   <!-- Mission & Vision -->
