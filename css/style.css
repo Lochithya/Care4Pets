@@ -29,7 +29,6 @@ header {
 
 
 
-    padding: 0.5rem 1rem;
 
 
 /* Main content */
@@ -61,7 +60,7 @@ main {
 }
 .se{
     overflow: auto;
-    width: 2000px   ;
+    width: 2000px;
 }
 
 /* Buttons */
