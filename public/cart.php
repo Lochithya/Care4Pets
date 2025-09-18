@@ -29,12 +29,12 @@ $cartTotal = $_SESSION['checkout']['cart_total'] ??  00.00 ;
         .cart-container {
             width : 1280px ;
             margin-left : -50px ;
-            background-color: #ffffffff;
+            background-color:#D4EBF8;
             border-radius: 12px;
             margin-top : -5px;
             padding: 1.5rem;
-            box-shadow: 10px 10px 15px rgba(161, 155, 155, 0.69);
-            border-left: 4px solid black;
+            
+           
 
         }
 
@@ -48,7 +48,7 @@ $cartTotal = $_SESSION['checkout']['cart_total'] ??  00.00 ;
             font-size: large;
             padding: 1rem;
             border-radius: 8px 8px 0 0;
-            background: linear-gradient( #fdc017ff);
+            background: #1C6EA4;    
             border : 1px solid gray ;
             color: black;
             
@@ -114,7 +114,7 @@ $cartTotal = $_SESSION['checkout']['cart_total'] ??  00.00 ;
 
         /*stock_qunaity */
         .stock {
-            color: #1b9b46;
+            color: #1C6EA4;
             font-size : 1rem ;
             font-family :'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             font-weight :500;
@@ -188,26 +188,27 @@ $cartTotal = $_SESSION['checkout']['cart_total'] ??  00.00 ;
         }
 
         .update-quantity-btn {
-            background: linear-gradient(135deg, #97c7e2ff, #42a5f5, #2979ff); /* A fresh blue gradient */
-            color: white;
+            background
+            : #1C6EA4; /* A fresh blue gradient */
+            color: white; 
             font-weight: bold;
             margin-left: 6px;
             box-shadow: 0 4px 10px rgba(41, 121, 255, 0.2); /* A soft shadow */
         }
 
         .update-quantity-btn:hover {
-            background: linear-gradient(135deg, #2979ff, #1a237e); /* Darker gradient on hover */
+            background:#154D71; /* Darker gradient on hover */
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             transform: translateY(-2px);
         }
 
         .remove-item-btn{
-            background: linear-gradient(45deg, #ff9966, #ff5e62, #ba5370);
+            background:#ED3500;
             color: white;
             box-shadow: 0 4px 10px
         }
         .remove-item-btn:hover{
-            background: linear-gradient(45deg, #ff8c4a, #ff4c51, #a43e5c); 
+            background: #B22222; 
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
         }
@@ -234,7 +235,7 @@ $cartTotal = $_SESSION['checkout']['cart_total'] ??  00.00 ;
             font-size: 1.3rem;
             font-weight: 600;
             font-family :Georgia, 'Times New Roman', Times, serif;
-            color: #13a30bff;
+            color: #1C6EA4;
             margin-bottom: 2.0rem;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -260,7 +261,7 @@ $cartTotal = $_SESSION['checkout']['cart_total'] ??  00.00 ;
         }
 
         .cart-total-amount , .dollar {
-            color: #27ae60;
+            color: #1C6EA4;
             font-weight: 700;
             font-size: 1.6rem;
             max-width: 20px;
@@ -274,7 +275,7 @@ $cartTotal = $_SESSION['checkout']['cart_total'] ??  00.00 ;
             margin-top: 1.5rem;
         }
         .shopping {
-            background: linear-gradient(135deg, #c94b7b, #a55db8, #7b2cbf);
+            background: #1C6EA4;
             padding: 0.75rem 1.5rem;
             border-radius: 25px;
             font-size : 0.95rem;
@@ -288,14 +289,14 @@ $cartTotal = $_SESSION['checkout']['cart_total'] ??  00.00 ;
         }
 
         .shopping:hover {
-            background: linear-gradient(-135deg, #c94b7b, #a55db8, #7b2cbf);
+            background: #1C6EA4;
             box-shadow: 0 6px 16px rgba(255, 77, 100, 0.4);
             transform: translateY(-2px);
             color:black
         }
 
         .checkout {
-            background: linear-gradient(135deg, #38ef7d, #11998e);
+            background: #06923E;
             color: white;
             padding: 0.75rem 1.5rem;
             border-radius: 20px;
@@ -309,7 +310,7 @@ $cartTotal = $_SESSION['checkout']['cart_total'] ??  00.00 ;
         }
 
         .checkout:hover {
-            background: linear-gradient(-135deg, #38ef7d, #11998e);
+            background: #347433;
             box-shadow: 0 6px 14px rgba(95, 42, 88, 0.4);
             color:black;
             transform: translateY(-2px);
@@ -357,7 +358,7 @@ $cartTotal = $_SESSION['checkout']['cart_total'] ??  00.00 ;
             align-items: baseline;
         }
         .delete-cart {
-            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            background: #ED3500;
             color: white;
             font-weight: bold;
             font-size: 1rem;
@@ -370,6 +371,7 @@ $cartTotal = $_SESSION['checkout']['cart_total'] ??  00.00 ;
         }
 
         .delete-cart:hover {
+            background:#B22222; 
             transform: translateY(-3px) scale(1.03);
             box-shadow: 0 6px 15px rgba(255, 75, 43, 0.5);
         }

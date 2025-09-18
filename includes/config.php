@@ -8,7 +8,7 @@ define('DB_Port', '4306');
 
 // Create connection
 function getConnection() {
-    $conn = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME,DB_Port);
+    $conn = new mysqli(DB_HOST,DB_USERNAME,DB_PASSWORD, DB_NAME,DB_Port);
     
     // Check connection
     if ($conn->connect_error) {

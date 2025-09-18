@@ -556,22 +556,22 @@ body {
     <h2>Our Team</h2>
     <div class="team-grid">
       <div class="team-card">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcv8rksm8UZHtwTRw2-kKPDToXKED6uIhNXOE3ED6c7LPISDfZe7x_AMPc1Yt6XGBl_rI" alt="Lochithya">
+ <img src="../images/About/WhatsApp Image 2025-09-18 at 15.59.48_af3b7e70.jpg">
         <h4>Lochithya</h4>
         <p>Co-Founder</p>
       </div>
       <div class="team-card">
-        <img src="https://www.shutterstock.com/image-photo/happy-handsome-young-business-leader-260nw-2375039955.jpg" alt="Chinthana">
-        <h4>Chinthana</h4>
+        <img src="../images/About/WhatsApp Image 2025-09-06 at 19.53.13_0527bf23.jpg" alt="Chinthana">
+        <h4>Chinthana</h4> 
         <p>Co-Founder</p>
       </div>
       <div class="team-card">
-        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Thisari">
+        <img src="../images/About/2025061422253573.jpg" alt="Thisari">
         <h4>Thisari</h4>
         <p>Co-Founder</p>
       </div>
       <div class="team-card">
-        <img src="https://www.perfocal.com/blog/content/images/size/w960/2021/01/Perfocal_17-11-2019_TYWFAQ_100_standard-3.jpg" alt="Nethmi">
+        <img src="../images/About/WhatsApp Image 2025-09-17 at 21.08.46_9babd15e.jpg" alt="Nethmi">
         <h4>Nethmi</h4>
         <p>Co-Founder</p>
       </div>

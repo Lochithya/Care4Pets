@@ -221,7 +221,7 @@ $conn->close();
         margin-bottom: 30px;
     }
     .back-to-cart {
-        background: linear-gradient(135deg, #c94b7b, #a55db8, #7b2cbf);
+        background: #1C6EA4;
         padding: 0.75rem 1.5rem;
         border-radius: 25px;
         font-size : 1.0rem;
@@ -236,14 +236,14 @@ $conn->close();
     }
 
     .back-to-cart:hover {
-        background: linear-gradient(-135deg, #c94b7b, #a55db8, #7b2cbf);
+        background: #154D71;  
         box-shadow: 0 6px 16px rgba(255, 77, 100, 0.4);
         transform: translateY(-2px);
         color:black
     }
 
     .proceed-to-payment {
-        background: linear-gradient(135deg, #38ef7d, #11998e);
+        background: #06923E;
         color: white;
         padding: 0.75rem 1.5rem;
         border-radius: 20px;
@@ -257,7 +257,7 @@ $conn->close();
     }
 
     .proceed-to-payment:hover {
-        background: linear-gradient(-135deg, #38ef7d, #11998e);
+        background: #347433;
         box-shadow: 0 6px 14px rgba(95, 42, 88, 0.4);
         color:black;
         transform: translateY(-2px);

@@ -13,6 +13,7 @@ $status = isset($_GET['status'])?$_GET['status']:null;
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Us - Pet Store</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
 
   <style>
     /* Reset */
@@ -57,7 +58,7 @@ $status = isset($_GET['status'])?$_GET['status']:null;
 
     /* Header */
     header.topbar {
-      background: rgba(94, 44, 237, 0.9);
+      background: #1C6EA4;
       padding: 1rem 0;
       color: #fff;
     }
@@ -97,7 +98,7 @@ $status = isset($_GET['status'])?$_GET['status']:null;
     .card h3{
       margin-bottom : 10px;
     }
-    .card i { color: #5e2ced; margin-bottom: 0.5rem; }
+    .card i { color: #1C6EA4; margin-bottom: 0.5rem; }
 
     /* Contact Form */
     .contact-form {
@@ -108,7 +109,7 @@ $status = isset($_GET['status'])?$_GET['status']:null;
       margin-bottom: 2rem;
       backdrop-filter: blur(8px);
     }
-    .contact-form h3 { margin-bottom: 1rem; color: #5e2ced; }
+    .contact-form h3 { margin-bottom: 1rem; color: #1C6EA4  ; }
     .contact-form .form-group { margin-bottom: 1rem; }
     .contact-form input, 
     .contact-form textarea {
@@ -127,7 +128,7 @@ $status = isset($_GET['status'])?$_GET['status']:null;
       gap : 20px;
     }
     .contact-form button {
-      background: #5e2ced;
+      background: #1C6EA4;
       color: #fff; border: none;
       padding: 0.8rem 1.2rem;
       border-radius: 8px;
@@ -172,6 +173,9 @@ $status = isset($_GET['status'])?$_GET['status']:null;
       color: inherit; /* matches the text color */
       user-select: none;
     }
+    .button{
+    background-color: #1b9b46;
+}
   </style>
 </head>
 <body>

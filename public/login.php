@@ -104,7 +104,7 @@
   .forgot a {
     font-size: 13px;
     text-decoration: none;
-    color: #7b2ff7;
+    color: #1C6EA4;
   }
 
   .forgot a:hover {
@@ -115,7 +115,7 @@
   button {
     width: 100%;
     padding: 12px;
-    background: linear-gradient(135deg, #7b2ff7, #9b59ff);
+    background:#1C6EA4;
     border: none;
     border-radius: 6px;
     color: #fff;
@@ -126,7 +126,7 @@
   }
 
   button:hover {
-    background: linear-gradient(135deg, #5a1bd1, #8227ff);
+    background:#154D71;
     transform: scale(1.02);
   }
 
@@ -138,7 +138,7 @@
   }
 
   p a {
-    color: #7b2ff7;
+    color: #1C6EA4;
     font-weight: 600;
     text-decoration: none;
   }

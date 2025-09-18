@@ -220,7 +220,7 @@ if ($productIds) {
         margin-bottom : 10px;
     }
     .back-to-shipping{
-        background: linear-gradient(135deg, #c94b7b, #a55db8, #7b2cbf);
+        background:#1C6EA4;
         padding: 0.85rem 1.6rem;
         border-radius: 25px;
         font-size : 1.0rem;
@@ -234,13 +234,13 @@ if ($productIds) {
 
     }
     .back-to-shipping:hover{
-        background: linear-gradient(-135deg, #c94b7b, #a55db8, #7b2cbf);
+        background: #154D71;
         box-shadow: 0 6px 16px rgba(255, 77, 100, 0.4);
         transform: translateY(-2px);
         color:black
     }
     .complete-order{
-        background: linear-gradient(135deg, #38ef7d, #11998e);
+        background: #06923E;
         color: white;
         padding: 0.85rem 1.6rem;
         border-radius: 20px;
@@ -253,7 +253,7 @@ if ($productIds) {
         box-shadow: 0 4px 10px rgba(164, 80, 139, 0.3);
     }
     .complete-order:hover{
-        background: linear-gradient(-135deg, #38ef7d, #11998e);
+        background:  #347433;
         box-shadow: 0 6px 14px rgba(95, 42, 88, 0.4);
         color:black;
         transform: translateY(-2px);

@@ -16,7 +16,7 @@ $products = getProductsByFilters($selectedPetType, $selectedProductType);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products - Pet Store</title>
-    <link rel="stylesheet" href="../css/style.css?v=2">
+    <link rel="stylesheet" href="../css/style.css?v=4">
     <style>
     .message-bar {
     position : fixed ;
@@ -54,14 +54,13 @@ $products = getProductsByFilters($selectedPetType, $selectedProductType);
     }
     .search-bar {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  align
   gap: 8px;
   max-width: 400px;
   margin: 20px auto;
   background: white;
   border-radius: 50px;
-  padding: 6px 10px;
+  padding:  10px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
@@ -172,7 +171,7 @@ $products = getProductsByFilters($selectedPetType, $selectedProductType);
                                         Add to Cart
                                     </button>
                                 <?php else: ?>
-                                    <p><a href="login.php">Login to purchase</a></p>
+                                    <div class="op"><p><a href="login.php">Login to purchase</a></p></div>
                                 <?php endif; ?>
                             </div>
                         
