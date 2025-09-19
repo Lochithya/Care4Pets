@@ -390,7 +390,7 @@ body {
 .choose-card p { font-weight: 750; color: #333; margin-top: 10px; }
 
 /* Testimonials */
-.testimonials { background: #eef1f8; padding: 60px 0; text-align: center; }
+.testimonials { background: #D4EBF8; padding: 60px 0; text-align: center; }
 .testimonials h2 { font-size: 1.8rem; margin-bottom: 40px; color: #111; }
 
 .testimonials h2 {

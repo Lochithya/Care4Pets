@@ -21,7 +21,7 @@
         
         /* Header Styles */
         .site-header {
-            background: linear-gradient(135deg, #1976d2, #0d47a1);
+            background: #1C6EA4;
             color:white;
             padding: 0;
             box-shadow:  0 2px 15px rgba(13, 71, 161, 0.2);
@@ -69,27 +69,31 @@
             text-decoration: none;
             font-weight: 500;
             padding: 8px 5px;
-            transition: all 0.3s ease;
             position: relative;
+            transition: all 0.3s ease;
         }
-        
-        .main-nav a:hover {
-            color: #ffd700;
-        }
-        
-        .main-nav a.active {
-            color: #ffd700;
-        }
-        
-        .main-nav a.active:after {
+
+        /* Underline animation for active link */
+        .main-nav a::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 100%;
+            width: 0;
             height: 3px;
             background-color: #ffd700;
             border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+        
+        .main-nav a:hover::after,
+        .main-nav a.active::after {
+            width: 100%;
+        }
+        
+        .main-nav a:hover,
+        .main-nav a.active {
+            color: #ffd700;
         }
         
         /* Top right icons */
@@ -157,99 +161,6 @@
             font-size: 24px;
             cursor: pointer;
         }
-        
-        /* Demo content */
-        .demo-content {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        
-        .demo-content h2 {
-            color: #1565c0;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
-        }
-        
-        .feature-card {
-            background: white;
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(13, 71, 161, 0.1);
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .feature-card i {
-            font-size: 40px;
-            color: #1976d2;
-            margin-bottom: 15px;
-        }
-        
-        .feature-card h3 {
-            color: #0d47a1;
-            margin-bottom: 10px;
-        }
-        
-        /* Responsive styles */
-        @media (max-width: 900px) {
-            .header-flex {
-                flex-wrap: wrap;
-            }
-            
-            .menu-toggle {
-                display: block;
-            }
-            
-            .main-nav {
-                width: 100%;
-                margin-top: 15px;
-                display: none;
-            }
-            
-            .main-nav.active {
-                display: block;
-            }
-            
-            .main-nav ul {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .header-icons {
-                margin-left: auto;
-                margin-right: 15px;
-            }
-        }
-        
-        @media (max-width: 600px) {
-            .logo a {
-                font-size: 22px;
-            }
-            
-            .greeting {
-                display: none;
-            }
-            
-            .header-flex {
-                padding: 10px 0;
-            }
-            
-            .icon-wrapper {
-                padding: 8px 12px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -264,7 +175,7 @@
             
             <nav class="main-nav" id="mainNav">
                 <ul>
-                    <li><a href="index.php" class="active">Home</a></li>
+                    <li><a href="index.php">Home</a></li>
                     <li><a href="about.php">About Us</a></li>
                     <li><a href="products.php">Products</a></li>
                     <li><a href="contact.php">Contact Us</a></li>
@@ -286,8 +197,6 @@
             </div>
         </div>
     </header>
-    
-    
 
     <script>
         // Mobile menu toggle
@@ -295,7 +204,6 @@
             const nav = document.getElementById('mainNav');
             nav.classList.toggle('active');
             
-            // Change icon
             const icon = this.querySelector('i');
             if (nav.classList.contains('active')) {
                 icon.classList.remove('fa-bars');
@@ -305,29 +213,18 @@
                 icon.classList.add('fa-bars');
             }
         });
-        
-        // Toggle profile menu (for demonstration)
+
+        // Auto-detect active page based on current URL
+        const currentPage = window.location.pathname.split('/').pop(); 
+        document.querySelectorAll('.main-nav a').forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            }
+        });
+
+        // Toggle profile menu
         function toggleProfileMenu() {
             alert("Profile menu would open here with account options.");
-        }
-        
-        // For demonstration - change active page on click
-        document.querySelectorAll('.main-nav a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                if (this.getAttribute('href') === 'login.php') {
-                    e.preventDefault();
-                    alert("Login screen would appear here.");
-                    return;
-                }
-                
-                document.querySelectorAll('.main-nav a').forEach(a => a.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-        
-        // Update cart count (for demonstration)
-        function updateCartCount(count) {
-            document.querySelector('.cart-count').textContent = count;
         }
     </script>
 </body>
