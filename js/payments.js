@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded',function(){
             .then(response => response.json())
             .then(data=> {
                 if (data.success){
-                    window.location.href = 'successful.php?order_id=' +data.order_id ;
+                    window.location.href = 'order_successful.php?order_id=' +data.order_id ;
                 }
                 else{
                     alert('Error saving order : '+(data.message || 'Unknown error'));

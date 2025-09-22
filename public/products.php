@@ -57,7 +57,6 @@ $products = getProductsByFilters($selectedPetType, $selectedProductType);
         }
     .search-bar {
   display: flex;
-  align
   gap: 8px;
   max-width: 400px;
   margin: 20px auto;
