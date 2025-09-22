@@ -9,7 +9,7 @@ if (isset($_POST['add_supplier'])) {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $address = mysqli_real_escape_string($conn, $_POST['address']);
     
-    $query = "INSERT INTO suppliers (name, phone, email, address) 
+    $query = "INSERT INTO suppliers (sup_name, sup_phone, sup_email, sup_address) 
               VALUES ('$name', '$phone', '$email', '$address')";
     
     if (mysqli_query($conn, $query)) {
@@ -75,11 +75,11 @@ include 'header.php';
             <tbody>
                 <?php while ($supplier = mysqli_fetch_assoc($suppliers_result)): ?>
                     <tr>
-                        <td><?php echo $supplier['id']; ?></td>
-                        <td><?php echo $supplier['name']; ?></td>
-                        <td><?php echo $supplier['phone']; ?></td>
-                        <td><?php echo $supplier['email']; ?></td>
-                        <td><?php echo $supplier['address']; ?></td>
+                        <td><?php echo $supplier['supplier_id']; ?></td>
+                        <td><?php echo $supplier['sup_name']; ?></td>
+                        <td><?php echo $supplier['sup_phone']; ?></td>
+                        <td><?php echo $supplier['sup_email']; ?></td>
+                        <td><?php echo $supplier['sup_address']; ?></td>
                     </tr>
                 <?php endwhile; ?>
             </tbody>
