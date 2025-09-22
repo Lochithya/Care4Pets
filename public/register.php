@@ -28,7 +28,6 @@
           justify-content: center;
           align-items: center;
           padding: 20px;
-          overflow: hidden; /* Prevents the whole page from scrolling */
         }
 
         /* === Main Container === */

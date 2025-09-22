@@ -1,3 +1,35 @@
+<?php 
+    require_once '../includes/auth.php';
+    require_once '../includes/config.php' ;
+
+    $userId = getCurrentUserId() ;
+    $conn = getConnection() ; 
+
+    if($userId){
+        $stmt = $conn->prepare("SELECT count(product_id) FROM cart WHERE user_id = ?");
+        $stmt->bind_param("i",$userId);
+        $stmt->execute();
+        $result = $stmt->get_result();                     // returns mysqli object
+        $row = $result->fetch_row();
+        $count = $row[0];
+        $stmt->close();
+
+        $stmt2 = $conn->prepare("SELECT avatar FROM users WHERE id = ?");
+        $stmt2->bind_param("i",$userId);
+        $stmt2->execute();
+        $result2 = $stmt2->get_result();
+        $row = $result2->fetch_row();
+        $avatar = $row[0];
+        $stmt2->close();
+
+        $conn->close();
+    }
+    else{
+        $count = 0 ; 
+    }
+
+    
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,7 +132,7 @@
         .header-icons {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 25px;
         }
         
         .icon-wrapper {
@@ -108,7 +140,7 @@
             align-items: center;
             gap: 8px;
             background: rgba(255, 255, 255, 0.15);
-            padding: 8px 15px;
+            padding: 6px 14px;
             border-radius: 50px;
             transition: all 0.3s ease;
             cursor: pointer;
@@ -147,9 +179,16 @@
         .profile-icon i {
             font-size: 20px;
         }
+
+        .image{
+            width:35px;
+            height:35px;
+            border-radius:20px;
+        }
         
         .greeting {
             font-weight: 500;
+            line-height: 20px;
         }
         
         /* Mobile menu toggle */
@@ -180,19 +219,30 @@
                     <li><a href="products.php">Products</a></li>
                     <li><a href="contact.php">Contact Us</a></li>
                     <li><a href="dashboard.php">Dashboard</a></li>
-                    <li><a href="login.php">Login</a></li>
+                    <?php if (isLoggedIn()): ?>
+                        <li><a href="logout.php">Logout</a></li>
+                    <?php else: ?>
+                        <li><a href="login.php">Login</a></li>
+                    <?php endif; ?>
                 </ul>
             </nav>
             
             <div class="header-icons">
                 <div class="icon-wrapper cart-icon" onclick="window.location.href='cart.php'">
                     <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-count">3</span>
+                    <span class="cart-count"><?php echo $count; ?></span>
                 </div>
                 
-                <div class="icon-wrapper profile-icon" onclick="toggleProfileMenu()">
-                    <i class="fas fa-user-circle"></i>
-                    <span class="greeting">Hi!</span>
+                <div class="icon-wrapper profile-icon">
+                    <?php if (isLoggedIn()): ?>
+                        <img class="image" src="<?php echo $avatar; ?>" alt="picture">
+                        <span class="greeting">Hi ! <br>
+                        <?php echo $_SESSION['username'];?></span>
+                    <?php else: ?>
+                        <i class="fas fa-user-circle"></i>
+                        <span class="greeting">Hi !</span>
+                    <?php endif; ?>
+                    
                 </div>
             </div>
         </div>
@@ -222,10 +272,6 @@
             }
         });
 
-        // Toggle profile menu
-        function toggleProfileMenu() {
-            alert("Profile menu would open here with account options.");
-        }
     </script>
 </body>
 </html>
