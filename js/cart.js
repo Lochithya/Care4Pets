@@ -1,4 +1,6 @@
 // Cart functionality
+const messageBar = document.getElementById('message-bar');
+
 document.addEventListener('DOMContentLoaded', function() {
     // Add to cart buttons
     const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
@@ -200,7 +202,7 @@ function showMessage(message, type) {
     const messageBar = document.getElementById('message-bar');
     messageBar.innerHTML = `
         <span>${message}</span>
-        <button class="close-btn">Reload</button>       
+        <button class="close-btn">❌ </button>       
     `;                                                   // adding the button along with the mesagebar
 
     messageBar.className = 'message-bar ' + type; // reset + apply type , then two classes are included
@@ -209,11 +211,15 @@ function showMessage(message, type) {
     // Attach close button event
     const closeBtn = messageBar.querySelector('.close-btn');
     closeBtn.addEventListener('click', () => {
-        messageBar.style.display = 'none';
-        setTimeout(()=>{
-            location.reload()
-        },0);
-    }) ;
+    messageBar.style.display = 'none';
+
+    // 🟢 delay එකක් දීලා reload
+    setTimeout(()=>{
+        location.reload();
+    }, 500);  // 0.5 seconds delay, userට UI effect එක smooth
+});
+  
+
 }    
 
 

@@ -387,7 +387,8 @@ $cartTotal = $_SESSION['checkout']['cart_total'] ??  00.00 ;
 <body>
    
 <?php include 'header.php'; ?>
-    <div id="message-bar"></div>
+  <div id="message-bar" class="message-bar"></div>
+
     <main class="container">
         <div class="top-section">
             <h2>Your Shopping Cart</h2>

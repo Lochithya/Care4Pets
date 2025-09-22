@@ -18,40 +18,43 @@ $products = getProductsByFilters($selectedPetType, $selectedProductType);
     <title>Products - Pet Store</title>
     <link rel="stylesheet" href="../css/style.css?v=4">
     <style>
-    .message-bar {
-    position : fixed ;
-    z-index : 1;
-    width: 100%;
-    top : 3% ;
-    padding: 12px 20px;
-    border-radius: 6px;
-    font-size: 1.15rem;
-    font-weight: bold;
-    display: none;  /* hidden by default */
-    text-align : center ;
-    margin-bottom : 20px ;
-    box-shadow: 0 8px 6px rgba(0,0,0,0.2);
-    }
+    /* Message Bar Styles */
+        .message-bar {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-size: 1.15rem;
+            font-weight: bold;
+            display: none;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            position: fixed;
+            top: 80px;
+            left: 0;
+            z-index: 1000;
+        }
 
-    .message-bar.success {                     /*when both the classes are needed to be there*/ 
-      background-color: #b1ecbfff;
-      color: #0c4b1bff;
-    }
+        .message-bar.success {
+            background-color: #b1ecbfff;
+            color: #0c4b1bff;
+        }
 
-    .message-bar.error {                       /*when both the classes are needed to be there*/
-      background-color: #f8d7da;
-      color: #721c24;
-    }
+        .message-bar.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
 
-    .message-bar .close-btn {
-      background: none;
-      font-size: 1.3rem;
-      border : none ;
-      font-weight: bold;
-      color: inherit;
-      margin-left: 7px;
-      cursor: pointer;
-    }
+        .message-bar .close-btn {
+            background-color: white;
+            font-size: .8rem;
+            border: 1px solid gray;
+            font-weight: 500;
+            color: inherit;
+            margin-left: 7px;
+            cursor: pointer;
+        }
     .search-bar {
   display: flex;
   align
@@ -183,8 +186,60 @@ $products = getProductsByFilters($selectedPetType, $selectedProductType);
     </main>
 
     <?php include 'footer.php' ?>
+    <script>
+        // Message bar functionality
+        function showMessage(message, type) {
+            const messageBar = document.getElementById('message-bar');
+            messageBar.innerHTML = `
+                <span>${message}</span>
+                <button class="close-btn">❌</button>       
+            `;
+            
+            messageBar.className = 'message-bar ' + type;
+            messageBar.style.display = 'block';
 
-    <script src="../js/cart.js"></script>
+            // Attach close button event
+            const closeBtn = messageBar.querySelector('.close-btn');
+            closeBtn.addEventListener('click', () => {
+                messageBar.style.display = 'none';
+            });
+        }
+
+        // Add to cart functionality for index.php
+        document.addEventListener('DOMContentLoaded', function() {
+            const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = this.getAttribute('data-product-id');
+                    addToCart(productId, 1);
+                });
+            });
+        });
+
+        // Add item to cart
+        function addToCart(productId, quantity) {
+            fetch('../api/cart_actions.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'action=add&product_id=' + productId + '&quantity=' + quantity
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showMessage(data.message, 'success');
+                } else {
+                    showMessage(data.message, 'error');
+                }
+            })
+            .catch(() => {
+                showMessage('Error adding item to the cart!', 'error');
+            });
+        }
+    </script>
+  
+
 </body>
 </html>
 
