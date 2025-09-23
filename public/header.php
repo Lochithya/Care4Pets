@@ -22,7 +22,6 @@
         $avatar = $row[0];
         $stmt2->close();
 
-        $conn->close();
     }
     else{
         $count = 0 ; 

@@ -93,7 +93,8 @@
         .header-icons {
             display: flex;
             align-items: center;
-            gap: 25px;
+            gap: 35px;
+            margin-left:20px;
         }
         
         .icon-wrapper {
@@ -107,8 +108,20 @@
             cursor: pointer;
         }
         
-        .icon-wrapper:hover {
+        .icon-wrapper:hover,
+        .icon-wrapper2:hover {
             background: rgba(255, 255, 255, 0.25);
+        }
+
+        .icon-wrapper2 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 6px 14px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
         
         .cart-icon {
@@ -150,6 +163,7 @@
         .greeting {
             font-weight: 500;
             line-height: 20px;
+            font-size : 15px;
         }
         
         /* Mobile menu toggle */

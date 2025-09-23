@@ -3,7 +3,7 @@
 require_once '../includes/auth.php';
 require_once '../includes/config.php';
 
-$conn = getConnection(); // must return mysqli connection
+$conn = getConnection();
 
 if (!isLoggedIn()) {
     // in case of not logged in
@@ -62,8 +62,8 @@ if (!isLoggedIn()) {
 }
 
 include 'header.php';
-
 $userId = getCurrentUserId();
+
 
 // ------------------ Fetch user ------------------
 $user = [];
