@@ -232,10 +232,10 @@
                     <li><a href="index.php">Home</a></li>
                     <li><a href="about.php">About Us</a></li>
                     <li><a href="products.php">Products</a></li>
-                    <li><a href="contact.php">Contact Us</a></li>
                     <li><a href="dashboard.php">Dashboard</a></li>
+                    <li><a href="contact.php">Contact Us</a></li>
                     <?php if (isLoggedIn()): ?>
-                        <li><a href="logout.php">Logout</a></li>
+                        <li><a href="" class="logout">Logout</a></li>
                     <?php else: ?>
                         <li><a href="login.php">Login</a></li>
                     <?php endif; ?>
@@ -290,6 +290,13 @@
                 link.classList.add('active');
             }
         });
+
+        let logout = document.querySelector('.logout');
+        logout.addEventListener("click",()=>{
+            if(confirm("Do you actually want to log out?")){
+                window.location.href = "logout.php";
+            }
+        })
 
     </script>
 </body>
