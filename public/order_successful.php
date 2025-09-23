@@ -31,16 +31,16 @@ $subtotal = $quantity * $price;
 
 .order-container {
     background: #ffffff;
-    width: 600px;
-    height: 600px;
-    margin: 50px auto;
+    width: 650px;
+    height: 650px;
+    margin: 10px auto;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 6px 20px rgba(0,0,0,0.1);
 }
 
 .header {
-    background: #2e3062;
+    background:#154D71;
     color: #fff;
     text-align: center;
     padding: 30px 20px;
@@ -75,7 +75,7 @@ $subtotal = $quantity * $price;
 }
 
 .order-id {
-    background: #e3aaf3;
+    background: #33A1E0;
     color: #000;
     display: inline-block;
     padding: 6px 12px;
@@ -97,6 +97,8 @@ $subtotal = $quantity * $price;
 }
 
 .order-summary {
+     padding: 12px;
+    text-align: left;
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
@@ -104,10 +106,11 @@ $subtotal = $quantity * $price;
 
 .summary-title {
     text-align: left;
-    font-size: 18px;
+    font-size: 2px;
     font-weight: bold;
-    margin: 20px 0 10px;
-    color: #0b0b0b;
+    margin: 20px 2px;
+    color: #154D71;
+    bold:2px;
 }
 
 
@@ -120,27 +123,30 @@ $subtotal = $quantity * $price;
 }
 
 .order-summary th {
-    background: #f0f0f0;
+    background:#D4EBF8;
     font-weight: normal; 
     
 }
 
 .order-summary td {
-    font-weight: bold; 
+   
 }
 
+
 .subtotal {
+    color: #e70b03ff;
     text-align: right;
     padding: 15px 20px;
     font-size: 16px;
     font-weight: bold;
 }
 .subtotal span {
-    color: #000;
+    color:  #198754;
 }
 .order-success {
-    background: #f0f0f0;   /* green success color */
-    color: #0a0a0a;
+    border-radius:2px;
+    background:#1C6EA4;   /* green success color */
+    color:white;
     text-align: center;
     padding: 12px;
     font-size: 16px;
@@ -153,7 +159,7 @@ $subtotal = $quantity * $price;
 <body>
     <div class="order-container">
         <div class="header">
-            <h2 class="logo">Pet Store</h2>
+            <h2 class="logo">Care4Pets</h2>
             <div class="checkmark">✔</div>
             <h2>Thanks for your Order!</h2>
             <div class="order-id">Order Id: <span><?php echo $orderId; ?></span></div>
@@ -165,7 +171,7 @@ $subtotal = $quantity * $price;
             <div><strong>Payment Method</strong><br><?php echo $paymentMethod; ?></div>
         </div>
 
-        <div class="summary-title">Order Summary</div>
+        <div class="summary-title"> Order Summary</div>
         <table class="order-summary">
             <thead>
                 <tr>
@@ -177,8 +183,8 @@ $subtotal = $quantity * $price;
             <tbody>
                 <tr>
                     <td><?php echo $product; ?></td>
-                    <td>x<?php echo $quantity; ?></td>
-                    <td>$<?php echo number_format($price, 2); ?></td>
+                    <td style=color:#154D71;>x<?php echo $quantity; ?></td>
+                    <td style=color:#198754;>$<?php echo number_format($price, 2); ?></td>
                 </tr>
             </tbody>
         </table>

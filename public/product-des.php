@@ -23,241 +23,305 @@ $product = $result ? $result->fetch_assoc() : null;
   <meta charset="UTF-8">
   <title><?php echo $product ? $product['name'] : "Product Details"; ?></title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f6f8fa;
-      margin: 0;
-      padding: 0;
-    }
-    .header {
-      background: #222;
-      color: #fff;
-      padding: 1rem 2rem;
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-    .back-btn {
-      display: inline-block;
-      margin: 1rem 2rem;
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-      border: 2px solid #333;
-      padding: 6px 12px;
-      border-radius: 6px;
-      transition: all 0.3s ease;
-    }
-    .back-btn:hover {
-      background: #333;
-      color: #fff;
-    }
-    .message-bar {
-      width: 100%;
-      padding: 12px 20px;
-      border-radius: 6px;
-      font-size: 1.15rem;
-      font-weight: bold;
-      display: none;  /* hidden by default */
-      text-align: center;
-      margin-top : -5px ;
-      margin-bottom : 20px ;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }
-
-    .message-bar.success {                     /*when both the classes are needed to be there*/ 
-      background-color: #b1ecbfff;
-      color: #0c4b1bff;
-    }
-
-    .message-bar.error {                       /*when both the classes are needed to be there*/
-      background-color: #f8d7da;
-      color: #721c24;
-    }
-
-    .message-bar .close-btn {
-      background-color : white;
-      font-size: .8rem;
-      border : 1px solid gray ;
-      font-weight: 500;
-      color: inherit;
-      margin-left: 7px;
-      cursor: pointer;
-    }
-    .container {
-      display: flex;
-      max-width: 1150px;
-      margin: 2rem auto;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-      overflow: hidden;
-      margin-top: 10px ;
-    }
-    .left {
-      flex: 1;
-      padding: 2rem;
-      border-right: 1px solid #eee;
-    }
-    .main-img {
-      width: 100%;
-      height: 350px;
-      object-fit: contain;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-      background: #fafafa;
-    }
-    .thumbnails {
-      display: flex;
-      gap: 10px;
-    }
-    .thumbnails img {
-      width: 70px;
-      height: 70px;
-      object-fit: cover;
-      border: 2px solid #ddd;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .thumbnails img:hover {
-      border-color: #ff9800;
-    }
-    .right {
-      flex: 1;
-      padding: 2rem;
-    }
-    .product-name {
-      font-size: 1.8rem;
-      font-weight: bold;
-      margin-bottom: 1.4rem;
-    }
-    .supplier {
-      font-size: 1rem;
-      color: #555;
-      margin-bottom: 0.3rem;
-    }
-    .supplier span{
-        color : black ;
-        font-weight: 550;
-    }
-    .supplier2{
-        font-size: 1rem ;
-        color : #555 ;
-        margin-left: 72px ;
-        margin-bottom: 1.6rem;
-    }
-    .ratings {
-      color: #f39c12;
-      margin-bottom: 1rem;
-      font-size : 1.2rem ;
-    }
-    .ratings span{
-        font-size : 1rem ;
-        color: black ;
-        font-weight: 550;
-    }
-    .description {
-      color: #444;
-      margin-bottom: 1.5rem;
-      line-height: 1.5;
-    }
-    .price {
-      font-size: 2.0rem;
-      font-weight: bold;
-      color: #e53935;
-      display:inline-block;
-    }
-    .product-price{
-        margin-top: 45px;
-        display: flex;
-        gap : 13px ;
-        align-items:baseline;
-        margin-bottom: 50px;
-    }
-    .stock {
-    color: #1b9b46;
-    font-size : 1.03rem ;
-    font-family :'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight :500;
-    font-style:italic;
-    }
-    .total-price {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-top: 10px;
-    color: #080808ff; /* white text for contrast */
-    text-align: center;
-    background: linear-gradient(150deg, #c511cbff, #0acceeff); /* stylish purple-blue gradient */
-    border-radius: 30px;
-    padding: 12px 20px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-    margin-bottom: 40px;
+    /* ---------- GLOBAL STYLES ---------- */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #f6f8fa, #e9f2f9);
+  margin: 0;
+  padding: 0;
+  color: #333;
 }
 
+/* ---------- HEADER ---------- */
+.header {
+  background: #1C6EA4;
+  color: #fff;
+  padding: 1rem 2rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 1px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
 
-    .action-row {
-      display: flex;
-      gap : 35px ;
-      align-items: flex-end;
-      margin-top: 1.5rem;
-    }
-    .quantity-box {
-      display: flex;
-      align-items: center;
-      gap : 30px ; 
-      
-    }
-    .quantity-label {
-      font-weight: bold;
-    }
-    .quantity-controls {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .quantity-controls button {
-            width: 32px;
-            height: 32px;
-            border: none;
-            background: #eee;
-            font-size: 18px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .quantity-controls input {
-            width: 60px;
-            text-align: center;
-            font-size: 16px;
-            padding: 4px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            border-color: black;
-            margin-right:-6px;
-        }
-        .quantity-controls .controls{
-            background-color: white;
-            color :darkred;
-            font-size: 1.4rem;  
+/* ---------- BACK BUTTON ---------- */
+.back-btn {
+  display: inline-block;
+  margin: 1rem 2rem;
+  text-decoration: none;
+  color: #1C6EA4;
+  font-weight: bold;
+  border: 2px solid #1C6EA4;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+.back-btn:hover {
+  background: #1C6EA4;
+  color: #fff;
+  transform: translateY(-2px);
+}
 
-        }
-    .add-to-cart-button {
-      background: linear-gradient(145deg, rgba(42, 179, 74, 0.9), rgba(38, 204, 154, 0.9));
-      color: #fff;
-      padding: 14px 30px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1rem;
-      font-weight: bold;
-      transition: all 0.3s ease;
-    }
-    .add-to-cart-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      color : black ;
-      cursor: pointer;
-    }
+/* ---------- MESSAGE BAR ---------- */
+.message-bar {
+  width: 90%;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 1.15rem;
+  font-weight: bold;
+  display: none;
+  text-align: center;
+  margin: 10px auto 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+.message-bar.success {
+  background-color: #d6f5e6;
+  color: #1a6640;
+}
+.message-bar.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+.message-bar .close-btn {
+  background-color: white;
+  font-size: 0.8rem;
+  border: 1px solid gray;
+  font-weight: 500;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+/* ---------- CONTAINER ---------- */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1150px;
+  margin: 2rem auto;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  animation: fadeIn 0.4s ease-in-out;
+  padding: 1rem;
+}
+
+/* ---------- LEFT SECTION ---------- */
+.left {
+  flex: 1;
+  padding: 2rem;
+  border-right: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main-img {
+  width: 100%;
+  max-width: 500px;
+  height: 350px;
+  border: 2px solid #154D71;
+  object-fit: contain;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  background: #fafafa;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.main-img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.thumbnails {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.thumbnails img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.3s ease;
+}
+.thumbnails img:hover {
+  
+  border-color: #1C6EA4;
+  transform: scale(1.08);
+}
+
+/* ---------- RIGHT SECTION ---------- */
+.right {
+  flex: 1;
+  padding: 2rem;
+}
+.product-name {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #154D71;
+}
+.supplier {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 0.3rem;
+}
+.supplier span {
+  color: black;
+  font-weight: 600;
+}
+.supplier2 {
+  font-size: 1rem;
+  color: #555;
+  margin-left: 72px;
+  margin-bottom: 1.5rem;
+}
+.ratings {
+  color: #f39c12;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+.ratings span {
+  color: #333;
+  font-weight: 600;
+}
+
+/* ---------- DESCRIPTION BOX ---------- */
+.description {
+  color: #444;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  background: #f6f6f6;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+  transition: background 0.3s ease;
+}
+.description:hover {
+  background: #eef2f5;
+}
+
+/* ---------- PRICE + STOCK ---------- */
+.product-price {
+  display: flex;
+  gap: 16px;
+  align-items: baseline;
+  margin: 30px 0 40px;
+}
+.price {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #e53935;
+}
+.stock {
+  color: #1b9b46;
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* ---------- TOTAL PRICE ---------- */
+.total-price {
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-align: center;
+  background: linear-gradient(90deg, #1C6EA4, #154D71);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 50px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  margin-bottom: 30px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.total-price:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* ---------- QUANTITY + BUTTON ---------- */
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: flex-end;
+  margin-top: 1rem;
+}
+.quantity-box {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.quantity-label {
+  font-weight: bold;
+}
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.quantity-controls button {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: #eee;
+  font-size: 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+.quantity-controls button:hover {
+  background: #ddd;
+  transform: scale(1.05);
+}
+.quantity-controls input {
+  width: 60px;
+  text-align: center;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 4px;
+}
+
+.add-to-cart-button {
+  background: #1C6EA4;
+  color: #fff;
+  padding: 14px 30px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+.add-to-cart-button:hover {
+  background: #154D71;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ---------- ANIMATIONS ---------- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- RESPONSIVE DESIGN ---------- */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  .left {
+    border-right: none;
+    border-bottom: 1px solid #eee;
+  }
+  .product-name {
+    text-align: center;
+  }
+  .total-price {
+    font-size: 1.1rem;
+  }
+}
+
   </style>
   
 </head>

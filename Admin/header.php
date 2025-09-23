@@ -15,7 +15,7 @@ if (!isset($_SESSION['admin_id'])) {
 <body>
     <div class="admin-container">
         <div class="sidebar">
-            <h2>Pet Shop Admin</h2>
+            <h2>Care4Pets Admin</h2>
             <ul>
                 <li><a href="dashboard.php">Dashboard</a></li>
                 <li><a href="product.php">Products</a></li>
