@@ -1,122 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="stylesheet" href="..\css\footer.css">
+
   </head>
   <footer>
-    <style>
-      footer {
-        background: #154D71; /* Attractive black */
-        color: #ffffff;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        margin-top: 40px;
-        box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.4);
-      }
-
-      .footer-container {
-        display: flex;
-        justify-content: space-between;
-        padding: px;
-        flex-wrap: wrap;
-        align-items: flex-start;
-      } 
-
-      .footer-section {
-        flex: 1;
-        min-width: 240px;
-        margin: 30px;
-        text-align: center;
-      }
-
-      .footer-section h3,
-      .footer-section h4 {
-       padding: top 10px;
-        margin-bottom: 18px;
-        font-size: 20px;
-        font-weight: bold;
-        color: #ffffff;
-      }
-
-      .footer-section p {
-        font-size: 15px;
-        line-height: 1.8;
-        color: #ffffff;
-      }
-
-      .footer-section ul {
-        list-style: none;
-        padding: 0;
-      }
-
-      .footer-section ul li {
-        margin-bottom: 10px;
-        
-      }
-
-      .footer-section ul li a {
-        color: #cccccc;
-        text-decoration: none;
-        font-size: 20px;
-        transition: all 0.3s ease-in-out;
-      }
-
-      .footer-section ul li a:hover {
-        color: lightseagreen;
-        text-decoration: none;
-        font-size : 17px;
-      }
-
-      /* ✅ Social Media Icons Row */
-      .social-row {
-        width: 100%;
-        text-align: center;
-        margin: 20px 0;
-      }
-
-      .social-icons a {
-        display: inline-block;
-        width: 40px;
-        height: 40px;
-        line-height: 40px;
-        text-align: center;
-        border-radius: 50%;
-        background: #ffffff;
-        color: #111111;
-        margin: 0 8px;
-        font-size: 18px;
-        transition: transform 0.3s, background 0.3s, color 0.3s;
-      }
-
-      .social-icons a:hover {
-        transform: scale(1.2);
-        background: #25d366; /* WhatsApp green for hover */
-        color: #ffffff;
-      }
-
-      .footer-bottom {
-        text-align: center;
-       
-        
-        font-size: 14px;
-        color: #aaaaaa;
-      }
-
-      .footer-bottom p {
-        margin: 0;
-        padding: 0;
-      }
-
-      .link{
-        color: #cccccc;
-        font-size: 17px;
-      }
-      .link:hover{
-        color : lightseagreen;
-      }
-    </style>
+    
 
     <body>
       <div class="footer-container">
