@@ -6,7 +6,7 @@ require_once '../includes/config.php';
 $conn = getConnection(); // must return mysqli connection
 
 if (!isLoggedIn()) {
-    // No redirect, just show a message
+    // in case of not logged in
     echo '
     <!DOCTYPE html>
     <html lang="en">
