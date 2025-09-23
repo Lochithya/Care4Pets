@@ -140,13 +140,28 @@
             align-items: center;
             gap: 8px;
             background: rgba(255, 255, 255, 0.15);
-            padding: 6px 14px;
+            padding: 8px 20px;
             border-radius: 50px;
             transition: all 0.3s ease;
             cursor: pointer;
         }
         
         .icon-wrapper:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .icon-wrapper2 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 6px 12px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .icon-wrapper2:hover {
             background: rgba(255, 255, 255, 0.25);
         }
         
@@ -181,8 +196,8 @@
         }
 
         .image{
-            width:35px;
-            height:35px;
+            width:40px;
+            height:40px;
             border-radius:20px;
         }
         
@@ -233,9 +248,13 @@
                     <span class="cart-count"><?php echo $count; ?></span>
                 </div>
                 
-                <div class="icon-wrapper profile-icon">
+                <div class="icon-wrapper2 profile-icon">
                     <?php if (isLoggedIn()): ?>
-                        <img class="image" src="<?php echo $avatar; ?>" alt="picture">
+                        <?php if($avatar) :?>
+                            <img class="image" src="<?php echo $avatar; ?>" alt="picture">
+                        <?php else : ?>
+                            <i class="fas fa-user-circle"></i>
+                        <?php endif; ?>
                         <span class="greeting">Hi ! <br>
                         <?php echo $_SESSION['username'];?></span>
                     <?php else: ?>
