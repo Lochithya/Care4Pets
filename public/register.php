@@ -1,10 +1,10 @@
 <?php
-// Your PHP registration logic would go here.
-// For example, handling form submission, validation, and database interaction.
 
-// Example variables for demonstration of message styling
-// $error = "Password does not match.";
-// $success = "Registration successful!";
+session_start();
+if (empty($_SESSION['csrf_token'])) {                                        // cross-site request forgery for extra safety and checking the vulnerabilities
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,10 +37,16 @@
           max-width: 900px; /* A bit wider to accommodate the image comfortably */
           background: #fff;
           border-radius: 20px; /* Softer, more rounded corners */
-          overflow: hidden;
           box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+          animation: fadeIn 0.8s ease-in-out;
           /* max-height property removed to rely on content size */
         }
+
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
 
         /* === Left Image Panel === */
         .image-panel {
@@ -176,6 +182,9 @@
         <!-- Form Panel -->
         <div class="form-container">
             <h2>Create Account</h2>
+
+            <div id="ajaxMessage" style="margin-bottom:12px"></div>
+
             <?php if (isset($error)): ?>
                 <div class="error"><?php echo htmlspecialchars($error); ?></div>
             <?php endif; ?>
@@ -200,6 +209,10 @@
                     <input type="email" id="email" name="email" required>
                 </div>
                 <div class="form-group">
+                  <label for="phone">Phone</label>
+                  <input type="text" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" required>
                 </div>
@@ -207,17 +220,21 @@
                     <label for="confirm_password">Confirm Password</label>
                     <input type="password" id="confirm_password" name="confirm_password" required>
                 </div>
-                <!-- Note: The attachment field was not in the original form, but kept it as you had it -->
+
                 <div class="form-group">
-                    <label for="attachment">Attachment</label>
-                    <input type="file" id="attachment" name="attachment" style="border:none; padding:0;">
+                    <label for="avatar">Profile Avatar</label>
+                    <input type="file" id="avatar" name="avatar" accept="image/*">
                 </div>
+
+                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">                  <!-- for csrf token to pe passed along with the form -->
+
                 <button type="submit">Register</button>
             </form>
             <p class="login-link">Already have an account? <a href="login.php">Login here</a></p>
         </div>
     </div>
 </body>
+<script src="../js/register.js"></script>
 </html>
 
 

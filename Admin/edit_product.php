@@ -120,7 +120,7 @@ include 'header.php';
                 <label>Supplier:</label>
                 <select name="supplier_id" required>
                     <?php while ($supplier = mysqli_fetch_assoc($suppliers)): ?>
-                        <option value="<?php echo $supplier['sup_id']; ?>" <?php echo $supplier['sup_id'] == $product['supplier_id'] ? 'selected' : ''; ?>>
+                        <option value="<?php echo $supplier['supplier_id']; ?>" <?php echo $supplier['supplier_id'] == $product['supplier_id'] ? 'selected' : ''; ?>>
                             <?php echo htmlspecialchars($supplier['sup_name']); ?>
                         </option>
                     <?php endwhile; ?>
