@@ -4,7 +4,7 @@ require_once '../includes/auth.php';
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8"
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pet Store</title>
 
@@ -12,7 +12,7 @@ require_once '../includes/auth.php';
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <link rel="stylesheet" href="..\css\about.css">
 
-<<<<<<< HEAD
+
   <style> 
 /* Reset */
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -443,8 +443,7 @@ body {
 }
 .swiper-button-next, .swiper-button-prev { color: #6a0dad; }
   </style>
-=======
->>>>>>> b15f03099c20b001818c5661c57d8aaaa1e0dda1
+
 </head>
 
 <body>
