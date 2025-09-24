@@ -130,16 +130,7 @@ $petTypes = getAllPetTypes();
    <?php include 'header.php'; ?>
    <div id="message-bar" class="message-bar"></div>
    
-    <main>
-       <section class="hero">
-    <div class="hero-content">
-      <span class="badge">Pet Store</span>
-      <h2>If animals could talk,<br> they’d talk about us!</h2>
-      <p>Providing everything your pets need <br> to live happy, healthy lives.</p>
-      <a href="products.php" class="btn">Shop Now</a>
-    </div>
-    
-  </section>
+  <?php include 'slider.html'  ?>
 
         <section class="featured-products">
             <div class="container">
