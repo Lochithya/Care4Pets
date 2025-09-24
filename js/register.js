@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     clearMsg();
 
-    const phone = phoneInput.value.trim(); // <-- moved here
+    const phone = phoneInput.value.trim(); // <-- for removal of the outer values
     const clientErrors = validateClientSide(phone);
     if (clientErrors.length) {
       showMsg(clientErrors.join('<br>'), true);
@@ -91,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (pwd !== confirmPassword.value) errors.push('Passwords do not match.');
     if (!/^[\w.\-]{3,30}$/.test(username.value.trim())) errors.push('Username must be 3–30 chars (letters, numbers, ., _, -).');
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) errors.push('Invalid email format.');
+
 
     if (avatarInput.files.length) {
         const file = avatarInput.files[0];
