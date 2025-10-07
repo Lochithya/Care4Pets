@@ -43,7 +43,7 @@
 <body>
     <!-- Header -->
     <header class="site-header">
-        <div class="container header-flex">
+        <div class="containerer header-flex">
             <h1 class="logo"><a href="index.php">Care4Pets</a></h1>
             
             <button class="menu-toggle" id="menuToggle">

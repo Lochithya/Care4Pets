@@ -12,14 +12,6 @@ body {
     background-color: #f8f9fa;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-
-
 /* Main content */
 main {
     min-height: calc(100vh - 120px);
@@ -244,7 +236,7 @@ main {
 .add-to-cart-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      color : #fff;
+      color : black;
 }
 
 
