@@ -1,213 +1,763 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="slider.css">
+    <title>Care4Pets - Premium Pet Supplies</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-     .slider-container {
-    width: 100%;
-    height: 90vh; /* almost full height of screen */
-    margin: 100px auto;
-    overflow: hidden;
-    position: relative;
-    border-radius: 0; /* no rounded corners */
-    box-shadow: none; /* remove frame shadow */
-    background: black; /* optional, makes empty areas look nice */
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Header Styles */
+        .site-header {
+            background: linear-gradient(135deg, #1C6EA4 0%, #154D71 100%);
+            color: white;
+            padding: 0;
+            box-shadow: 0 4px 20px rgba(13, 71, 161, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo a {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo a:before {
+            content: "🐾";
+            margin-right: 10px;
+            font-size: 24px;
+        }
+        
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        .main-nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 5px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
 
-.slider {
-    display: flex;
-    height: 100%;
-    transition: transform 0.6s ease-in-out;
-    width: 100%;
-}
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ffd700, #ffed4a);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+        
+        .main-nav a:hover::after,
+        .main-nav a.active::after {
+            width: 100%;
+        }
+        
+        .main-nav a:hover,
+        .main-nav a.active {
+            color: #ffd700;
+        }
+        
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        
+        .icon-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 8px 20px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .icon-wrapper:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
 
-.slide {
-    min-width: 100%;
-    height: 100%;
-    flex-shrink: 0;
-    position: relative; 
-    overflow: hidden;
-}
+        .icon-wrapper2 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 6px 12px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .icon-wrapper2:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cart-icon {
+            position: relative;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: linear-gradient(135deg, #ff5252, #ff1744);
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(255, 82, 82, 0.4);
+        }
+        
+        .profile-icon {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .profile-icon i {
+            font-size: 20px;
+        }
 
-.slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* keeps image fully covering the screen */
-    transform: scale(1.15); /* zoom effect for close-up look */
-    transition: transform 0.8s ease-in-out;
-}
+        .image {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .greeting {
+            font-weight: 500;
+            line-height: 20px;
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
 
-.slide img:hover {
-    transform: scale(1.25); /* extra zoom when hovering */
-}
+        /* Full-Width Slider Styles */
+        .slider-container {
+            width: 100vw;
+            height: 600px;
+            overflow: hidden;
+            position: relative;
+            margin-left: calc(-50vw + 50%);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        }
 
-.slide::after {
-    position: absolute;
-    content: "";
-    width: 100%;
-    height: 100%;
-    bottom: 0;
-    left: 0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.6));
-    z-index: 1;
-}
+        .slider {
+            display: flex;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+        }
 
-.slider-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 60px;
-    height: 60px;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(8px);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    z-index: 10;
-}
+        .slide {
+            min-width: 100vw;
+            height: 100%;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
 
-.slider-arrow:hover {
-    background: rgba(255, 255, 255, 0.3);
-}
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.8s ease-in-out;
+            will-change: transform;
+        }
 
-.prev {
-    left: 20px;
-}
+        .slide.active img {
+            transform: scale(1.02);
+        }
 
-.next {
-    right: 20px;
-}
+        .slide-content {
+            position: absolute;
+            bottom: 25%;
+            left: 8%;
+            max-width: 600px;
+            color: white;
+            z-index: 3;
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s;
+        }
 
-.slider-nav {
-    position: absolute;
-    bottom: 25px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 12px;
-    z-index: 3;
-}
+        .slide.active .slide-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-.nav-dot {
-    height: 12px;
-    width: 12px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.5);
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-}
+        .slide-content h2 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.8);
+            background: linear-gradient(135deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-.nav-dot.active,
-.nav-dot:hover {
-    background-color: white;
-    transform: scale(1.3);
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
-}
+        .slide-content p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8);
+            line-height: 1.5;
+            max-width: 500px;
+        }
 
+        .slide-content .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #1C6EA4, #154D71);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 6px 20px rgba(28, 110, 164, 0.4);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide-content .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .slide-content .btn:hover::before {
+            left: 100%;
+        }
+
+        .slide-content .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(28, 110, 164, 0.6);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .slide::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg,
+                rgba(0, 0, 0, 0.2) 0%,
+                rgba(0, 0, 0, 0.1) 30%,
+                rgba(0, 0, 0, 0.6) 100%
+            );
+            z-index: 2;
+        }
+
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            z-index: 10;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 18px;
+        }
+
+        .slider-arrow:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .prev {
+            left: 40px;
+        }
+
+        .next {
+            right: 40px;
+        }
+
+        .slider-nav {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+        }
+
+        .nav-dot {
+            height: 14px;
+            width: 14px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .nav-dot.active,
+        .nav-dot:hover {
+            background-color: white;
+            transform: scale(1.3);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+        }
+
+        .slide-counter {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 8px 16px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Loading Animation */
+        .slide img {
+            opacity: 0;
+            transition: opacity 2s ease;
+        }
+
+        .slide img.loaded {
+            opacity: 1;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .slider-container {
+                height: 500px;
+            }
+            
+            .slide-content h2 {
+                font-size: 2.8rem;
+            }
+
+            .slide-content {
+                left: 6%;
+                max-width: 500px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-flex {
+                flex-wrap: wrap;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .main-nav {
+                display: none;
+                width: 100%;
+                margin-top: 15px;
+            }
+            
+            .main-nav.active {
+                display: block;
+            }
+            
+            .main-nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .slider-container {
+                height: 450px;
+            }
+            
+            .slide-content {
+                left: 5%;
+                bottom: 20%;
+                max-width: 90%;
+            }
+            
+            .slide-content h2 {
+                font-size: 2.2rem;
+            }
+            
+            .slide-content p {
+                font-size: 1.1rem;
+            }
+            
+            .slider-arrow {
+                width: 50px;
+                height: 50px;
+                font-size: 16px;
+            }
+            
+            .prev {
+                left: 20px;
+            }
+            
+            .next {
+                right: 20px;
+            }
+
+            .slide-counter {
+                top: 20px;
+                right: 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slider-container {
+                height: 400px;
+            }
+            
+            .slide-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .slide-content p {
+                font-size: 1rem;
+            }
+
+            .slide-content .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            
+            .header-icons {
+                gap: 15px;
+            }
+            
+            .icon-wrapper, .icon-wrapper2 {
+                padding: 6px 12px;
+            }
+
+            .slider-arrow {
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        /* Performance Optimizations */
+        .slider {
+            transform: translate3d(0, 0, 0);
+        }
+
+        .slide {
+            backface-visibility: hidden;
+            perspective: 1000px;
+        }
     </style>
 </head>
+<body> 
 
-<body>
     <div class="slider-container">
         <div class="slider">
             <div class="slide active">
-                <img src="../images/slider/pexels-blue-bird-7210436.jpg">
-
+                <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=1200&h=600&fit=crop&crop=center" alt="Happy Dog">
+                <div class="slide-content">
+                    <h2>Nutritious Pet Foods</h2>
+                    <p>Give your pets the best with our carefully selected, healthy and tasty food options for every breed and age.</p>
+                       <a href="products.php" class="btn">Shop Now</a>
+                </div>
             </div>
             <div class="slide">
-                <img src="../images/slider/pexels-pixabay-416160 (3).jpg" >
-
+                <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=1200&h=600&fit=crop&crop=center" alt="Playful Cat">
+                <div class="slide-content">
+                    <h2>Fun & Safe Pet Toys</h2>
+                    <p>Keep your pets active and happy with our wide range of safe, engaging, and durable toys.</p>
+                    <a href="products.php" class="btn">Shop Now</a>
+                </div>
             </div>
             <div class="slide">
-                <img src="../images/slider/pexels-simonakidric-2607541.jpg" >
-
+                <img src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=1200&h=600&fit=crop&crop=center" alt="Cute Rabbit">
+                <div class="slide-content">
+                    <h2>Stylish Pet Accessories</h2>
+                    <p>From collars to cozy beds, explore trendy and comfortable accessories that your pets will love.</p>
+                    <a href="products.php" class="btn">Shop Now</a>
+                </div>
             </div>
             <div class="slide">
-                <img src="../images/slider/pexels-peng-louis-587527-1643456.jpg" >
-
+                <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=1200&h=600&fit=crop&crop=center" alt="Pet Training">
+                <div class="slide-content">
+                    <h2>Grooming Essentials</h2>
+                    <p>Pamper your pets with high-quality grooming tools and products for a clean, healthy look.</p>
+                    <a href="products.php" class="btn">Shop Now</a>
+                </div>
             </div>
             <div class="slide">
-                <img src="../images/slider/pexels-helenalopes-1938123.jpg" >
+                <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1200&h=600&fit=crop&crop=center" alt="Veterinary Care">
+                <div class="slide-content">
+                    <h2>C Travel & Outdoor Gear</h2>
+                    <p>Take your pets on adventures with our reliable carriers, leashes, and outdoor essentials.</p>
+                    <a href="products.php" class="btn">Shop Now</a>
+                </div>
             </div>
         </div>
 
-        <div class="slider-nav">
-        </div>
+        <div class="slider-nav"></div>
 
         <div class="slider-arrow prev">
-            <span class="arrow-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-                </svg>
-            </span>
+            <i class="fas fa-chevron-left"></i>
         </div>
         <div class="slider-arrow next">
-            <span class="arrow-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                </svg>
-            </span>
+            <i class="fas fa-chevron-right"></i>
+        </div>
+
+        <div class="slide-counter">
+            <span class="current-slide">1</span> / <span class="total-slides">5</span>
         </div>
     </div>
 
-</body>
-<script>
-    const slides = document.querySelectorAll(".slide");
-    const sliderNav = document.querySelector(".slider-nav");
-    const slider = document.querySelector(".slider");
-    const nextBtn = document.querySelector(".next");
-    const prevBtn = document.querySelector(".prev");
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const slider = document.querySelector(".slider");
+            const slides = document.querySelectorAll(".slide");
+            const prevBtn = document.querySelector(".prev");
+            const nextBtn = document.querySelector(".next");
+            const navContainer = document.querySelector(".slider-nav");
+            const currentSlideSpan = document.querySelector(".current-slide");
+            const totalSlidesSpan = document.querySelector(".total-slides");
 
+            let currentSlide = 0;
+            const slideCount = slides.length;
+            const intervalTime = 2000; // Changed to 2000 milliseconds (2 seconds)
+            let slideInterval;
+            let isTransitioning = false;
 
-    const orderBtn = document.querySelector(".order-btn");
+            // Create navigation dots
+            function createNavDots() {
+                for (let i = 0; i < slideCount; i++) {
+                    const dot = document.createElement('div');
+                    dot.className = 'nav-dot';
+                    if (i === 0) dot.classList.add('active');
+                    dot.addEventListener('click', () => goToSlide(i));
+                    navContainer.appendChild(dot);
+                }
+            }
 
-    let currentSlide = 0;
-    let slideCount = slides.length;
-    const dots = [];
-    const cart = [];
+            // Update slider position and active states
+            function updateSlider() {
+                if (isTransitioning) return;
+                isTransitioning = true;
 
-    slides.forEach((_, index) => {
-        const dot = document.createElement("div");
-        dot.classList.add("nav-dot");
-        if (index === 0) dot.classList.add("active");
-        dot.addEventListener("click", () => goToSlide(index));
-        sliderNav.appendChild(dot);
-        dots.push(dot);
-    });
+                slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+                
+                slides.forEach((slide, index) => {
+                    slide.classList.toggle("active", index === currentSlide);
+                });
 
-    function updateDots() {
-        dots.forEach((dot, index) => {
-            dot.classList.toggle("active", index === currentSlide);
+                document.querySelectorAll('.nav-dot').forEach((dot, index) => {
+                    dot.classList.toggle("active", index === currentSlide);
+                });
+
+                currentSlideSpan.textContent = currentSlide + 1;
+
+                setTimeout(() => {
+                    isTransitioning = false;
+                }, 800);
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slideCount;
+                updateSlider();
+            }
+
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+                updateSlider();
+            }
+
+            function goToSlide(slideIndex) {
+                if (slideIndex !== currentSlide && !isTransitioning) {
+                    currentSlide = slideIndex;
+                    updateSlider();
+                    resetAutoSlide();
+                }
+            }
+
+            function startAutoSlide() {
+                slideInterval = setInterval(nextSlide, intervalTime);
+            }
+
+            function stopAutoSlide() {
+                clearInterval(slideInterval);
+            }
+
+            function resetAutoSlide() {
+                stopAutoSlide();
+                startAutoSlide();
+            }
+
+            // Event Listeners
+            nextBtn.addEventListener("click", () => {
+                nextSlide();
+                resetAutoSlide();
+            });
+
+            prevBtn.addEventListener("click", () => {
+                prevSlide();
+                resetAutoSlide();
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                    resetAutoSlide();
+                } else if (e.key === 'ArrowRight') {
+                    nextSlide();
+                    resetAutoSlide();
+                }
+            });
+
+            // Touch/swipe support
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            slider.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            slider.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, { passive: true });
+
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = touchStartX - touchEndX;
+
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0) {
+                        nextSlide();
+                    } else {
+                        prevSlide();
+                    }
+                    resetAutoSlide();
+                }
+            }
+
+            // Pause on hover
+            slider.addEventListener("mouseenter", stopAutoSlide);
+            slider.addEventListener("mouseleave", startAutoSlide);
+
+            // Visibility API for performance
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    stopAutoSlide();
+                } else {
+                    startAutoSlide();
+                }
+            });
+
+            // Mobile menu toggle
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mainNav = document.querySelector('.main-nav');
+
+            if (menuToggle) {
+                menuToggle.addEventListener('click', () => {
+                    mainNav.classList.toggle('active');
+                });
+            }
+
+            // Initialize
+            totalSlidesSpan.textContent = slideCount;
+            createNavDots();
+            updateSlider();
+            startAutoSlide();
+
+            // Preload images for better performance
+            slides.forEach(slide => {
+                const img = slide.querySelector('img');
+                if (img) {
+                    if (img.complete) {
+                        img.classList.add('loaded');
+                    } else {
+                        img.onload = () => img.classList.add('loaded');
+                    }
+                }
+            });
         });
-    }
-
-    function goToSlide(index) {
-        currentSlide = (index + slideCount) % slideCount;
-        slider.style.transform = `translateX(-${currentSlide * 100}%)`;
-        updateDots();
-    }
-
-    function nextSlide() {
-        goToSlide(currentSlide + 1);
-    }
-
-    function prevSlide() {
-        goToSlide(currentSlide - 1);
-    }
-    prevBtn.addEventListener("click", prevSlide);
-    nextBtn.addEventListener("click", nextSlide);
-    setInterval(nextSlide, 8000);
-
-
-</script>
-
+    </script>
+</body>
 </html>

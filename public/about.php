@@ -4,12 +4,14 @@ require_once '../includes/auth.php';
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8"
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pet Store</title>
 
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="..\css\about.css">
+
 
   <style> 
 /* Reset */
@@ -22,6 +24,78 @@ body {
   background: linear-gradient(135deg, #f9f9fc, #eef1f8); /* soft formal gradient */
 }
 
+.container { width: 90%; max-width: 1200px; margin: auto; }
+
+
+/* Hero */
+.hero {
+  background: url('../images/slider/pexels-peps-silvestro-180443212-14255377.jpg')
+              no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 10%;
+  flex-wrap: wrap;
+  color: white;
+  height:450px;
+  position: relative;
+  overflow: hidden;
+
+  /* ✅ Add this for smooth zoom-out effect */
+  animation: zoomOut 10s ease-in-out infinite alternate;
+}
+
+/* Keyframes for Zoom-Out Effect */
+@keyframes zoomOut {
+  0% {
+    background-size: 120%; /* Start slightly zoomed-in */
+  }
+  100% {
+    background-size: 100%; /* Slowly zoom out to normal size */
+  }
+}
+
+.hero-content { max-width: 500px; }
+.hero .badge {
+  display: inline-block;
+  background: #fff;
+  color: #1C6EA4;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+.hero h2 { font-size: 2.2rem; margin-bottom: 15px;color:white; }
+.hero p { margin-bottom: 20px; font-size: 1rem; font-style: italic; }
+.hero .btn {
+  display: inline-block;
+  padding: 10px 25px;
+  background:#1C6EA4;
+  color: white;
+  font-weight : bolder;
+  text-decoration: none;
+  border-radius: 25px;
+  transition: 0.3s;
+}
+.hero .btn:hover { color: black; transform: translateY(-2px); }
+.hero-image img { max-width: 250px; }
+
+/* Floating paw animation */
+.hero::after {
+  content: "🐾";
+  font-size: 50px;
+  position: absolute;                              /* hero section becomes the parent element */
+  bottom: -50px;
+  left: 20%;
+  animation: floatPaw 8s infinite linear;         /* for infinite looping */
+  opacity: 0.2;
+}
+@keyframes floatPaw {
+  0% { bottom: -50px; opacity: 0; }
+  50% { opacity: 0.4; }
+  100% { bottom: 100%; opacity: 0; }
+}
 
 /* Mission & Vision */
 .mission-vision {
@@ -369,21 +443,23 @@ body {
 }
 .swiper-button-next, .swiper-button-prev { color: #6a0dad; }
   </style>
+
 </head>
 
 <body>
 
  <?php include 'header.php'; ?>
   <!-- Hero Section -->
-  <main>
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <?php include 'slider.html' ?>
-                    <a href="products.php" class="btn btn-primary">Shop Now</a>
-                </div>
-            </div>
-        </section>
+  <section class="hero">
+    <div class="hero-content">
+     
+      <h2>If animals could talk,<br> they’d talk about us!</h2>
+      <p>Providing everything your pets need <br> to live happy, healthy lives.</p>
+    
+    </div>
+    
+  </section>
+
   <!-- Mission & Vision -->
   <section class="mission-vision">
     <div class="mv-card">
