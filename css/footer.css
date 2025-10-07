@@ -50,14 +50,14 @@
       .footer-section ul li a {
         color: #cccccc;
         text-decoration: none;
-        font-size: 20px;
+        font-size: 17px;
         transition: all 0.3s ease-in-out;
       }
 
       .footer-section ul li a:hover {
         color: lightseagreen;
         text-decoration: none;
-        font-size : 17px;
+        font-size : 20px;
       }
 
       /* ✅ Social Media Icons Row */
