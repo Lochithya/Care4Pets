@@ -16,6 +16,11 @@
             left: 0;
             z-index: 1000;
         }
+        main.container{
+            padding-top: 20px;
+            margin-left : 100px;
+        }
+        
 
         .message-bar.success {
             background-color: #b1ecbfff;
@@ -36,36 +41,198 @@
             margin-left: 7px;
             cursor: pointer;
         }
-        .search-bar {
-            display: flex;
-            gap: 8px;
-            max-width: 400px;
-            margin: 20px auto;
-            background: white;
-            border-radius: 50px;
-            padding:  10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            }
 
-            .search-bar input {
-            flex: 1;
-            border: none;
-            outline: none;
-            font-size: 1rem;
-            padding: 8px 12px;
-            border-radius: 50px;
-            }
+        
+    /* Message Bar Styles */
+        .message-bar {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-size: 1.15rem;
+            font-weight: bold;
+            display: none;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            position: fixed;
+            top: 80px;
+            left: 0;
+            z-index: 1000;
+        }
+        h2{
+            margin-left: 10px;
+        }
 
-            .search-bar button {
-            /* professional blue */
-            color: white;
-            border: none;
-            outline: none;
-            padding: 8px 14px;
-            font-size: 1rem;
-            border-radius: 50%;
+        .message-bar.success {
+            background-color: #b1ecbfff;
+            color: #0c4b1bff;
+        }
+
+        .message-bar.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .message-bar .close-btn {
+            background-color: white;
+            font-size: .8rem;
+            border: 1px solid gray;
+            font-weight: 500;
+            color: inherit;
+            margin-left: 7px;
             cursor: pointer;
-            transition: background 0.3s ease;
-            }
+        }
+
+
+        /* Filter section */
+        .filters-container {
+            background: #D4EBF8;
+            padding: 2rem;
+            box-sizing: border-box;
+            border-radius: 10px;
+            padding-top: 2%;
+            padding-bottom: 2.5%;
+            padding-right: 5%;
+            margin-bottom: 2rem;
+            margin-top : -15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            width : 1200px;
+            margin-left : 10px;
+        }
+
+
+        .category-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            background-color: #f8f9fa;
+            color: #333;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color:#1C6EA4;
+            color: white;
+        }
+
+        .category-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            background-color: #f8f9fa;
+            color: #333;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color:#1C6EA4;
+            color: white;
+        }
+
+        /* Product grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns:1fr 1fr 1fr;
+            width : 1300px;
+            margin-left: 10px;
+            margin-top : 20px;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.8); /* semi-transparent */
+            backdrop-filter: blur(12px) saturate(150%);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            width: 360px ;
+            height : 470px ; 
+            margin-bottom : 50px;   
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.18);
+            background: rgba(255, 255, 255, 0.9);
+            border : 1px solid rgb(99, 95, 95) ;
+        }
+
+        /* --- Image --- */
+        .product-image {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.08); /* stylish zoom */
+        }
+
+        /* --- Product Info --- */
+        .product-info {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #222;
+            font-weight: 600;
+        }
+
+        .product-info .category {
+            color: rgba(60,60,60,0.8);
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+            font-style: italic;
+        }
+
+        .product-info .description {
+            color: rgba(50,50,50,0.85);
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+            line-height: 1.5;
+        }
+
+        /* --- Price --- */
+        .product-info .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #e53935;
+            margin-bottom: 0.4rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
 
 

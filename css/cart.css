@@ -1,21 +1,22 @@
 
         .cart-container {
-            width : 1280px ;
-            margin-left : -50px ;
+            width : 1350px ;
+            margin-left : 90px ;
             background-color:#D4EBF8;
             border-radius: 12px;
             margin-top : -5px;
             padding: 1.5rem;
             
-           
-
+        }
+        h2{
+            margin-left : 90px;
         }
 
         /* Header Row */
         .cart-header {
             width : 100%;
             display: grid;
-            grid-template-columns: 40px 130px 325px 90px 320px 150px 185px;
+            grid-template-columns: 40px 130px 325px 90px 350px 180px 185px;
             font-weight: bolder;
             text-align: center;
             font-size: large;
@@ -35,7 +36,7 @@
         /* Cart Item Layout */
         .cart-item {
             display: grid;
-            grid-template-columns: 40px 130px 325px 90px 475px 182px;
+            grid-template-columns: 40px 130px 355px 100px 485px 200px;
             align-items: center;
             text-align: center;
             padding: 1rem;
@@ -339,6 +340,7 @@
             border-radius: 25px;
             cursor: pointer;
             color:white;
+            margin-right:80px;
             box-shadow: 0 4px 10px rgba(255, 75, 43, 0.4);
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         }

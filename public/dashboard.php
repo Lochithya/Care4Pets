@@ -254,6 +254,7 @@ $stmtItems = $conn->prepare("
         <?php endif; ?>
     </section>
 </div>
+<?php include 'footer.php' ; ?>
 
 <script src="../js/dashboard.js"></script>
 </body>

@@ -23,11 +23,6 @@
             z-index: 1000;
         }
         
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
         
         .header-flex {
             display: flex;
@@ -49,12 +44,13 @@
             content: "🐾";
             margin-right: 10px;
             font-size: 24px;
+            margin-left : 50px;
         }
         
         .main-nav ul {
             display: flex;
             list-style: none;
-            gap: 25px;
+            gap: 30px;
             margin-left: 50px;
         }
         
@@ -96,6 +92,7 @@
             align-items: center;
             gap: 35px;
             margin-left:20px;
+            margin-right: 50px;
         }
         
         .icon-wrapper {
