@@ -157,6 +157,7 @@ $products = getProductsByFilters($selectedPetType, $selectedProductType, $sort);
             const closeBtn = messageBar.querySelector('.close-btn');
             closeBtn.addEventListener('click', () => {
                 messageBar.style.display = 'none';
+                window.location.reload();  // to refresh the page after closing the message bar
             });
         }
 

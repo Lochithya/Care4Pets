@@ -40,7 +40,7 @@ $cartTotal = $_SESSION['checkout']['cart_total'] ??  00.00 ;
         <br>
         <?php if (empty($cartItems)): ?>
         <div class="empty-cart">
-            <p>Your cart is empty.</p>
+            <p style="margin-left:40px;font-weight:bold;">Your cart is empty.</p>
             <a href="products.php" class="btn">Continue Shopping</a>
         </div>
         <?php else: ?>
