@@ -437,12 +437,8 @@ define('DB_NAME', 'your-production-database');
 Potential improvements for the project:
 
 - **Admin Dashboard**: Complete admin interface for product and order management
-- **Payment Integration**: Add payment gateway integration (PayPal, Stripe)
-- **Email Notifications**: Order confirmation and status update emails
-- **Product Reviews**: Customer review and rating system
 - **Inventory Management**: Low stock alerts and automatic reordering
 - **Search Functionality**: Product search with filters
-- **Wishlist Feature**: Save products for later purchase
 - **Multi-language Support**: Internationalization capabilities
 
 ## License
