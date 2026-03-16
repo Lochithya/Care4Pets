@@ -24,7 +24,7 @@ $products = getProductsByFilters($selectedPetType, $selectedProductType, $sort);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products - Pet Store</title>
     <link rel="stylesheet" href="../css/style.css?v=4">
-    <link rel="stylesheet" href="..\css\products.css">
+    <link rel="stylesheet" href="../css/products.css">
 </head>
 <body>
      <?php include 'header.php'; ?>

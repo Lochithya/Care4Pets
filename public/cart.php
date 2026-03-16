@@ -25,7 +25,7 @@ $cartTotal = $_SESSION['checkout']['cart_total'] ??  00.00 ;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart - Pet Store</title>
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="..\css\cart.css">
+    <link rel="stylesheet" href="../css/cart.css">
 </head>
 <body>
    

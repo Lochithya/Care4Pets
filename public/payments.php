@@ -39,7 +39,7 @@ if ($productIds) {
   <meta charset="utf-8">
   <title>Payment</title>
   <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="..\css\payments.css">
+  <link rel="stylesheet" href="../css/payments.css">
 </head>
 <body>
 <div class="wrap">

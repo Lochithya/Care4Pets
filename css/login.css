@@ -9,7 +9,7 @@
 }
 
 body {
-    background: linear-gradient(135deg, #e8f4fd 0%, #dbeafe 50%, #ede9fe 100%);
+    background: linear-gradient(135deg, #e4f0fb 0%, #d6e8f5 50%, #e8e4f8 100%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,18 +20,18 @@ body {
 /* ---------- Card ---------- */
 .container {
     display: flex;
-    width: 860px;
+    width: 840px;
     max-width: 100%;
-    min-height: 500px;
+    min-height: 490px;
     background: #fff;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 20px 60px rgba(28,110,164,0.18);
-    animation: fadeUp 0.5s ease;
+    box-shadow: 0 20px 60px rgba(26,111,168,0.16);
+    animation: fadeUp 0.45s ease;
 }
 
 @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
+    from { opacity: 0; transform: translateY(22px); }
     to   { opacity: 1; transform: translateY(0); }
 }
 
@@ -41,57 +41,57 @@ body {
     background: url("https://c4.wallpaperflare.com/wallpaper/239/138/482/kittens-steam-basket-flowers-grass-wallpaper-preview.jpg")
                 no-repeat center / cover;
     position: relative;
-    min-width: 260px;
+    min-width: 250px;
 }
 
 .side-panel::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(21,77,113,0.3) 0%, rgba(21,77,113,0.55) 100%);
+    background: linear-gradient(180deg, rgba(19,79,120,0.28) 0%, rgba(19,79,120,0.52) 100%);
 }
 
 /* ---------- Form Panel ---------- */
 .form-container {
     flex: 1;
-    padding: 48px 44px;
+    padding: 46px 42px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
 .form-container h2 {
-    font-size: 1.9rem;
+    font-size: 1.85rem;
     font-weight: 800;
-    color: #1e293b;
-    margin-bottom: 8px;
+    color: #1a2332;
+    margin-bottom: 7px;
     text-align: center;
 }
 
 .form-container .subtitle {
     text-align: center;
-    color: #64748b;
-    font-size: 0.9rem;
-    margin-bottom: 32px;
+    color: #5e6e82;
+    font-size: 0.88rem;
+    margin-bottom: 30px;
 }
 
 /* ---------- Error ---------- */
 .error {
     background: #fef2f2;
-    color: #991b1b;
-    border: 1px solid #fecaca;
-    padding: 10px 14px;
+    color: #8b1a1a;
+    border: 1px solid #fcc;
+    padding: 9px 13px;
     border-radius: 8px;
-    margin-bottom: 20px;
-    font-size: 0.88rem;
+    margin-bottom: 18px;
+    font-size: 0.86rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    animation: shake 0.4s ease;
+    gap: 7px;
+    animation: shake 0.38s ease;
 }
 
-#dismissBtn { cursor: pointer; font-size: 1rem; }
+#dismissBtn { cursor: pointer; font-size: 0.97rem; }
 
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
@@ -101,88 +101,88 @@ body {
 
 /* ---------- Inputs ---------- */
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     position: relative;
 }
 
 .form-group label {
     display: block;
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     font-weight: 700;
-    color: #64748b;
+    color: #5e6e82;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
 }
 
 .form-group input {
     width: 100%;
-    padding: 11px 14px;
-    border: 1.5px solid #e2e8f0;
+    padding: 10px 13px;
+    border: 1.5px solid #e4e9f0;
     border-radius: 10px;
-    font-size: 0.95rem;
-    background: #f8fafc;
-    color: #1e293b;
+    font-size: 0.93rem;
+    background: #f5f7fa;
+    color: #1a2332;
     outline: none;
     transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
 }
 
 .form-group input:focus {
-    border-color: #1C6EA4;
+    border-color: #1a6fa8;
     background: #fff;
-    box-shadow: 0 0 0 3px rgba(28,110,164,0.12);
+    box-shadow: 0 0 0 3px rgba(26,111,168,0.11);
 }
 
 /* ---------- Forgot ---------- */
 .forgot {
     text-align: right;
-    margin-bottom: 22px;
-    margin-top: -10px;
+    margin-bottom: 20px;
+    margin-top: -9px;
 }
 
 .forgot a {
-    font-size: 0.82rem;
-    color: #1C6EA4;
+    font-size: 0.8rem;
+    color: #1a6fa8;
     font-weight: 600;
     text-decoration: none;
     transition: color 0.2s;
 }
 
-.forgot a:hover { color: #154D71; text-decoration: underline; }
+.forgot a:hover { color: #134f78; text-decoration: underline; }
 
 /* ---------- Submit Button ---------- */
 button[type="submit"],
 button:not(.close-btn):not(#dismissBtn) {
     width: 100%;
-    padding: 13px;
-    background: linear-gradient(135deg, #1C6EA4, #154D71);
+    padding: 12px;
+    background: linear-gradient(135deg, #1a6fa8, #134f78);
     border: none;
     border-radius: 10px;
     color: #fff;
-    font-size: 1rem;
+    font-size: 0.97rem;
     font-weight: 700;
     cursor: pointer;
-    transition: all 0.25s ease;
-    box-shadow: 0 4px 14px rgba(28,110,164,0.3);
+    transition: all 0.22s ease;
+    box-shadow: 0 4px 14px rgba(26,111,168,0.28);
 }
 
 button[type="submit"]:hover,
 button:not(.close-btn):not(#dismissBtn):hover {
-    background: linear-gradient(135deg, #154D71, #0f3a5c);
+    background: linear-gradient(135deg, #134f78, #0e3a5a);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(28,110,164,0.4);
+    box-shadow: 0 6px 20px rgba(26,111,168,0.36);
 }
 
 /* ---------- Register Link ---------- */
 p {
-    margin-top: 20px;
-    font-size: 0.88rem;
-    color: #64748b;
+    margin-top: 18px;
+    font-size: 0.86rem;
+    color: #5e6e82;
     text-align: center;
 }
 
 p a {
-    color: #1C6EA4;
+    color: #1a6fa8;
     font-weight: 700;
     text-decoration: none;
 }
@@ -193,13 +193,13 @@ p a:hover { text-decoration: underline; }
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0 1000px #f8fafc inset !important;
-    box-shadow: 0 0 0 1000px #f8fafc inset !important;
-    -webkit-text-fill-color: #1e293b !important;
+    -webkit-box-shadow: 0 0 0 1000px #f5f7fa inset !important;
+    box-shadow: 0 0 0 1000px #f5f7fa inset !important;
+    -webkit-text-fill-color: #1a2332 !important;
 }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 640px) {
+@media (max-width: 620px) {
     .side-panel { display: none; }
-    .form-container { padding: 36px 28px; }
+    .form-container { padding: 34px 26px; }
 }

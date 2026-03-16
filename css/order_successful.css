@@ -4,7 +4,7 @@
 
 body {
     font-family: 'Segoe UI', system-ui, sans-serif;
-    background: linear-gradient(135deg, #e8f4fd 0%, #dbeafe 50%, #f0fdf4 100%);
+    background: linear-gradient(135deg, #e4f0fb 0%, #d6e8f5 50%, #edfaf3 100%);
     margin: 0;
     padding: 24px 16px;
     min-height: 100vh;
@@ -17,12 +17,12 @@ body {
 .order-container {
     background: #fff;
     width: 100%;
-    max-width: 660px;
+    max-width: 650px;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 16px 48px rgba(28,110,164,0.15);
-    border: 1px solid #e2e8f0;
-    animation: fadeUp 0.5s ease;
+    box-shadow: 0 16px 48px rgba(26,111,168,0.14);
+    border: 1px solid #e4e9f0;
+    animation: fadeUp 0.45s ease;
 }
 
 @keyframes fadeUp {
@@ -32,57 +32,57 @@ body {
 
 /* ---------- Header ---------- */
 .header {
-    background: linear-gradient(135deg, #1C6EA4, #154D71);
+    background: linear-gradient(135deg, #1a6fa8, #134f78);
     color: #fff;
     text-align: center;
-    padding: 36px 24px 28px;
+    padding: 34px 24px 26px;
 }
 
 .header .logo {
-    font-size: 1rem;
+    font-size: 0.97rem;
     letter-spacing: 2px;
-    opacity: 0.85;
-    margin-bottom: 16px;
+    opacity: 0.82;
+    margin-bottom: 14px;
     font-weight: 600;
 }
 
 .header .checkmark {
-    font-size: 1.6rem;
+    font-size: 1.55rem;
     background: #fff;
-    color: #06923E;
+    color: #0a8a3c;
     border-radius: 50%;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 52px;
-    height: 52px;
-    margin: 0 auto 16px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 14px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.14);
 }
 
 .header h2 {
-    font-size: 1.5rem;
+    font-size: 1.45rem;
     font-weight: 800;
-    margin: 0 0 6px;
+    margin: 0 0 5px;
 }
 
 .header h3 {
-    font-size: 0.95rem;
+    font-size: 0.93rem;
     font-weight: 400;
-    opacity: 0.85;
+    opacity: 0.84;
     margin: 0;
 }
 
 .order-id {
     display: inline-block;
-    background: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.18);
     color: #fff;
-    padding: 6px 16px;
+    padding: 5px 15px;
     border-radius: 50px;
-    margin-top: 14px;
+    margin-top: 13px;
     font-weight: 700;
-    font-size: 0.9rem;
-    border: 1px solid rgba(255,255,255,0.35);
+    font-size: 0.88rem;
+    border: 1px solid rgba(255,255,255,0.32);
     letter-spacing: 0.5px;
 }
 
@@ -90,87 +90,87 @@ body {
 .details {
     display: flex;
     justify-content: space-around;
-    background: #f8fafc;
-    padding: 18px 20px;
-    border-bottom: 1px solid #e2e8f0;
+    background: #f5f7fa;
+    padding: 16px 18px;
+    border-bottom: 1px solid #e4e9f0;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 11px;
 }
 
 .details div {
     text-align: center;
-    font-size: 0.85rem;
-    color: #64748b;
+    font-size: 0.83rem;
+    color: #5e6e82;
 }
 
 .details div strong {
     display: block;
-    font-size: 0.95rem;
+    font-size: 0.93rem;
     font-weight: 700;
-    color: #1e293b;
+    color: #1a2332;
     margin-bottom: 2px;
 }
 
 /* ---------- Summary Table ---------- */
 .summary-title {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     font-weight: 700;
-    color: #1C6EA4;
+    color: #1a6fa8;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    padding: 16px 20px 8px;
+    padding: 14px 18px 7px;
 }
 
 .order-summary {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
 }
 
 .order-summary th,
 .order-summary td {
-    padding: 12px 20px;
+    padding: 11px 18px;
     text-align: left;
     border-bottom: 1px solid #f1f5f9;
 }
 
 .order-summary th {
-    background: #f0f7ff;
+    background: #eef5fc;
     font-weight: 700;
-    color: #1C6EA4;
-    font-size: 0.82rem;
+    color: #1a6fa8;
+    font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.4px;
 }
 
 .order-summary td {
-    color: #1e293b;
+    color: #1a2332;
     font-weight: 600;
 }
 
 /* ---------- Subtotal ---------- */
 .subtotal {
     text-align: right;
-    padding: 14px 20px;
-    font-size: 1rem;
+    padding: 13px 18px;
+    font-size: 0.97rem;
     font-weight: 700;
-    color: #1e293b;
-    border-top: 2px solid #e2e8f0;
+    color: #1a2332;
+    border-top: 2px solid #e4e9f0;
 }
 
 .subtotal span {
-    color: #06923E;
-    font-size: 1.2rem;
+    color: #0a8a3c;
+    font-size: 1.15rem;
     font-weight: 800;
 }
 
 /* ---------- Success Banner ---------- */
 .order-success {
-    background: linear-gradient(135deg, #1C6EA4, #154D71);
+    background: linear-gradient(135deg, #1a6fa8, #134f78);
     color: #fff;
     text-align: center;
-    padding: 16px 20px;
-    font-size: 0.95rem;
+    padding: 15px 18px;
+    font-size: 0.93rem;
     font-weight: 700;
     letter-spacing: 0.3px;
 }

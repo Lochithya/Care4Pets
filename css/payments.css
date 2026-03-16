@@ -4,48 +4,51 @@
 
 body {
     font-family: 'Segoe UI', system-ui, sans-serif;
-    background: #f4f7fb;
+    background: #f5f7fa;
     margin: 0;
     padding: 0;
-    color: #1e293b;
+    color: #1a2332;
 }
 
+/* ---------- Page Wrapper ---------- */
 .wrap {
     display: flex;
     margin: 32px auto;
-    max-width: 1300px;
+    max-width: 1260px;
     padding: 0 24px;
     align-items: flex-start;
-    gap: 24px;
+    gap: 22px;
     flex-wrap: wrap;
 }
 
+/* ---------- Shared Box ---------- */
 .box {
     background: #fff;
     padding: 28px;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
-    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    box-shadow: 0 4px 22px rgba(0,0,0,0.07);
+    border: 1px solid #e4e9f0;
 }
 
 .left {
-    flex: 0 0 480px;
-    max-width: 480px;
+    flex: 0 0 460px;
+    max-width: 460px;
 }
 
 .right {
     flex: 1;
-    min-width: 320px;
+    min-width: 310px;
 }
 
+/* ---------- Section Headings ---------- */
 h3 {
     text-align: center;
-    font-size: 1.4rem;
+    font-size: 1.35rem;
     font-weight: 800;
-    color: #1e293b;
-    margin-bottom: 24px;
+    color: #1a2332;
+    margin-bottom: 22px;
     padding-bottom: 12px;
-    border-bottom: 2px solid #e2e8f0;
+    border-bottom: 2px solid #e4e9f0;
     position: relative;
 }
 
@@ -55,9 +58,9 @@ h3::after {
     bottom: -2px;
     left: 50%;
     transform: translateX(-50%);
-    width: 50px;
+    width: 46px;
     height: 2px;
-    background: #FF6B35;
+    background: #f06030;
     border-radius: 2px;
 }
 
@@ -67,42 +70,42 @@ h3::after {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #f1f5f9;
-    padding: 14px 0;
-    gap: 12px;
+    padding: 13px 0;
+    gap: 11px;
 }
 
 .product-info {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 13px;
 }
 
 .product-info img {
-    width: 60px;
-    height: 60px;
+    width: 58px;
+    height: 58px;
     object-fit: cover;
     border-radius: 8px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #e4e9f0;
 }
 
 .product-name {
     font-weight: 700;
-    font-size: 0.95rem;
-    color: #1e293b;
+    font-size: 0.93rem;
+    color: #1a2332;
 }
 
 .product-name small {
     display: block;
-    color: #64748b;
+    color: #5e6e82;
     font-weight: 500;
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     margin-top: 2px;
 }
 
 .price {
     font-weight: 700;
-    font-size: 1rem;
-    color: #1C6EA4;
+    font-size: 0.97rem;
+    color: #1a6fa8;
     white-space: nowrap;
 }
 
@@ -111,37 +114,38 @@ h3::after {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 20px;
-    padding-top: 16px;
-    border-top: 2px solid #e2e8f0;
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 2px solid #e4e9f0;
 }
 
 .text {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: 700;
-    color: #1e293b;
+    color: #1a2332;
 }
 
 .total {
-    font-size: 1.4rem;
+    font-size: 1.35rem;
     font-weight: 800;
-    color: #06923E;
+    color: #0a8a3c;
 }
 
-/* ---------- Payment Method ---------- */
+/* ---------- Payment Method Toggle ---------- */
 .method {
     font-weight: 700;
-    font-size: 1rem;
-    color: #1e293b;
+    font-size: 0.97rem;
+    color: #1a2332;
     margin-bottom: 4px;
+    display: block;
+    text-align: center;
 }
 
 .radio-group {
-    margin: 20px 0 8px;
-    text-align: center;
+    margin: 18px 0 6px;
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 10px;
     justify-content: center;
 }
 
@@ -149,101 +153,119 @@ h3::after {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 18px;
-    border: 1.5px solid #e2e8f0;
-    border-radius: 10px;
+    padding: 10px 20px;
+    border: 2px solid #e4e9f0;
+    border-radius: 50px;
     cursor: pointer;
     font-weight: 600;
     font-size: 0.9rem;
     transition: all 0.2s;
-    background: #f8fafc;
+    background: #f5f7fa;
+    color: #1a2332;
 }
 
 .radio-group label:hover {
-    border-color: #1C6EA4;
-    background: #f0f7ff;
+    border-color: #1a6fa8;
+    background: #eef5fc;
+    color: #1a6fa8;
 }
 
-.radio-group input[type="radio"]:checked + span,
 .radio-group label:has(input:checked) {
-    border-color: #1C6EA4;
-    background: #f0f7ff;
-    color: #1C6EA4;
+    border-color: #1a6fa8;
+    background: #eef5fc;
+    color: #1a6fa8;
+    box-shadow: 0 0 0 3px rgba(26,111,168,0.10);
 }
 
-/* ---------- Accepted Cards ---------- */
+.radio-group input[type="radio"] {
+    accent-color: #1a6fa8;
+}
+
+/* ---------- Accepted Cards Banner ---------- */
 .accept {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 24px;
+    margin-bottom: 22px;
     gap: 10px;
 }
 
 .accept p {
-    font-size: 0.82rem;
-    color: #64748b;
-    font-weight: 600;
+    font-size: 0.8rem;
+    color: #5e6e82;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.4px;
+    letter-spacing: 0.5px;
 }
 
 .accept .images {
     display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
+    gap: 10px;
+    flex-wrap:
+ wrap;
     justify-content: center;
 }
 
 .accept .images img {
-    width: 72px;
-    height: 44px;
+    width: 70px;
+    height: 42px;
     border-radius: 8px;
-    border: 1.5px solid #e2e8f0;
+    border: 1.5px solid #e4e9f0;
     object-fit: contain;
-    padding: 4px;
+    padding: 4px 6px;
     background: #fff;
-    transition: border-color 0.2s, transform 0.2s;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 
 .accept .images img:hover {
-    border-color: #1C6EA4;
-    transform: scale(1.05);
+    border-color: #1a6fa8;
+    transform: scale(1.06);
+    box-shadow: 0 4px 12px rgba(26,111,168,0.14);
 }
 
-/* ---------- Card Fields ---------- */
+/* ---------- Card Fields Panel ---------- */
 .card-fields {
     display: none;
-    margin-top: 20px;
+    margin-top: 18px;
+    background: #fafcff;
+    border: 1px solid #e4e9f0;
+    border-radius: 14px;
+    padding: 20px;
+    animation: slideDown 0.22s ease;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 hr {
     border: none;
-    border-top: 1px solid #e2e8f0;
-    margin: 20px 0;
+    border-top: 1px solid #e4e9f0;
+    margin: 18px 0;
 }
 
 /* ---------- Form Fields ---------- */
 .row {
     display: flex;
-    gap: 16px;
+    gap: 14px;
     flex-wrap: wrap;
 }
 
 .row .multi-section {
     flex: 1;
-    min-width: 140px;
-    margin-bottom: 1.2rem;
+    min-width: 135px;
+    margin-bottom: 1.1rem;
 }
 
-.single-section { margin-bottom: 1.2rem; }
+.single-section { margin-bottom: 1.1rem; }
 
 .form-label {
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
     font-weight: 600;
-    font-size: 0.82rem;
-    color: #64748b;
+    font-size: 0.8rem;
+    color: #5e6e82;
     text-transform: uppercase;
     letter-spacing: 0.4px;
 }
@@ -252,76 +274,100 @@ hr {
 .form-control {
     display: block;
     width: 100%;
-    padding: 10px 14px;
-    font-size: 0.95rem;
-    border: 1.5px solid #e2e8f0;
+    padding: 9px 13px;
+    font-size: 0.93rem;
+    border: 1.5px solid #e4e9f0;
     border-radius: 8px;
     outline: none;
-    background: #f8fafc;
-    color: #1e293b;
+    background: #f5f7fa;
+    color: #1a2332;
     transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: 'Segoe UI', system-ui, sans-serif;
 }
 
 .form-select:focus,
 .form-control:focus {
-    border-color: #1C6EA4;
-    box-shadow: 0 0 0 3px rgba(28,110,164,0.12);
+    border-color: #1a6fa8;
+    box-shadow: 0 0 0 3px rgba(26,111,168,0.11);
     background: #fff;
 }
 
-/* ---------- Buttons ---------- */
+/* ---------- Security Badge ---------- */
+.security-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    color: #5e6e82;
+    margin-top: 14px;
+    padding: 8px 14px;
+    background: #f5f7fa;
+    border-radius: 8px;
+    border: 1px solid #e4e9f0;
+}
+
+.security-note::before {
+    content: "🔒";
+    font-size: 0.9rem;
+}
+
+/* ---------- Action Buttons ---------- */
 .btn-row {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 16px;
-    margin-top: 24px;
+    gap: 14px;
+    margin-top: 22px;
     flex-wrap: wrap;
 }
 
 .back-to-shipping {
-    background: #1C6EA4;
+    background: #1a6fa8;
     color: #fff;
-    padding: 12px 26px;
+    padding: 11px 24px;
     border-radius: 50px;
-    font-size: 0.95rem;
+    font-size: 0.93rem;
     font-weight: 700;
     border: none;
     cursor: pointer;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    transition: all 0.25s ease;
-    box-shadow: 0 4px 12px rgba(28,110,164,0.25);
+    transition: all 0.22s ease;
+    box-shadow: 0 4px 12px rgba(26,111,168,0.22);
+    font-family: 'Segoe UI', system-ui, sans-serif;
 }
 
 .back-to-shipping:hover {
-    background: #154D71;
+    background: #134f78;
     transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(28,110,164,0.35);
+    box-shadow: 0 6px 18px rgba(26,111,168,0.32);
 }
 
 .complete-order {
-    background: #06923E;
+    background: linear-gradient(135deg, #0a8a3c, #076e30);
     color: #fff;
-    padding: 12px 26px;
+    padding: 11px 28px;
     border-radius: 50px;
     font-size: 0.95rem;
     font-weight: 700;
     border: none;
     cursor: pointer;
-    transition: all 0.25s ease;
-    box-shadow: 0 4px 12px rgba(6,146,62,0.25);
+    transition: all 0.22s ease;
+    box-shadow: 0 4px 14px rgba(10,138,60,0.30);
+    letter-spacing: 0.2px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
 }
 
 .complete-order:hover {
-    background: #057a33;
+    background: linear-gradient(135deg, #076e30, #055424);
     transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(6,146,62,0.35);
+    box-shadow: 0 7px 20px rgba(10,138,60,0.38);
 }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
-    .wrap { flex-direction: column; padding: 0 16px; }
+    .wrap { flex-direction: column; padding: 0 14px; }
     .left { flex: unset; max-width: 100%; width: 100%; }
 }

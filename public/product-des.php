@@ -22,7 +22,7 @@ $product = $result ? $result->fetch_assoc() : null;
 <head>
   <meta charset="UTF-8">
   <title><?php echo $product ? $product['name'] : "Product Details"; ?></title>
-  <link rel="stylesheet" href="..\css\product-des.css">
+  <link rel="stylesheet" href="../css/product-des.css">
   
 </head>
 <body>
