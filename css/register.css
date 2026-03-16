@@ -1,155 +1,174 @@
+/* ============================================================
+   REGISTER PAGE — Care4Pets
+   ============================================================ */
 
-        /* === Base Reset === */
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-          font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        }
+*, *::before, *::after {
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
 
-        body {
-          background: #f0f2f5; /* A slightly lighter, neutral background */
-          min-height: 100vh;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          padding: 20px;
-        }
+body {
+    background: linear-gradient(135deg, #e8f4fd 0%, #dbeafe 50%, #ede9fe 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
 
-        /* === Main Container === */
-        .container {
-          display: flex;
-          width: 100%;
-          max-width: 900px; /* A bit wider to accommodate the image comfortably */
-          background: #fff;
-          border-radius: 20px; /* Softer, more rounded corners */
-          overflow: hidden;
-          box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-          /* max-height property removed to rely on content size */
-        }
+/* ---------- Card ---------- */
+.container {
+    display: flex;
+    width: 100%;
+    max-width: 920px;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(28,110,164,0.18);
+    animation: fadeUp 0.5s ease;
+}
 
-        /* === Left Image Panel === */
-        .image-panel {
-          flex: 1;
-         background: url("https://i.pinimg.com/736x/77/3d/1d/773d1d6cd39d98e193b343e5d149fb20.jpg") center center/cover no-repeat;
-          min-width: 300px; /* Ensures the image is visible on smaller flex layouts */
-        }
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
 
-        /* === Right Form Panel === */
-        .form-container {
-          flex: 1.2; /* Give the form slightly more space */
-          padding: 30px 40px; /* Reduced padding to make it more compact */
-          display: flex;
-          flex-direction: column;
-          justify-content: center; /* Vertically center the form content */
-          overflow-y: hidden; /* Hides the scrollbar on the form */
-        }
+/* ---------- Image Panel ---------- */
+.image-panel {
+    flex: 1;
+    background: url("https://i.pinimg.com/736x/77/3d/1d/773d1d6cd39d98e193b343e5d149fb20.jpg")
+                center center / cover no-repeat;
+    min-width: 280px;
+    position: relative;
+}
 
-        .form-container h2 {
-          font-size: 32px;
-          font-weight: 700;
-          margin-bottom: 15px; /* Further reduced margin */
-          color: #333;
-          text-align: center;
-        }
+.image-panel::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(21,77,113,0.25) 0%, rgba(21,77,113,0.5) 100%);
+}
 
-        /* Messages */
-        .error, .success {
-          padding: 12px;
-          margin-bottom: 15px;
-          border-radius: 8px;
-          font-size: 14px;
-          text-align: center;
-        }
-        .error {
-          background: #ffe2e2;
-          color: #c0392b;
-          border: 1px solid #c0392b;
-        }
-        .success {
-          background: #e6ffea;
-          color: #2e7d32;
-          border: 1px solid #2e7d32;
-        }
+/* ---------- Form Panel ---------- */
+.form-container {
+    flex: 1.2;
+    padding: 36px 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto;
+}
 
-        /* === Form Inputs === */
-        .form-group {
-          margin-bottom: 12px; /* Further reduced margin */
-        }
+.form-container h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 6px;
+    text-align: center;
+}
 
-        .form-group label {
-          display: block;
-          margin-bottom: 5px; /* Reduced margin */
-          font-weight: 600;
-          font-size: 14px;
-          color: #555;
-        }
+.form-container .subtitle {
+    text-align: center;
+    color: #64748b;
+    font-size: 0.88rem;
+    margin-bottom: 24px;
+}
 
-        .form-group input {
-          width: 100%;
-          border: none;
-          border-bottom: 2px solid #ccc;
-          padding: 8px 0; /* Reduced padding */
-          font-size: 15px;
-          background: transparent;
-          outline: none;
-          transition: border-color 0.3s;
-        }
+/* ---------- Alerts ---------- */
+.error, .success {
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    text-align: center;
+}
 
-        .form-group input:focus {
-          border-bottom-color: #1C6EA4; /* Use your original brand color */
-        }
+.error   { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+.success { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
 
-        /* === Submit Button === */
-        button[type="submit"] {
-          width: 100%;
-          padding: 14px;
-          background: #1C6EA4; /* Original Color */
-          border: none;
-          border-radius: 8px;
-          color: #fff;
-          font-size: 16px;
-          font-weight: 600;
-          cursor: pointer;
-          transition: background 0.3s ease, transform 0.2s ease;
-          margin-top: 12px; /* Further reduced margin */
-        }
+/* ---------- Inputs ---------- */
+.form-group {
+    margin-bottom: 14px;
+}
 
-        button[type="submit"]:hover {
-          background: #154D71; /* A darker shade for hover */
-          transform: translateY(-2px);
-        }
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
 
-        /* === Link Below Form === */
-        p.login-link {
-          margin-top: 12px; /* Further reduced margin */
-          font-size: 14px;
-          color: #555;
-          text-align: center;
-        }
+.form-group input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    background: #f8fafc;
+    color: #1e293b;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
 
-        p.login-link a {
-          color: #1C6EA4; /* Original Color */
-          font-weight: 600;
-          text-decoration: none;
-        }
-        p.login-link a:hover {
-          text-decoration: underline;
-        }
+.form-group input:focus {
+    border-color: #1C6EA4;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(28,110,164,0.12);
+}
 
-        /* === Responsive === */
-        @media (max-width: 768px) {
-          .container {
-            flex-direction: column;
-            width: 100%;
-            max-width: 450px; /* Constrain width on mobile for a better look */
-          }
-          .image-panel {
-            height: 200px; /* Give the image a fixed height when stacked */
-            min-width: unset;
-          }
-          .form-container {
-            padding: 30px;
-          }
-        }
-    
+/* ---------- Submit ---------- */
+button[type="submit"] {
+    width: 100%;
+    padding: 13px;
+    background: linear-gradient(135deg, #1C6EA4, #154D71);
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    margin-top: 10px;
+    box-shadow: 0 4px 14px rgba(28,110,164,0.3);
+}
+
+button[type="submit"]:hover {
+    background: linear-gradient(135deg, #154D71, #0f3a5c);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(28,110,164,0.4);
+}
+
+/* ---------- Login Link ---------- */
+p.login-link {
+    margin-top: 14px;
+    font-size: 0.88rem;
+    color: #64748b;
+    text-align: center;
+}
+
+p.login-link a {
+    color: #1C6EA4;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+p.login-link a:hover { text-decoration: underline; }
+
+/* ---------- Autofill fix ---------- */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px #f8fafc inset !important;
+    -webkit-text-fill-color: #1e293b !important;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 700px) {
+    .container { flex-direction: column; max-width: 460px; }
+    .image-panel { height: 180px; min-width: unset; }
+    .form-container { padding: 28px 24px; }
+}

@@ -1,180 +1,226 @@
+/* ============================================================
+   HEADER — Care4Pets
+   ============================================================ */
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: #f8f9fa;
-            color: #2c3e50;
-            line-height: 1.6;
-        }
-        
-        /* Header Styles */
-        .site-header {
-            background: #1C6EA4;
-            color:white;
-            padding: 0;
-            box-shadow:  0 2px 15px rgba(13, 71, 161, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .header-flex {
-            display: flex;
-            justify-content:space-between;
-            align-items: center;
-            padding: 15px 0;
-        }
-        
-        .logo a {
-            font-size: 28px;
-            font-weight: bold;
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo a:before {
-            content: "🐾";
-            margin-right: 10px;
-            font-size: 24px;
-        }
-        
-        .main-nav ul {
-            display: flex;
-            list-style: none;
-            gap: 25px;
-            margin-left: 50px;
-        }
-        
-        .main-nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 8px 5px;
-            position: relative;
-            transition: all 0.3s ease;
-        }
+*, *::before, *::after {
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
 
-        /* Underline animation for active link */
-        .main-nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background-color: #ffd700;
-            border-radius: 3px;
-            transition: width 0.3s ease;
-        }
-        
-        .main-nav a:hover::after,
-        .main-nav a.active::after {
-            width: 100%;
-        }
-        
-        .main-nav a:hover,
-        .main-nav a.active {
-            color: #ffd700;
-        }
-        
-        /* Top right icons */
-        .header-icons {
-            display: flex;
-            align-items: center;
-            gap: 35px;
-            margin-left:20px;
-        }
-        
-        .icon-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.15);
-            padding: 6px 14px;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .icon-wrapper:hover,
-        .icon-wrapper2:hover {
-            background: rgba(255, 255, 255, 0.25);
-        }
+body {
+    background: #f4f7fb;
+    color: #1e293b;
+    line-height: 1.65;
+}
 
-        .icon-wrapper2 {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.15);
-            padding: 6px 14px;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .cart-icon {
-            position: relative;
-        }
-        
-        .cart-count {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #ff5252;
-            color: white;
-            font-size: 12px;
-            font-weight: bold;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .profile-icon {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .profile-icon i {
-            font-size: 20px;
-        }
+/* ---------- Sticky Header ---------- */
+.site-header {
+    background: linear-gradient(135deg, #1C6EA4 0%, #154D71 100%);
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 16px rgba(21,77,113,0.25);
+}
 
-        .image{
-            width:35px;
-            height:35px;
-            border-radius:20px;
-        }
-        
-        .greeting {
-            font-weight: 500;
-            line-height: 20px;
-            font-size : 15px;
-        }
-        
-        /* Mobile menu toggle */
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-        }
-    
-        
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.header-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+    gap: 16px;
+}
+
+/* ---------- Logo ---------- */
+.logo a {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: -0.3px;
+    transition: opacity 0.2s;
+}
+
+.logo a::before {
+    content: "🐾";
+    font-size: 1.3rem;
+}
+
+.logo a:hover { opacity: 0.88; }
+
+/* ---------- Nav ---------- */
+.main-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav a {
+    color: rgba(255,255,255,0.88);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 8px 14px;
+    border-radius: 8px;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 14px;
+    right: 14px;
+    height: 2px;
+    background: #ffd700;
+    border-radius: 2px;
+    transform: scaleX(0);
+    transition: transform 0.25s ease;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    color: #fff;
+    background: rgba(255,255,255,0.12);
+}
+
+.main-nav a:hover::after,
+.main-nav a.active::after {
+    transform: scaleX(1);
+}
+
+/* ---------- Header Icons ---------- */
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.icon-wrapper,
+.icon-wrapper2 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.14);
+    padding: 7px 16px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+    border: 1px solid rgba(255,255,255,0.18);
+}
+
+.icon-wrapper:hover,
+.icon-wrapper2:hover {
+    background: rgba(255,255,255,0.24);
+    transform: translateY(-1px);
+}
+
+.icon-wrapper i,
+.icon-wrapper2 i {
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+/* Cart badge */
+.cart-icon { position: relative; }
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #FF6B35;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #154D71;
+}
+
+/* Profile */
+.profile-icon { gap: 8px; }
+.profile-icon i { font-size: 1.2rem; }
+
+.image {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255,255,255,0.5);
+}
+
+.greeting {
+    font-size: 0.82rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: rgba(255,255,255,0.92);
+}
+
+/* ---------- Mobile Toggle ---------- */
+.menu-toggle {
+    display: none;
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.menu-toggle:hover { background: rgba(255,255,255,0.24); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+    .main-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: linear-gradient(135deg, #1C6EA4, #154D71);
+        padding: 1rem 1.5rem;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        z-index: 999;
+    }
+
+    .main-nav.active { display: block; }
+
+    .main-nav ul {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .main-nav a {
+        display: block;
+        padding: 10px 14px;
+    }
+
+    .menu-toggle { display: flex; align-items: center; }
+
+    .site-header { position: relative; }
+}
+
+@media (max-width: 480px) {
+    .greeting { display: none; }
+    .header-icons { gap: 8px; }
+    .icon-wrapper, .icon-wrapper2 { padding: 7px 10px; }
+}

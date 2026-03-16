@@ -1,111 +1,195 @@
+/* ============================================================
+   HOME PAGE — Care4Pets
+   ============================================================ */
 
-        /* Message Bar Styles */
-        .message-bar {
-            width: 100%;
-            padding: 12px 20px;
-            border-radius: 6px;
-            margin-top: 10px;
-            font-size: 1.15rem;
-            font-weight: bold;
-            display: none;
-            text-align: center;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-            position: fixed;
-            top: 80px;
-            left: 0;
-            z-index: 1000;
-        }
-
-        .message-bar.success {
-            background-color: #b1ecbfff;
-            color: #0c4b1bff;
-        }
-
-        .message-bar.error {
-            background-color: #f8d7da;
-            color: #721c24;
-        }
-
-        .message-bar .close-btn {
-            background-color: white;
-            font-size: .8rem;
-            border: 1px solid gray;
-            font-weight: 500;
-            color: inherit;
-            margin-left: 7px;
-            cursor: pointer;
-        }
-        
 .container { width: 90%; max-width: 1200px; margin: auto; }
 
+/* ---------- Message Bar ---------- */
+.message-bar {
+    width: 100%;
+    padding: 13px 20px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    display: none;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    position: fixed;
+    top: 72px;
+    left: 0;
+    z-index: 1100;
+}
 
-/* Hero */
+.message-bar.success { background: #dcfce7; color: #166534; }
+.message-bar.error   { background: #fee2e2; color: #991b1b; }
+
+.message-bar .close-btn {
+    background: rgba(255,255,255,0.7);
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 4px;
+    font-size: 0.78rem;
+    padding: 2px 7px;
+    margin-left: 10px;
+    cursor: pointer;
+    color: inherit;
+}
+
+/* ---------- Hero ---------- */
 .hero {
-  background: url('../images/slider/pexels-peps-silvestro-180443212-14255377.jpg')
-              no-repeat center center fixed;
-  background-size: cover;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 60px 10%;
-  flex-wrap: wrap;
-  color: white;
-  position: relative;
-  overflow: hidden;
-
-  /* ✅ Add this for smooth zoom-out effect */
-  animation: zoomOut 10s ease-in-out infinite alternate;
+    background: url('../images/slider/pexels-peps-silvestro-180443212-14255377.jpg')
+                no-repeat center center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    padding: 80px 10%;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    min-height: 480px;
+    animation: heroZoom 12s ease-in-out infinite alternate;
 }
 
-/* Keyframes for Zoom-Out Effect */
-@keyframes zoomOut {
-  0% {
-    background-size: 120%; /* Start slightly zoomed-in */
-  }
-  100% {
-    background-size: 100%; /* Slowly zoom out to normal size */
-  }
+@keyframes heroZoom {
+    0%   { background-size: 115%; }
+    100% { background-size: 100%; }
 }
 
-.hero-content { max-width: 500px; }
+/* Dark overlay */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(15,41,66,0.72) 0%, rgba(21,77,113,0.45) 100%);
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 520px;
+}
+
 .hero .badge {
-  display: inline-block;
-  background: #fff;
-  color: #1C6EA4;
-  padding: 5px 15px;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  margin-bottom: 15px;
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(6px);
+    color: #fff;
+    padding: 5px 16px;
+    border-radius: 50px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(255,255,255,0.3);
 }
-.hero h2 { font-size: 2.2rem; margin-bottom: 15px; }
-.hero p { margin-bottom: 20px; font-size: 1rem; font-style: italic; }
-.hero .btn {
-  display: inline-block;
-  padding: 10px 25px;
-  background:#1C6EA4;
-  color: white;
-  font-weight : bolder;
-  text-decoration: none;
-  border-radius: 25px;
-  transition: 0.1s;
-}
-.hero .btn:hover { color: black; transform: translateY(-2px); }
-.hero-image img { max-width: 250px; }
 
-/* Floating paw animation */
+.hero h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 14px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+
+.hero p {
+    font-size: 1.05rem;
+    margin-bottom: 24px;
+    opacity: 0.9;
+    font-style: italic;
+    line-height: 1.6;
+}
+
+.hero .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 28px;
+    background: #FF6B35;
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 16px rgba(255,107,53,0.45);
+}
+
+.hero .btn:hover {
+    background: #e55a25;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255,107,53,0.5);
+}
+
+/* Floating paw */
 .hero::after {
-  content: "🐾";
-  font-size: 50px;
-  position: absolute;                              /* hero section becomes the parent element */
-  bottom: -50px;
-  left: 20%;
-  animation: floatPaw 8s infinite linear;         /* for infinite looping */
-  opacity: 0.2;
+    content: "🐾";
+    font-size: 48px;
+    position: absolute;
+    bottom: -50px;
+    left: 22%;
+    animation: floatPaw 9s infinite linear;
+    opacity: 0.15;
+    z-index: 0;
 }
+
 @keyframes floatPaw {
-  0% { bottom: -50px; opacity: 0; }
-  50% { opacity: 0.4; }
-  100% { bottom: 100%; opacity: 0; }
+    0%   { bottom: -50px; opacity: 0; }
+    50%  { opacity: 0.3; }
+    100% { bottom: 105%; opacity: 0; }
 }
-    
+
+/* ---------- Featured Products Section ---------- */
+.featured-products {
+    padding: 4rem 0;
+    background: #f4f7fb;
+}
+
+.featured-products h2 {
+    text-align: center;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 2.5rem;
+    position: relative;
+}
+
+.featured-products h2::after {
+    content: "";
+    display: block;
+    width: 56px;
+    height: 4px;
+    background: #FF6B35;
+    border-radius: 2px;
+    margin: 10px auto 0;
+}
+
+/* ---------- Categories Section ---------- */
+.categories {
+    padding: 4rem 0;
+    background: #fff;
+}
+
+.categories h2 {
+    text-align: center;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 2.5rem;
+    position: relative;
+}
+
+.categories h2::after {
+    content: "";
+    display: block;
+    width: 56px;
+    height: 4px;
+    background: #FF6B35;
+    border-radius: 2px;
+    margin: 10px auto 0;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+    .hero { padding: 60px 6%; min-height: 360px; }
+    .hero h2 { font-size: 1.8rem; }
+}

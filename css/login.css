@@ -1,169 +1,205 @@
+/* ============================================================
+   LOGIN PAGE — Care4Pets
+   ============================================================ */
 
-  /* Reset */
-  * {
-    margin: 0;
-    padding: 0;
+*, *::before, *::after {
+    margin: 0; padding: 0;
     box-sizing: border-box;
-    font-family: "Segoe UI", Tahoma, sans-serif;
-  }
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
 
-  body {
-    background: linear-gradient(135deg, #fdfbfb, #ebedee);
+body {
+    background: linear-gradient(135deg, #e8f4fd 0%, #dbeafe 50%, #ede9fe 100%);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-  }
+    padding: 20px;
+}
 
-  /* Main container */
-  .container {
+/* ---------- Card ---------- */
+.container {
     display: flex;
-    width: 850px;
-    max-width: 95%;
-    height: 500px;
+    width: 860px;
+    max-width: 100%;
+    min-height: 500px;
     background: #fff;
-    border-radius: 15px;
+    border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 6px 30px rgba(0,0,0,0.15);
-    animation: fadeIn 0.8s ease-in-out;
-  }
+    box-shadow: 0 20px 60px rgba(28,110,164,0.18);
+    animation: fadeUp 0.5s ease;
+}
 
-  /* Left side image */
-  .side-panel {
-    flex: 1;
-    background: url("https://c4.wallpaperflare.com/wallpaper/239/138/482/kittens-steam-basket-flowers-grass-wallpaper-preview.jpg") 
-                no-repeat center/cover;
-  }
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
 
-  /* Right form section */
-  .form-container {
+/* ---------- Side Panel ---------- */
+.side-panel {
     flex: 1;
-    padding: 0px 40px;
+    background: url("https://c4.wallpaperflare.com/wallpaper/239/138/482/kittens-steam-basket-flowers-grass-wallpaper-preview.jpg")
+                no-repeat center / cover;
+    position: relative;
+    min-width: 260px;
+}
+
+.side-panel::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(21,77,113,0.3) 0%, rgba(21,77,113,0.55) 100%);
+}
+
+/* ---------- Form Panel ---------- */
+.form-container {
+    flex: 1;
+    padding: 48px 44px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    text-align: center;
-  }
-
-  .form-container h2 {
-    font-size: 34px;
-    margin-bottom: 45px;
-    color: #333;
-  }
-
-  /* Error message */
-  .error {
-    background: #ffe6e6;
-    color: #cc0000;
-    border: 1px solid #ff9999;
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    font-size: 16px;
-    animation: shake 0.4s;
-    display:flex ;
-    flex-direction: row;
-    justify-content: center;
-  }
-  #dismissBtn{
-    cursor : pointer;
-  }
-
-  /* Input fields */
-  .form-group {
-    margin-bottom: 20px;
-    position: relative;
-  }
-
-  .form-group input {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-bottom: 2px solid #ccc;
-    outline: none;
-    font-size: 15px;
-    transition: border-color 0.3s ease;
-  }
-
-  .form-group input:focus {
-    border-color: #7b2ff7;
-  }
-
-  /* Forgot password */
-  .forgot {
-    text-align: right;
-    margin-bottom: 20px;
-  }
-
-  .forgot a {
-    font-size: 13px;
-    text-decoration: none;
-    color: #1C6EA4;
-  }
-
-  .forgot a:hover {
-    text-decoration: underline;
-  }
-
-  /* Button */
-  button {
-    width: 100%;
-    padding: 12px;
-    background:#1C6EA4;
-    border: none;
-    border-radius: 6px;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: transform 0.2s ease, background 0.3s ease;
-  }
-
-  button:hover {
-    background:#154D71;
-    transform: scale(1.02);
-  }
-
-  /* Register text */
-  p {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #444;
-  }
-
-  p a {
-    color: #1C6EA4;
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  p a:hover {
-    text-decoration: underline;
-  }
-
-  /* Animations */
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-    75% { transform: translateX(-5px); }
-    100% { transform: translateX(0); }
-  }
-
-  /* Remove autofill background color */
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0px 1000px #fff inset !important; /* replace #fff with your background */
-  box-shadow: 0 0 0px 1000px #fff inset !important;
-  -webkit-text-fill-color: #000 !important; /* text color */
-  transition: background-color 5000s ease-in-out 0s; /* prevents flashing */
 }
 
- 
+.form-container h2 {
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.form-container .subtitle {
+    text-align: center;
+    color: #64748b;
+    font-size: 0.9rem;
+    margin-bottom: 32px;
+}
+
+/* ---------- Error ---------- */
+.error {
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.88rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    animation: shake 0.4s ease;
+}
+
+#dismissBtn { cursor: pointer; font-size: 1rem; }
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25%       { transform: translateX(-5px); }
+    75%       { transform: translateX(5px); }
+}
+
+/* ---------- Inputs ---------- */
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    background: #f8fafc;
+    color: #1e293b;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.form-group input:focus {
+    border-color: #1C6EA4;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(28,110,164,0.12);
+}
+
+/* ---------- Forgot ---------- */
+.forgot {
+    text-align: right;
+    margin-bottom: 22px;
+    margin-top: -10px;
+}
+
+.forgot a {
+    font-size: 0.82rem;
+    color: #1C6EA4;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.forgot a:hover { color: #154D71; text-decoration: underline; }
+
+/* ---------- Submit Button ---------- */
+button[type="submit"],
+button:not(.close-btn):not(#dismissBtn) {
+    width: 100%;
+    padding: 13px;
+    background: linear-gradient(135deg, #1C6EA4, #154D71);
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 14px rgba(28,110,164,0.3);
+}
+
+button[type="submit"]:hover,
+button:not(.close-btn):not(#dismissBtn):hover {
+    background: linear-gradient(135deg, #154D71, #0f3a5c);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(28,110,164,0.4);
+}
+
+/* ---------- Register Link ---------- */
+p {
+    margin-top: 20px;
+    font-size: 0.88rem;
+    color: #64748b;
+    text-align: center;
+}
+
+p a {
+    color: #1C6EA4;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+p a:hover { text-decoration: underline; }
+
+/* ---------- Autofill fix ---------- */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px #f8fafc inset !important;
+    box-shadow: 0 0 0 1000px #f8fafc inset !important;
+    -webkit-text-fill-color: #1e293b !important;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+    .side-panel { display: none; }
+    .form-container { padding: 36px 28px; }
+}

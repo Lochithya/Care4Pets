@@ -1,110 +1,144 @@
+/* ============================================================
+   FOOTER — Care4Pets
+   ============================================================ */
 
-      footer {
-        background: #154D71; /* Attractive black */
-        color: #ffffff;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        margin-top: 40px;
-        box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.4);
-      }
+footer {
+    background: linear-gradient(135deg, #0f2942 0%, #154D71 100%);
+    color: #e2e8f0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    margin-top: 60px;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+}
 
-      .footer-container {
-        display: flex;
-        justify-content: space-between;
-        padding: px;
-        flex-wrap: wrap;
-        align-items: flex-start;
-      } 
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0;
+    padding: 50px 60px 20px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
 
-      .footer-section {
-        flex: 1;
-        min-width: 240px;
-        margin: 30px;
-        text-align: center;
-      }
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+    max-width: 280px;
+    padding: 0 20px 30px;
+}
 
-      .footer-section h3,
-      .footer-section h4 {
-       padding: top 10px;
-        margin-bottom: 18px;
-        font-size: 20px;
-        font-weight: bold;
-        color: #ffffff;
-      }
+.footer-section h3,
+.footer-section h4 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid rgba(255,107,53,0.6);
+    display: inline-block;
+}
 
-      .footer-section p {
-        font-size: 15px;
-        line-height: 1.8;
-        color: #ffffff;
-      }
+.footer-section p {
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: #94a3b8;
+}
 
-      .footer-section ul {
-        list-style: none;
-        padding: 0;
-      }
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
 
-      .footer-section ul li {
-        margin-bottom: 10px;
-        
-      }
+.footer-section ul li {
+    margin-bottom: 10px;
+}
 
-      .footer-section ul li a {
-        color: #cccccc;
-        text-decoration: none;
-        font-size: 20px;
-        transition: all 0.3s ease-in-out;
-      }
+.footer-section ul li a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s ease, padding-left 0.2s ease;
+    display: inline-block;
+}
 
-      .footer-section ul li a:hover {
-        color: lightseagreen;
-        text-decoration: none;
-        font-size : 17px;
-      }
+.footer-section ul li a:hover {
+    color: #FF6B35;
+    padding-left: 4px;
+}
 
-      /* ✅ Social Media Icons Row */
-      .social-row {
-        width: 100%;
-        text-align: center;
-        margin: 20px 0;
-      }
+/* ---------- Social Row ---------- */
+.social-row {
+    width: 100%;
+    text-align: center;
+    padding: 20px 0 10px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
 
-      .social-icons a {
-        display: inline-block;
-        width: 40px;
-        height: 40px;
-        line-height: 40px;
-        text-align: center;
-        border-radius: 50%;
-        background: #ffffff;
-        color: #111111;
-        margin: 0 8px;
-        font-size: 18px;
-        transition: transform 0.3s, background 0.3s, color 0.3s;
-      }
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
 
-      .social-icons a:hover {
-        transform: scale(1.2);
-        background: #25d366; /* WhatsApp green for hover */
-        color: #ffffff;
-      }
+.social-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    color: #e2e8f0;
+    font-size: 1rem;
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: all 0.25s ease;
+    text-decoration: none;
+}
 
-      .footer-bottom {
-        text-align: center;
-       
-        
-        font-size: 14px;
-        color: #aaaaaa;
-      }
+.social-icons a:hover {
+    background: #FF6B35;
+    color: #fff;
+    border-color: #FF6B35;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(255,107,53,0.4);
+}
 
-      .footer-bottom p {
-        margin: 0;
-        padding: 0;
-      }
+/* ---------- Footer Bottom ---------- */
+.footer-bottom {
+    text-align: center;
+    padding: 16px 24px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    font-size: 0.82rem;
+    color: #64748b;
+}
 
-      .link{
-        color: #cccccc;
-        font-size: 17px;
-      }
-      .link:hover{
-        color : lightseagreen;
-      }
-    
+.footer-bottom p { margin: 0; }
+
+.link {
+    color: #94a3b8;
+    font-size: 0.88rem;
+    transition: color 0.2s;
+}
+
+.link:hover { color: #FF6B35; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+    .footer-container {
+        padding: 40px 24px 16px;
+        gap: 0;
+    }
+
+    .footer-section {
+        min-width: 160px;
+        max-width: 50%;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-section {
+        min-width: 100%;
+        max-width: 100%;
+        padding: 0 0 24px;
+    }
+}
