@@ -8,7 +8,14 @@ $productTypes = getAllProductTypes();
 $selectedPetType = isset($_GET['pet_type']) && $_GET['pet_type'] !== '' ? $_GET['pet_type'] : null;                         // when refreshing , default values will be shown( set to null )
 $selectedProductType = isset($_GET['product_type']) && $_GET['product_type'] !== '' ? $_GET['product_type'] : null;
 
-$products = getProductsByFilters($selectedPetType, $selectedProductType);    
+$sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
+
+
+// Allow sort param: default | low | high
+$sort = isset($_GET['sort']) && in_array($_GET['sort'], ['default','low','high']) ? $_GET['sort'] : 'default';
+$products = getProductsByFilters($selectedPetType, $selectedProductType, $sort);
+
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,38 +32,54 @@ $products = getProductsByFilters($selectedPetType, $selectedProductType);
     <div id="message-bar"></div>
 
     <main class="container">
-        <h2>Our Products</h2>
-        
-        <div class="filter-section">
-            <div class="search-bar">
-  <input type="text" placeholder="Search for products..." />
-  <button type="submit">🔍</button>
-</div>
+    <h2>Our Products</h2>
 
-            <h3>Filter by Pet Type:</h3>
-            <div class="category-filters">
-                <a href="products.php?product_type=<?php echo htmlspecialchars($selectedProductType ?? ''); ?>" class="filter-btn <?php echo $selectedPetType === null ? 'active' : ''; ?>">All Pets</a>
-                <?php foreach ($petTypes as $petType): ?>
-                    <a href="products.php?pet_type=<?php echo htmlspecialchars($petType['id']); ?>&product_type=<?php echo htmlspecialchars($selectedProductType ?? ''); ?>" 
-                       class="filter-btn <?php echo $selectedPetType == $petType['id'] ? 'active' : ''; ?>">
-                        <?php echo htmlspecialchars($petType['name']); ?>
-                    </a>
-                <?php endforeach; ?>
+    <div class="products-layout">
+        <!-- LEFT: product list -->
+        <section class="product-list">
+            <!-- keep local product search (optional) -->
+            <div class="filters-container">
+                <div class="filter-section">
+                    <h3>Filter by Pet Type:</h3>
+                    <div class="category-filters">
+                        <a href="products.php?product_type=<?php echo htmlspecialchars($selectedProductType ?? ''); ?>&sort=<?php echo $sort; ?>"
+                        class="filter-btn <?php echo $selectedPetType === null ? 'active' : ''; ?>">All Pets</a>
+
+                        <?php foreach ($petTypes as $petType): ?>
+                            <a href="products.php?pet_type=<?php echo $petType['id']; ?>&product_type=<?php echo htmlspecialchars($selectedProductType ?? ''); ?>&sort=<?php echo $sort; ?>"
+                            class="filter-btn <?php echo $selectedPetType == $petType['id'] ? 'active' : ''; ?>">
+                                <?php echo htmlspecialchars($petType['name']); ?>
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
+
+                    <h3>Filter by Product Type:</h3>
+                    <div class="category-filters">
+                        <a href="products.php?pet_type=<?php echo htmlspecialchars($selectedPetType ?? ''); ?>&sort=<?php echo $sort; ?>"
+                        class="filter-btn <?php echo $selectedProductType === null ? 'active' : ''; ?>">All Types</a>
+
+                        <?php foreach ($productTypes as $productType): ?>
+                        <a href="products.php?product_type=<?php echo $productType['id']; ?>&pet_type=<?php echo htmlspecialchars($selectedPetType ?? ''); ?>&sort=<?php echo $sort; ?>"
+                            class="filter-btn <?php echo $selectedProductType == $productType['id'] ? 'active' : ''; ?>">
+                            <?php echo htmlspecialchars($productType['name']); ?>
+                        </a>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+
+                <!-- 🔽 Sort By Price Dropdown (aligned horizontally) -->
+                <div class="sort-section" style="display: flex; align-items: center; justify-content: flex-end; margin-top: 10px; gap: 8px;">
+                    <label for="sort" style="font-weight: bold;">Sort by Price:</label>
+                    <select id="sort" name="sort" onchange="applySort()" 
+                            style="padding: 6px 10px; border-radius: 8px; border: 1px solid #ccc;">
+                        <option value="default" <?php echo $sort === 'default' ? 'selected' : ''; ?>>Default</option>
+                        <option value="low" <?php echo $sort === 'low' ? 'selected' : ''; ?>>Low to High</option>
+                        <option value="high" <?php echo $sort === 'high' ? 'selected' : ''; ?>>High to Low</option>
+                    </select>
+                </div>
             </div>
 
-            <h3>Filter by Product Type:</h3>
-            <div class="category-filters">
-                <a href="products.php?pet_type=<?php echo htmlspecialchars($selectedPetType ?? ''); ?>" class="filter-btn <?php echo $selectedProductType === null ? 'active' : ''; ?>">All Product Types</a>
-                <?php foreach ($productTypes as $productType): ?>
-                    <a href="products.php?pet_type=<?php echo htmlspecialchars($selectedPetType ?? ''); ?>&product_type=<?php echo htmlspecialchars($productType['id']); ?>" 
-                       class="filter-btn <?php echo $selectedProductType == $productType['id'] ? 'active' : ''; ?>">
-                        <?php echo htmlspecialchars($productType['name']); ?>
-                    </a>
-                <?php endforeach; ?>
-            </div>
-        </div>
-
-        <div class="products-grid">
+            <div class="products-grid">
             <?php if (empty($products)): ?>
                 <p>No products found.</p>
             <?php else: ?>
@@ -110,7 +133,12 @@ $products = getProductsByFilters($selectedPetType, $selectedProductType);
                 <?php endforeach; ?>
             <?php endif; ?>
         </div>
-    </main>
+        </section>
+
+        
+    </div>
+</main>
+
 
     <?php include 'footer.php' ?>
     <script>
@@ -129,6 +157,7 @@ $products = getProductsByFilters($selectedPetType, $selectedProductType);
             const closeBtn = messageBar.querySelector('.close-btn');
             closeBtn.addEventListener('click', () => {
                 messageBar.style.display = 'none';
+                window.location.reload();  // to refresh the page after closing the message bar
             });
         }
 
@@ -164,9 +193,17 @@ $products = getProductsByFilters($selectedPetType, $selectedProductType);
                 showMessage('Error adding item to the cart!', 'error');
             });
         }
+        
+function applySort() {
+  const sort = document.getElementById('sort').value;
+  const params = new URLSearchParams(window.location.search);
+  params.set('sort', sort);
+  window.location.href = window.location.pathname + '?' + params.toString();
+}
+
+
     </script>
   
 
 </body>
 </html>
-

@@ -23,47 +23,104 @@ function getAllProducts() {
 }
 
 // Get products by pet type and product type
-function getProductsByFilters($petTypeId , $productTypeId ) {
+/* === Replace the existing getProductsByFilters(...) with this === */
+function getProductsByFilters($petTypeId, $productTypeId, $sort = 'default') {
     $conn = getConnection();
-    
-    $sql = "SELECT p.*, pt.name as pet_type_name, prt.name as product_type_name 
-            FROM products p 
+
+    $sql = "SELECT p.*, pt.name as pet_type_name, prt.name as product_type_name
+            FROM products p
             LEFT JOIN pet_types pt ON p.pet_type_id = pt.id
-            LEFT JOIN product_types prt ON p.product_type_id = prt.id WHERE 1=1";
+            LEFT JOIN product_types prt ON p.product_type_id = prt.id
+            WHERE 1=1";
 
-    $params = [];                   // for adding of paramters for the sql based on pet,product IDS
-    $types = '';                    // necessary variable for bind_param() function
+    $params = [];
+    $types = '';
 
-    if ($petTypeId !== null) {                 // If not specially selected in the website, this is not executed . so default
+    if ($petTypeId !== null) {
         $sql .= " AND p.pet_type_id = ?";
         $params[] = $petTypeId;
-        $types .= 'i';                        
+        $types .= 'i';
     }
 
-    if ($productTypeId !== null) {              // If not specially selected in the website, this is not executed . so default
+    if ($productTypeId !== null) {
         $sql .= " AND p.product_type_id = ?";
         $params[] = $productTypeId;
         $types .= 'i';
     }
 
-    $stmt = $conn->prepare($sql);                  // preparing the sql statement with placeholders
-    if (!empty($params)) {
-        $stmt->bind_param($types, ...$params);         // $params assigned for placeholders(?)  
+    // Add sorting (safe — we only use controlled values)
+    if ($sort === 'low') {
+        $sql .= " ORDER BY p.price ASC";
+    } elseif ($sort === 'high') {
+        $sql .= " ORDER BY p.price DESC";
+    } else {
+        // default ordering (you can change to created_at or id)
+        $sql .= " ORDER BY p.id DESC";
     }
+
+    $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+        // prepare failed, return empty array (or log error)
+        error_log("Prepare failed in getProductsByFilters: " . $conn->error);
+        $conn->close();
+        return [];
+    }
+
+    if (!empty($params)) {
+        // uses argument unpacking (PHP 5.6+) to bind dynamically
+        $stmt->bind_param($types, ...$params);
+    }
+
     $stmt->execute();
-    $result = $stmt->get_result();                     // get result from the database
-    
+    $result = $stmt->get_result();
+
     $products = [];
-    if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
             $products[] = $row;
         }
     }
-    
+
     $stmt->close();
     $conn->close();
     return $products;
 }
+
+/* === Add this helper to allow searching products by name/description === */
+function searchProducts($query, $limit = 50) {
+    $conn = getConnection();
+
+    $sql = "SELECT p.*, pt.name as pet_type_name, prt.name as product_type_name
+            FROM products p
+            LEFT JOIN pet_types pt ON p.pet_type_id = pt.id
+            LEFT JOIN product_types prt ON p.product_type_id = prt.id
+            WHERE p.name LIKE ? OR p.description LIKE ?
+            LIMIT ?";
+
+    $like = '%' . $query . '%';
+    $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+        error_log("Prepare failed in searchProducts: " . $conn->error);
+        $conn->close();
+        return [];
+    }
+
+    $stmt->bind_param('ssi', $like, $like, $limit);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $products = [];
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $products[] = $row;
+        }
+    }
+
+    $stmt->close();
+    $conn->close();
+    return $products;
+}
+
 
 // Get single product by ID
 function getProductById($productId) {
@@ -142,4 +199,3 @@ function addProduct($name, $description, $price, $stockQuantity, $imageUrl, $pet
     }
 }
 ?>
-

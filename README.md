@@ -1,4 +1,4 @@
-# Pet Store E-commerce Platform
+# Care4Pets E-commerce Platform
 
 A professional e-commerce website for a pet store built using HTML, CSS, JavaScript, PHP, and MySQL. This project demonstrates a complete web application with user authentication, product management, shopping cart functionality, and order processing.
 
@@ -70,8 +70,9 @@ The platform now features a sophisticated two-level filtering system:
 Users can filter products by:
 1. **Pet Type Only**: See all products for a specific pet (e.g., all dog products)
 2. **Product Type Only**: See specific product categories across all pets (e.g., all food products)
-3. **Combined Filtering**: Precise filtering by both criteria (e.g., dog food, cat toys)
-4. **No Filters**: Browse all available products
+4. **Filtering by the price**: Filter the products by prices (e.g., low-to-high , high-to-low )
+4. **Combined Filtering**: Precise filtering by both criteria (e.g., dog food, cat toys)
+5. **No Filters**: Browse all available products
 
 ## Technology Stack
 
@@ -130,7 +131,7 @@ Before installing the project, ensure you have the following software installed:
    
    # Create database and user
    CREATE DATABASE pet_store;
-   CREATE USER 'petstore_user'@'localhost' IDENTIFIED BY 'password123';
+   CREATE USER 'petstore_user'@'localhost';
    GRANT ALL PRIVILEGES ON pet_store.* TO 'petstore_user'@'localhost';
    FLUSH PRIVILEGES;
    EXIT;
@@ -160,7 +161,7 @@ Before installing the project, ensure you have the following software installed:
 
 ### Database Schema
 
-The application uses a well-structured relational database with the following tables:
+The application uses a well-structured relational database with some the following tables:
 
 #### Users Table
 - `id`: Primary key (auto-increment)
@@ -231,34 +232,91 @@ This script will:
 ## Project Structure
 
 ```
-pet_store_ecommerce/
-├── public/                 # Web-accessible files
-│   ├── index.php          # Homepage
-│   ├── products.php       # Product catalog
-│   ├── cart.php           # Shopping cart
-│   ├── login.php          # User login
-│   ├── register.php       # User registration
-│   ├── about.php          # About us page
-│   ├── contact.php        # Contact page
-│   └── logout.php         # Logout functionality
-├── includes/              # PHP include files
-│   ├── config.php         # Database configuration
-│   ├── auth.php           # Authentication functions
-│   ├── product.php        # Product management functions
-│   ├── cart.php           # Cart management functions
-│   └── order.php          # Order processing functions
-├── api/                   # API endpoints
-│   ├── cart_actions.php   # Cart AJAX endpoints
-│   └── checkout.php       # Checkout processing
-├── css/                   # Stylesheets
-│   └── style.css          # Main stylesheet
-├── js/                    # JavaScript files
-│   └── cart.js            # Cart functionality
-├── images/                # Product and site images
-├── database/              # Database files
-│   ├── schema.sql         # Database structure
-│   └── sample_data.sql    # Sample data
-└── README.md              # Project documentation
+CARE4PETS/
+├── admin/                      # Admin pages (web-accessible)
+│   ├── config.php
+│   ├── dashboard.php
+│   ├── login.php
+│   ├── logout.php
+│   ├── header.php
+│   ├── footer.php
+│   ├── product.php
+│   ├── edit_product.php
+│   ├── delete_product.php
+│   ├── product_types.php
+│   ├── pet_types.php
+│   ├── suppliers.php
+│   ├── orders.php
+│   ├── order_details.php
+│   ├── messages.php
+│   ├── users.php
+│   ├── hash_generator.php
+│   ├── script.js
+│   └── style.css
+├── api/
+│   └── cart_actions.php        # AJAX endpoints for cart (add/update/remove)
+├── css/                        # Page level stylesheets
+│   ├── about.css
+│   ├── cart.css
+│   ├── contact.css
+│   ├── dashboard.css
+│   ├── footer.css
+│   ├── header.css
+│   ├── index.css
+│   ├── login.css
+│   ├── order_successful.css
+│   ├── payments.css
+│   ├── product-des.css
+│   ├── products.css
+│   ├── register.css
+│   ├── shipping.css
+│   └── style.css
+├── database/
+│   └── schema.sql
+├── images/                     # product and site images
+├── includes/                   # shared PHP includes (server-side)
+│   ├── auth.php
+│   ├── cart.php
+│   ├── check_username.php
+│   ├── config.php
+│   ├── contact.php
+│   ├── dashboard_handler.php
+│   ├── login_process.php
+│   ├── order.php
+│   ├── payment_process.php
+│   ├── payments.php
+│   ├── product.php
+│   └── register_handler.php
+├── js/                         # Page-level javascript
+│   ├── cart.js
+│   ├── contact.js
+│   ├── dashboard.js
+│   ├── login.js
+│   ├── payments.js
+│   └── register.js
+├── public/                     # Web root (served to users)
+│   ├── index.php
+│   ├── products.php
+│   ├── product-des.php
+│   ├── cart.php
+│   ├── checkout.php
+│   ├── order_successful.php
+│   ├── login.php
+│   ├── register.php
+│   ├── logout.php
+│   ├── payments.php
+│   ├── shipping.php
+│   ├── about.php
+│   ├── contact.php
+│   ├── dashboard.php          # note: public dashboard and admin/dashboard.php both exist
+│   ├── header.php
+│   ├── footer.php
+│   └── slider.html
+├── .gitattributes
+├── FEATURES.md
+├── README.md                   # (this file — update)
+└── roles.md
+
 ```
 
 ## Usage Instructions
@@ -437,12 +495,8 @@ define('DB_NAME', 'your-production-database');
 Potential improvements for the project:
 
 - **Admin Dashboard**: Complete admin interface for product and order management
-- **Payment Integration**: Add payment gateway integration (PayPal, Stripe)
-- **Email Notifications**: Order confirmation and status update emails
-- **Product Reviews**: Customer review and rating system
 - **Inventory Management**: Low stock alerts and automatic reordering
 - **Search Functionality**: Product search with filters
-- **Wishlist Feature**: Save products for later purchase
 - **Multi-language Support**: Internationalization capabilities
 
 ## License

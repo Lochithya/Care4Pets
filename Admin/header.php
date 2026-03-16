@@ -21,6 +21,7 @@ if (!isset($_SESSION['admin_id'])) {
                 <li><a href="product.php">Products</a></li>
                 <li><a href="orders.php">Orders</a></li>
                 <li><a href="users.php">Users</a></li>
+                <li><a href="messages.php">Messages</a></li>
                 <li><a href="suppliers.php">Suppliers</a></li>
                 <li><a href="pet_types.php">Pet Types</a></li>
                 <li><a href="product_types.php">Product Types</a></li>

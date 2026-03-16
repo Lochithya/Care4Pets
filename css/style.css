@@ -205,6 +205,7 @@ section h2::after {
     margin-top: 0.3rem;
 }
 
+/* --- Stock & Rating --- */
 .stock-rating {
     display: flex;
     justify-content: space-between;
