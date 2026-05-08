@@ -1,5 +1,5 @@
 /* ============================================================
-   HEADER — Care4Pets
+   HEADER — Care4Pets (Redesigned)
    ============================================================ */
 
 *, *::before, *::after {
@@ -17,44 +17,45 @@ body {
 
 /* ---------- Sticky Header ---------- */
 .site-header {
-    background: linear-gradient(135deg, #1a6fa8 0%, #134f78 100%);
+    background: linear-gradient(135deg, #0d3b66 0%, #1a6fa8 50%, #134f78 100%);
     color: #fff;
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 18px rgba(19,79,120,0.28);
+    box-shadow: 0 4px 24px rgba(13, 59, 102, 0.35);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
 .containerer {
-    max-width: 1260px;
+    max-width: 1440px;
     margin: 0 auto;
-    padding: 0 28px;
+    padding: 0 40px;
 }
 
 .header-flex {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 13px 0;
-    gap: 14px;
+    padding: 16px 0;
+    gap: 20px;
 }
 
 /* ---------- Logo ---------- */
 .logo a {
-    font-size: 1.55rem;
+    font-size: 1.75rem;
     font-weight: 800;
     color: #fff;
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     letter-spacing: -0.3px;
     transition: opacity 0.2s;
 }
 
 .logo a::before {
     content: "🐾";
-    font-size: 1.25rem;
+    font-size: 1.5rem;
 }
 
 .logo a:hover { opacity: 0.85; }
@@ -63,40 +64,41 @@ body {
 .main-nav ul {
     display: flex;
     list-style: none;
-    gap: 2px;
+    gap: 4px;
     margin: 0;
     padding: 0;
 }
 
 .main-nav a {
-    color: rgba(255,255,255,0.85);
+    color: rgba(255,255,255,0.88);
     text-decoration: none;
     font-weight: 500;
-    font-size: 0.92rem;
-    padding: 8px 13px;
-    border-radius: 8px;
+    font-size: 1.02rem;
+    padding: 10px 18px;
+    border-radius: 10px;
     position: relative;
-    transition: all 0.2s ease;
+    transition: all 0.25s ease;
     display: block;
+    letter-spacing: 0.2px;
 }
 
 .main-nav a::after {
     content: '';
     position: absolute;
-    bottom: 4px;
-    left: 13px;
-    right: 13px;
-    height: 2px;
-    background: #ffd166;
+    bottom: 5px;
+    left: 18px;
+    right: 18px;
+    height: 2.5px;
+    background: linear-gradient(90deg, #ffd166, #ffb347);
     border-radius: 2px;
     transform: scaleX(0);
-    transition: transform 0.22s ease;
+    transition: transform 0.25s ease;
 }
 
 .main-nav a:hover,
 .main-nav a.active {
     color: #fff;
-    background: rgba(255,255,255,0.11);
+    background: rgba(255,255,255,0.12);
 }
 
 .main-nav a:hover::after,
@@ -104,35 +106,53 @@ body {
     transform: scaleX(1);
 }
 
+/* Nav link icons */
+.main-nav a i {
+    font-size: 0.82rem;
+    opacity: 0.82;
+    transition: opacity 0.2s;
+    width: 14px;
+    text-align: center;
+}
+.main-nav a:hover i,
+.main-nav a.active i {
+    opacity: 1;
+}
+
 /* ---------- Header Icons ---------- */
 .header-icons {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 14px;
 }
 
 .icon-wrapper,
 .icon-wrapper2 {
     display: flex;
     align-items: center;
-    gap: 7px;
+    gap: 9px;
     background: rgba(255,255,255,0.12);
-    padding: 7px 14px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 10px 18px;
     border-radius: 50px;
     cursor: pointer;
-    transition: background 0.2s ease, transform 0.2s ease;
-    border: 1px solid rgba(255,255,255,0.16);
+    transition: all 0.25s ease;
+    border: 1px solid rgba(255,255,255,0.18);
+    color: #fff;
+    text-decoration: none;
 }
 
 .icon-wrapper:hover,
 .icon-wrapper2:hover {
-    background: rgba(255,255,255,0.22);
-    transform: translateY(-1px);
+    background: rgba(255,255,255,0.24);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 
 .icon-wrapper i,
 .icon-wrapper2 i {
-    font-size: 1.05rem;
+    font-size: 1.2rem;
     color: #fff;
 }
 
@@ -143,37 +163,46 @@ body {
     position: absolute;
     top: -8px;
     right: -8px;
-    background: #f06030;
+    background: linear-gradient(135deg, #ff5252, #f06030);
     color: #fff;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 700;
-    width: 19px;
-    height: 19px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid #134f78;
+    border: 2px solid #0d3b66;
     line-height: 1;
+    box-shadow: 0 2px 8px rgba(240, 96, 48, 0.4);
 }
 
 /* Profile */
-.profile-icon { gap: 7px; }
-.profile-icon i { font-size: 1.15rem; }
+.profile-icon { gap: 9px; }
+.profile-icon i { font-size: 1.35rem; }
 
 .image {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid rgba(255,255,255,0.45);
+    border: 2px solid rgba(255,255,255,0.5);
 }
 
 .greeting {
-    font-size: 0.8rem;
+    font-size: 0.88rem;
     font-weight: 600;
     line-height: 1.3;
-    color: rgba(255,255,255,0.9);
+    color: rgba(255,255,255,0.92);
+}
+
+/* Cart label */
+.cart-label {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.92);
+    letter-spacing: 0.2px;
 }
 
 /* ---------- Mobile Toggle ---------- */
@@ -182,9 +211,9 @@ body {
     background: rgba(255,255,255,0.12);
     border: 1px solid rgba(255,255,255,0.22);
     color: #fff;
-    font-size: 1.15rem;
-    padding: 8px 11px;
-    border-radius: 8px;
+    font-size: 1.25rem;
+    padding: 10px 14px;
+    border-radius: 10px;
     cursor: pointer;
     transition: background 0.2s;
     align-items: center;
@@ -194,15 +223,19 @@ body {
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
+    .containerer {
+        padding: 0 20px;
+    }
+
     .main-nav {
         display: none;
         position: absolute;
         top: 100%;
         left: 0;
         right: 0;
-        background: linear-gradient(135deg, #1a6fa8, #134f78);
-        padding: 0.9rem 1.4rem;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+        background: linear-gradient(135deg, #0d3b66, #1a6fa8);
+        padding: 1rem 1.5rem;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
         z-index: 999;
     }
 
@@ -215,7 +248,8 @@ body {
 
     .main-nav a {
         display: block;
-        padding: 10px 13px;
+        padding: 12px 16px;
+        font-size: 1rem;
     }
 
     .menu-toggle { display: flex; }
@@ -225,6 +259,6 @@ body {
 
 @media (max-width: 480px) {
     .greeting { display: none; }
-    .header-icons { gap: 7px; }
-    .icon-wrapper, .icon-wrapper2 { padding: 7px 9px; }
+    .header-icons { gap: 8px; }
+    .icon-wrapper, .icon-wrapper2 { padding: 8px 12px; }
 }

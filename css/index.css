@@ -1,21 +1,26 @@
 /* ============================================================
-   HOME PAGE — Care4Pets
+   HOME PAGE — Care4Pets (Redesigned)
    ============================================================ */
 
-.container { width: 90%; max-width: 1200px; margin: auto; }
+.container { 
+    width: 92%; 
+    max-width: 1440px; 
+    margin: auto; 
+    padding: 0 24px;
+}
 
 /* ---------- Message Bar ---------- */
 .message-bar {
     width: 100%;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-size: 0.93rem;
+    padding: 14px 24px;
+    border-radius: 10px;
+    font-size: 1rem;
     font-weight: 600;
     display: none;
     text-align: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
     position: fixed;
-    top: 68px;
+    top: 72px;
     left: 0;
     z-index: 1100;
 }
@@ -26,10 +31,10 @@
 .message-bar .close-btn {
     background: rgba(255,255,255,0.65);
     border: 1px solid rgba(0,0,0,0.12);
-    border-radius: 4px;
-    font-size: 0.76rem;
-    padding: 2px 7px;
-    margin-left: 10px;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    padding: 3px 10px;
+    margin-left: 12px;
     cursor: pointer;
     color: inherit;
 }
@@ -45,7 +50,7 @@
     color: #fff;
     position: relative;
     overflow: hidden;
-    min-height: 480px;
+    min-height: 520px;
     animation: heroZoom 14s ease-in-out infinite alternate;
 }
 
@@ -65,7 +70,7 @@
 .hero-content {
     position: relative;
     z-index: 1;
-    max-width: 520px;
+    max-width: 560px;
 }
 
 .hero .badge {
@@ -73,26 +78,26 @@
     background: rgba(255,255,255,0.16);
     backdrop-filter: blur(6px);
     color: #fff;
-    padding: 5px 15px;
+    padding: 6px 18px;
     border-radius: 50px;
-    font-size: 0.8rem;
+    font-size: 0.88rem;
     font-weight: 600;
     letter-spacing: 0.5px;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
     border: 1px solid rgba(255,255,255,0.28);
 }
 
 .hero h2 {
-    font-size: clamp(1.8rem, 4vw, 2.7rem);
+    font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 800;
     line-height: 1.2;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     text-shadow: 0 2px 14px rgba(0,0,0,0.28);
 }
 
 .hero p {
-    font-size: 1.02rem;
-    margin-bottom: 22px;
+    font-size: 1.1rem;
+    margin-bottom: 24px;
     opacity: 0.9;
     font-style: italic;
     line-height: 1.6;
@@ -101,14 +106,14 @@
 .hero .btn {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 12px 28px;
+    gap: 8px;
+    padding: 14px 32px;
     background: #f06030;
     color: #fff;
     font-weight: 700;
     text-decoration: none;
     border-radius: 50px;
-    font-size: 0.93rem;
+    font-size: 1rem;
     transition: all 0.22s ease;
     box-shadow: 0 4px 16px rgba(240,96,48,0.42);
 }
@@ -139,56 +144,66 @@
 
 /* ---------- Featured Products ---------- */
 .featured-products {
-    padding: 4rem 0;
+    padding: 5rem 0;
     background: #f5f7fa;
 }
 
 .featured-products h2 {
     text-align: center;
-    font-size: clamp(1.5rem, 3vw, 2.1rem);
-    font-weight: 700;
+    font-size: clamp(1.7rem, 3vw, 2.4rem);
+    font-weight: 800;
     color: #1a2332;
-    margin-bottom: 2.4rem;
+    margin-bottom: 3rem;
     position: relative;
+    letter-spacing: -0.3px;
 }
 
 .featured-products h2::after {
     content: "";
     display: block;
-    width: 48px;
-    height: 3px;
-    background: #f06030;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #f06030, #ffb347);
     border-radius: 2px;
-    margin: 10px auto 0;
+    margin: 14px auto 0;
 }
 
 /* ---------- Categories ---------- */
 .categories {
-    padding: 4rem 0;
+    padding: 5rem 0;
     background: #fff;
 }
 
 .categories h2 {
     text-align: center;
-    font-size: clamp(1.5rem, 3vw, 2.1rem);
-    font-weight: 700;
+    font-size: clamp(1.7rem, 3vw, 2.4rem);
+    font-weight: 800;
     color: #1a2332;
-    margin-bottom: 2.4rem;
+    margin-bottom: 3rem;
     position: relative;
+    letter-spacing: -0.3px;
 }
 
 .categories h2::after {
     content: "";
     display: block;
-    width: 48px;
-    height: 3px;
-    background: #f06030;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #f06030, #ffb347);
     border-radius: 2px;
-    margin: 10px auto 0;
+    margin: 14px auto 0;
+}
+
+/* ---------- View All ---------- */
+.view-all {
+    text-align: center;
+    margin-top: 2.5rem;
 }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 768px) {
-    .hero { padding: 56px 6%; min-height: 340px; }
-    .hero h2 { font-size: 1.75rem; }
+    .hero { padding: 56px 6%; min-height: 360px; }
+    .hero h2 { font-size: 1.85rem; }
+    .container { width: 95%; padding: 0 16px; }
+    .featured-products, .categories { padding: 3.5rem 0; }
 }

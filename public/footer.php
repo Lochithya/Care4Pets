@@ -1,22 +1,15 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
     <link rel="stylesheet" href="../css/footer.css">
 
-  </head>
-  <footer>
-    
-
-    <body>
+    <footer>
       <div class="footer-container">
-      <!-- Left Section -->
+
+        <!-- Left Section: Brand -->
         <div class="footer-section">
-          <h3>Pet Store</h3>
+          <h3>Care4Pets</h3>
           <p>
-             <i> Connecting Pets with Loving Families.</i> <br>
-            At PetStore, we make it simple to adopt, buy, or rehome your furry, feathery, or scaly companions. <br>
-            With a safe and trusted platform, we bring together responsible owners and caring homes.
+            <em>Connecting Pets with Loving Families.</em><br>
+            At Care4Pets, we make it simple to find everything your furry, feathery, or scaly companion needs.
+            With a trusted platform, we bring together responsible owners and caring homes.
             Because every pet deserves love — and every family deserves a loyal friend. ❤️
           </p>
         </div>
@@ -25,10 +18,10 @@
         <div class="footer-section">
           <h4>Company</h4>
           <ul>
-            <li><a href="about.php">🐾 About Us</a></li>
-            <li><a href="javascript:void(0)">🐕 Blog</a></li>
-            <li><a href="javascript:void(0)" >🎁 Gift Cards</a></li>
-            <li><a href="javascript:void(0)">💼 Careers</a></li>
+            <li><a href="about.php"><i class="fas fa-paw"></i> About Us</a></li>
+            <li><a href="javascript:void(0)"><i class="fas fa-blog"></i> Blog</a></li>
+            <li><a href="javascript:void(0)"><i class="fas fa-gift"></i> Gift Cards</a></li>
+            <li><a href="javascript:void(0)"><i class="fas fa-briefcase"></i> Careers</a></li>
           </ul>
         </div>
 
@@ -36,45 +29,39 @@
         <div class="footer-section">
           <h4>Customer Service</h4>
           <ul>
-            <li><a href="contact.php">📩 Contact Us</a></li>
-            <li><a href="javascript:void(0)">🚚 Shipping</a></li>
-            <li><a href="javascript:void(0)">↩️ Returns</a></li>
-            <li><a href="order_tracking.php">📦 Order Tracking</a></li>
+            <li><a href="contact.php"><i class="fas fa-envelope"></i> Contact Us</a></li>
+            <li><a href="javascript:void(0)"><i class="fas fa-truck"></i> Shipping</a></li>
+            <li><a href="javascript:void(0)"><i class="fas fa-rotate-left"></i> Returns</a></li>
+            <li><a href="javascript:void(0)"><i class="fas fa-box"></i> Order Tracking</a></li>
           </ul>
         </div>
 
         <!-- Store Section -->
         <div class="footer-section">
           <h4>Store</h4>
-          <p style="font-size:17px;font-weight:bold;margin-bottom:5px;">📍 Kelaniya, Sri Lanka</p>
-          <p>📞 +94 112 359 359</p>
+          <p><i class="fas fa-map-marker-alt"></i> <strong>Kelaniya, Sri Lanka</strong></p>
+          <p><i class="fas fa-phone"></i> +94 112 359 359</p>
           <p>
-            <a href="mailto:lctnpet@outlook.com" class="link">
-              ✉️ info@petstore.com
+            <a href="mailto:info@petstore.com" class="link">
+              <i class="fas fa-envelope"></i> info@petstore.com
             </a>
           </p>
         </div>
 
-        <!-- ✅ Social Icons Row (Centered Between Sections) -->
+        <!-- Social Icons Row -->
         <div class="social-row">
+          <p class="social-label">Follow Us</p>
           <div class="social-icons">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-x-twitter"></i></a>
-            <a href="https://wa.me/94774692339" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" title="Twitter / X"><i class="fab fa-x-twitter"></i></a>
+            <a href="https://wa.me/94774692339" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
           </div>
         </div>
+
       </div>
 
       <div class="footer-bottom">
-        <p>© 2025 🐾 Pet Store E-commerce | All Rights Reserved</p>
+        <p>© 2025 🐾 Care4Pets E-commerce &nbsp;|&nbsp; All Rights Reserved &nbsp;|&nbsp; Made with ❤️ for pets</p>
       </div>
     </footer>
-    </body>
-
-  <script>
-    document.getElementById("myLink").addEventListener("click", function(event) {
-      event.preventDefault();   // stop page reload/navigation
-    });
-  </script>
-</html>
