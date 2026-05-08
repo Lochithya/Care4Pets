@@ -43,31 +43,39 @@ $products = getProductsByFilters($selectedPetType, $selectedProductType, $sort);
             <!-- keep local product search (optional) -->
             <div class="filters-container">
                 <div class="filter-section">
-                    <h3>Filter by Pet Type:</h3>
-                    <div class="category-filters">
-                        <a href="products.php?product_type=<?php echo htmlspecialchars($selectedProductType ?? ''); ?>&sort=<?php echo $sort; ?>"
-                        class="filter-btn <?php echo $selectedPetType === null ? 'active' : ''; ?>">All Pets</a>
+                  <div class="filter-row">
+                    <div class="filter-group">
+                        <h3>Filter by Pet Type:</h3>
+                        <div class="category-filters">
+                            <a href="products.php?product_type=<?php echo htmlspecialchars($selectedProductType ?? ''); ?>&sort=<?php echo $sort; ?>"
+                            class="filter-btn <?php echo $selectedPetType === null ? 'active' : ''; ?>">All Pets</a>
 
-                        <?php foreach ($petTypes as $petType): ?>
-                            <a href="products.php?pet_type=<?php echo $petType['id']; ?>&product_type=<?php echo htmlspecialchars($selectedProductType ?? ''); ?>&sort=<?php echo $sort; ?>"
-                            class="filter-btn <?php echo $selectedPetType == $petType['id'] ? 'active' : ''; ?>">
-                                <?php echo htmlspecialchars($petType['name']); ?>
+                            <?php foreach ($petTypes as $petType): ?>
+                                <a href="products.php?pet_type=<?php echo $petType['id']; ?>&product_type=<?php echo htmlspecialchars($selectedProductType ?? ''); ?>&sort=<?php echo $sort; ?>"
+                                class="filter-btn <?php echo $selectedPetType == $petType['id'] ? 'active' : ''; ?>">
+                                    <?php echo htmlspecialchars($petType['name']); ?>
+                                </a>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+
+                    <div class="filter-divider"></div>
+
+                    <div class="filter-group">
+                        <h3>Filter by Product Type:</h3>
+                        <div class="category-filters">
+                            <a href="products.php?pet_type=<?php echo htmlspecialchars($selectedPetType ?? ''); ?>&sort=<?php echo $sort; ?>"
+                            class="filter-btn <?php echo $selectedProductType === null ? 'active' : ''; ?>">All Types</a>
+
+                            <?php foreach ($productTypes as $productType): ?>
+                            <a href="products.php?product_type=<?php echo $productType['id']; ?>&pet_type=<?php echo htmlspecialchars($selectedPetType ?? ''); ?>&sort=<?php echo $sort; ?>"
+                                class="filter-btn <?php echo $selectedProductType == $productType['id'] ? 'active' : ''; ?>">
+                                <?php echo htmlspecialchars($productType['name']); ?>
                             </a>
-                        <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
-
-                    <h3>Filter by Product Type:</h3>
-                    <div class="category-filters">
-                        <a href="products.php?pet_type=<?php echo htmlspecialchars($selectedPetType ?? ''); ?>&sort=<?php echo $sort; ?>"
-                        class="filter-btn <?php echo $selectedProductType === null ? 'active' : ''; ?>">All Types</a>
-
-                        <?php foreach ($productTypes as $productType): ?>
-                        <a href="products.php?product_type=<?php echo $productType['id']; ?>&pet_type=<?php echo htmlspecialchars($selectedPetType ?? ''); ?>&sort=<?php echo $sort; ?>"
-                            class="filter-btn <?php echo $selectedProductType == $productType['id'] ? 'active' : ''; ?>">
-                            <?php echo htmlspecialchars($productType['name']); ?>
-                        </a>
-                        <?php endforeach; ?>
-                    </div>
+                  </div>
                 </div>
 
                 <!-- 🔽 Sort By Price Dropdown (aligned horizontally) -->

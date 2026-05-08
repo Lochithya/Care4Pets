@@ -37,7 +37,7 @@
     font-size: clamp(1.4rem, 3vw, 1.9rem);
     font-weight: 700;
     color: #1a2332;
-    margin: 2rem 0 1.4rem;
+    margin: 1.4rem 0 0.4rem;
     position: relative;
     text-align: center;
 }
@@ -50,6 +50,21 @@
     background: #f06030;
     border-radius: 2px;
     margin: 8px auto 0;
+}
+
+/* Override the global section h2 margin for products page */
+.product-list h2,
+main.container > h2 {
+    margin-bottom: 0.4rem !important;
+}
+
+/* Tighten the gap between title and filter box */
+.products-layout {
+    margin-top: 1.2rem;
+}
+
+.product-list {
+    padding-top: 0 !important;
 }
 
 /* ---------- Search Bar ---------- */
@@ -146,3 +161,127 @@
 }
 
 .op a:hover { color: #134f78; }
+
+/* ---------- Side-by-side filters ---------- */
+.filter-section {
+    background: linear-gradient(135deg, #f0f6fc 0%, #ffffff 100%);
+    border: 1.5px solid #d6e8f5;
+    border-radius: 16px;
+    padding: 1.6rem 2rem;
+    margin-bottom: 1.6rem;
+    box-shadow: 0 4px 18px rgba(26,111,168,0.08);
+}
+
+.filter-section .category-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.filter-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0;
+}
+
+.filter-group {
+    flex: 0 1 auto;
+    text-align: left;
+    padding: 0 2rem 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.filter-group h3 {
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
+    color: #1a6fa8;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.filter-group h3::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #f06030;
+}
+
+.filter-group .category-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.filter-divider {
+    width: 1.5px;
+    background: linear-gradient(180deg, transparent, #c8dff0, transparent);
+    margin: 0 8px;
+    align-self: stretch;
+    min-height: 60px;
+}
+
+/* ---------- Wider product grid ---------- */
+.products-grid {
+    max-width: 100% !important;
+}
+
+/* ---------- Responsive filters ---------- */
+@media (max-width: 768px) {
+    .filter-row {
+        flex-direction: column;
+        gap: 16px;
+    }
+    .filter-group {
+        padding: 0;
+        width: 100%;
+    }
+    .filter-divider {
+        width: 100%;
+        height: 1.5px;
+        min-height: unset;
+        margin: 0;
+        background: linear-gradient(90deg, transparent, #c8dff0, transparent);
+    }
+}
+
+/* ---------- Filter button overrides ---------- */
+.filter-btn {
+    padding: 6px 16px;
+    font-size: 0.84rem;
+    font-weight: 600;
+    border-radius: 50px;
+    border: 1.5px solid #d6e8f5;
+    background: #fff;
+    color: #1a6fa8;
+    transition: all 0.22s ease;
+    letter-spacing: 0.2px;
+}
+
+.filter-btn:hover {
+    background: #e8f3fb;
+    border-color: #1a6fa8;
+    color: #134f78;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(26,111,168,0.12);
+}
+
+.filter-btn.active {
+    background: linear-gradient(135deg, #1C6EA4, #154D71);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 4px 12px rgba(26,111,168,0.3);
+}

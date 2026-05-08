@@ -3,8 +3,8 @@
    ============================================================ */
 
 footer {
-    background: linear-gradient(160deg, #091e36 0%, #0d3b66 50%, #134f78 100%);
-    color: #c8dae8;
+    background: linear-gradient(135deg, #1C6EA4 0%, #2484c1 50%, #154D71 100%);
+    color: #e8f3fb;
     font-family: 'Segoe UI', system-ui, sans-serif;
     margin-top: 0;
     box-shadow: 0 -6px 30px rgba(0,0,0,0.2);
@@ -53,7 +53,7 @@ footer::before {
 .footer-section p {
     font-size: 0.96rem;
     line-height: 1.85;
-    color: #94b3c9;
+    color: rgba(255,255,255,0.85);
 }
 
 .footer-section-company {
@@ -70,7 +70,7 @@ footer::before {
 }
 
 .footer-section ul li a {
-    color: #94b3c9;
+    color: rgba(255,255,255,0.85);
     text-decoration: none;
     font-size: 1rem;
     transition: color 0.25s ease, padding-left 0.25s ease;
@@ -80,7 +80,7 @@ footer::before {
 }
 
 .footer-section ul li a:hover {
-    color: #f06030;
+    color: #fff;
     padding-left: 6px;
 }
 
@@ -120,7 +120,7 @@ footer::before {
     font-weight: 700;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.45);
+    color: rgba(255,255,255,0.75);
     margin-bottom: 14px;
 }
 
@@ -166,22 +166,23 @@ footer::before {
 .footer-bottom {
     text-align: center;
     padding: 20px 24px;
-    border-top: 1px solid rgba(255,255,255,0.08);
+    border-top: 1px solid rgba(255,255,255,0.15);
     font-size: 0.95rem;
-    color: #6a8da6;
+    color: rgba(255,255,255,0.85);
     letter-spacing: 0.2px;
+    background: rgba(0,0,0,0.15);
 }
 
 .footer-bottom p { margin: 0; }
 
 .link {
-    color: #94b3c9;
+    color: rgba(255,255,255,0.85);
     font-size: 0.96rem;
     transition: color 0.25s;
     text-decoration: none;
 }
 
-.link:hover { color: #f06030; }
+.link:hover { color: #fff; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 768px) {

@@ -129,8 +129,9 @@ section h2::after {
 .products-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin: 2rem 0;
+    gap: 2.4rem;
+    margin: 2rem auto;
+    max-width: 1180px;
 }
 
 .product-card {
@@ -235,9 +236,9 @@ section h2::after {
 .view-more {
     background: var(--primary);
     color: #fff;
-    padding: 8px 16px;
+    padding: 9px 20px;
     border: none;
-    border-radius: var(--radius-sm);
+    border-radius: 50px;
     cursor: pointer;
     font-size: 0.88rem;
     font-weight: 600;
@@ -252,11 +253,11 @@ section h2::after {
 .add-to-cart-btn {
     background: var(--accent);
     color: #fff;
-    padding: 10px 20px;
+    padding: 9px 20px;
     border: none;
-    border-radius: var(--radius-sm);
+    border-radius: 50px;
     cursor: pointer;
-    font-size: 0.95rem;
+    font-size: 0.88rem;
     font-weight: 600;
     transition: all var(--transition);
     display: inline-flex;
@@ -267,7 +268,7 @@ section h2::after {
     content: "\f07a";
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
 }
 .add-to-cart-btn:hover {
     background: #d4521f;
