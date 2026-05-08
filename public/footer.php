@@ -15,13 +15,13 @@
         </div>
 
         <!-- Company Section -->
-        <div class="footer-section">
+        <div class="footer-section footer-section-company">
           <h4>Company</h4>
           <ul>
-            <li><a href="about.php"><i class="fas fa-paw"></i> About Us</a></li>
-            <li><a href="javascript:void(0)"><i class="fas fa-blog"></i> Blog</a></li>
-            <li><a href="javascript:void(0)"><i class="fas fa-gift"></i> Gift Cards</a></li>
-            <li><a href="javascript:void(0)"><i class="fas fa-briefcase"></i> Careers</a></li>
+            <li><a href="about.php"> About Us</a></li>
+            <li><a href="javascript:void(0)"> Blog</a></li>
+            <li><a href="javascript:void(0)"> Gift Cards</a></li>
+            <li><a href="javascript:void(0)"> Careers</a></li>
           </ul>
         </div>
 
@@ -29,21 +29,48 @@
         <div class="footer-section">
           <h4>Customer Service</h4>
           <ul>
-            <li><a href="contact.php"><i class="fas fa-envelope"></i> Contact Us</a></li>
-            <li><a href="javascript:void(0)"><i class="fas fa-truck"></i> Shipping</a></li>
-            <li><a href="javascript:void(0)"><i class="fas fa-rotate-left"></i> Returns</a></li>
-            <li><a href="javascript:void(0)"><i class="fas fa-box"></i> Order Tracking</a></li>
+            <li>
+              <a href="contact.php">
+                <img src="../images/footer/phone-call.png" alt="Contact" class="footer-icon">
+                Contact Us
+              </a>
+            </li>
+            <li>
+              <a href="dashboard.php?tab=orders">
+                <img src="../images/footer/delivery-truck.png" alt="Shipping" class="footer-icon">
+                Shipping
+              </a>
+            </li>
+            <li>
+              <a href="dashboard.php?tab=orders">
+                <img src="../images/footer/return-box.png" alt="Returns" class="footer-icon">
+                Returns
+              </a>
+            </li>
+            <li>
+              <a href="dashboard.php?tab=orders">
+                <img src="../images/footer/order-tracking.png" alt="Order Tracking" class="footer-icon">
+                Order Tracking
+              </a>
+            </li>
           </ul>
         </div>
 
         <!-- Store Section -->
         <div class="footer-section">
           <h4>Store</h4>
-          <p><i class="fas fa-map-marker-alt"></i> <strong>Kelaniya, Sri Lanka</strong></p>
-          <p><i class="fas fa-phone"></i> +94 112 359 359</p>
+          <p>
+            <img src="../images/footer/location.png" alt="Location" class="footer-icon-inline">
+            <strong>Kelaniya, Sri Lanka</strong>
+          </p>
+          <p>
+            <img src="../images/footer/phone-call.png" alt="Phone" class="footer-icon-inline">
+            +94 112 359 359
+          </p>
           <p>
             <a href="mailto:info@petstore.com" class="link">
-              <i class="fas fa-envelope"></i> info@petstore.com
+              <img src="../images/footer/mail.png" alt="Email" class="footer-icon-inline">
+              info@petstore.com
             </a>
           </p>
         </div>
@@ -52,10 +79,18 @@
         <div class="social-row">
           <p class="social-label">Follow Us</p>
           <div class="social-icons">
-            <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" title="Twitter / X"><i class="fab fa-x-twitter"></i></a>
-            <a href="https://wa.me/94774692339" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" title="Facebook">
+              <img src="../images/footer/facebook.png" alt="Facebook">
+            </a>
+            <a href="#" title="Instagram">
+              <img src="../images/footer/instagram.png" alt="Instagram">
+            </a>
+            <a href="#" title="Twitter / X">
+              <img src="../images/footer/twitter.png" alt="Twitter">
+            </a>
+            <a href="https://wa.me/94774692339" target="_blank" title="WhatsApp">
+              <img src="../images/footer/whatsapp.png" alt="WhatsApp">
+            </a>
           </div>
         </div>
 

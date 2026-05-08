@@ -343,12 +343,16 @@ body {
 .offer-card p { color: #5e6e82; font-size: 0.88rem; }
 
 /* ---------- Team ---------- */
-.team { padding: 68px 0; text-align: center; background: #fff; }
+.team {
+    padding: 68px 0;
+    text-align: center;
+    background: linear-gradient(160deg, #eef5fc 0%, #f5f9ff 60%, #fff 100%);
+}
 
 .team h2 {
     font-size: 1.85rem;
     font-weight: 800;
-    margin-bottom: 46px;
+    margin-bottom: 8px;
     color: #134f78;
     position: relative;
 }
@@ -363,56 +367,90 @@ body {
     border-radius: 2px;
 }
 
+.section-sub {
+    color: #7a9ab5;
+    font-size: 0.95rem;
+    margin-bottom: 40px;
+    font-style: italic;
+}
+
 .team-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-    gap: 22px;
-    margin-bottom: 28px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    justify-items: center;
+    max-width: 960px;
+    margin: 0 auto;
 }
 
 .team-card {
     background: #fff;
-    padding: 22px 18px;
-    border-radius: 16px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
-    border: 1px solid #e4e9f0;
+    padding: 28px 20px 24px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(26,111,168,0.09);
+    border: 1px solid #ddeaf5;
     transition: transform 0.28s ease, box-shadow 0.28s ease;
+    width: 100%;
+    text-align: center;
 }
 
 .team-card:hover {
-    transform: translateY(-7px);
-    box-shadow: 0 12px 32px rgba(26,111,168,0.14);
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(26,111,168,0.16);
     border-color: #1a6fa8;
 }
 
-.team-card img {
+.team-img-wrap {
+    width: 110px;
+    height: 110px;
     border-radius: 50%;
-    width: 105px;
-    height: 105px;
+    margin: 0 auto 16px;
+    padding: 3px;
+    background: linear-gradient(135deg, #1a6fa8, #f06030);
+}
+
+.team-img-wrap img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 11px;
-    border: 3px solid #d6e8f5;
+    border: 3px solid #fff;
+    display: block;
 }
 
 .team-card h4 {
     font-weight: 800;
     color: #1a2332;
+    font-size: 1.05rem;
     margin-bottom: 4px;
 }
 
-.team-card p { color: #5e6e82; font-size: 0.86rem; }
+.team-card .role {
+    color: #1a6fa8;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 10px;
+}
+
+.team-card .team-bio {
+    color: #5e6e82;
+    font-size: 0.86rem;
+    line-height: 1.55;
+}
 
 /* ---------- Why Choose Us ---------- */
 .chooseus {
     padding: 68px 0;
     text-align: center;
-    background: #f5f7fa;
+    background: #fff;
 }
 
 .chooseus h2 {
     font-size: 1.85rem;
     font-weight: 800;
-    margin-bottom: 46px;
+    margin-bottom: 8px;
     color: #134f78;
     position: relative;
 }
@@ -429,48 +467,62 @@ body {
 
 .choose-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-    gap: 18px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
     justify-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 .choose-card {
-    background: #fff;
-    padding: 22px 18px;
-    border-radius: 14px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
-    border: 1px solid #e4e9f0;
+    background: linear-gradient(160deg, #f5f9ff, #fff);
+    padding: 28px 18px 24px;
+    border-radius: 18px;
+    box-shadow: 0 4px 16px rgba(26,111,168,0.08);
+    border: 1px solid #ddeaf5;
     width: 100%;
-    max-width: 195px;
-    font-size: 1.7rem;
+    text-align: center;
     transition: transform 0.28s, box-shadow 0.28s, border-color 0.28s;
 }
 
 .choose-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 24px rgba(26,111,168,0.11);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(26,111,168,0.14);
     border-color: #1a6fa8;
 }
 
+.choose-icon {
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+    line-height: 1;
+}
+
+.choose-card h5 {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #134f78;
+    margin-bottom: 8px;
+}
+
 .choose-card p {
-    font-weight: 700;
-    color: #1a2332;
-    margin-top: 9px;
-    font-size: 0.86rem;
+    color: #5e6e82;
+    font-size: 0.84rem;
+    line-height: 1.55;
 }
 
 /* ---------- Testimonials ---------- */
 .testimonials {
-    background: linear-gradient(135deg, #eef5fc, #d6e8f5);
-    padding: 68px 0;
+    background: linear-gradient(160deg, #1a4f7a 0%, #2484c1 55%, #1a6fa8 100%);
+    padding: 72px 0 80px;
+    margin-bottom: 56px;
     text-align: center;
 }
 
 .testimonials h2 {
     font-size: 1.85rem;
     font-weight: 800;
-    margin-bottom: 46px;
-    color: #134f78;
+    margin-bottom: 8px;
+    color: #fff;
     position: relative;
 }
 
@@ -484,55 +536,134 @@ body {
     border-radius: 2px;
 }
 
+.testimonials .section-sub {
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 44px;
+}
+
+/* Outer wrapper: arrows + swiper in a row */
+.swiper-outer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Custom arrow buttons */
+.testi-arrow {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,255,255,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.28s ease;
+    backdrop-filter: blur(8px);
+}
+
+.testi-arrow:hover {
+    background: rgba(255,255,255,0.3);
+    border-color: rgba(255,255,255,0.7);
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+.testi-arrow img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    transition: transform 0.22s ease;
+}
+
+.testi-prev:hover img { transform: translateX(-2px); }
+.testi-next:hover img { transform: translateX(2px); }
+
 .swiper {
-    width: 55%;
+    width: 58%;
     padding-bottom: 48px;
-    height: 390px;
 }
 
 .swiper-slide {
     background: #fff;
-    border-radius: 16px;
-    padding: 24px;
+    border-radius: 20px;
+    padding: 32px 28px 28px;
     text-align: center;
-    box-shadow: 0 4px 16px rgba(26,111,168,0.09);
-    border: 1px solid #d6e8f5;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    border: 1px solid rgba(255,255,255,0.15);
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 
 .swiper-slide img {
-    width: 96px;
-    height: 96px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
     border: 3px solid #d6e8f5;
+    box-shadow: 0 4px 14px rgba(26,111,168,0.18);
+}
+
+.stars {
+    color: #f5a623;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+}
+
+.testimonial-text {
+    font-style: italic;
+    color: #4a5e72;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 18px;
+    flex-grow: 1;
 }
 
 .swiper-slide h4 {
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 800;
-    margin-bottom: 9px;
     color: #134f78;
+    margin-bottom: 4px;
 }
 
-.swiper-slide p {
-    font-style: italic;
-    color: #5e6e82;
-    font-size: 0.9rem;
-    line-height: 1.6;
+.testimonial-meta {
+    font-size: 0.78rem;
+    color: #7a9ab5;
+    font-weight: 600;
+    letter-spacing: 0.3px;
 }
 
-.swiper-button-next,
-.swiper-button-prev { color: #1a6fa8; }
+.swiper-pagination-bullet { background: rgba(255,255,255,0.5); }
+.swiper-pagination-bullet-active { background: #fff; }
 
 /* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+    .team-grid    { grid-template-columns: repeat(2, 1fr); max-width: 600px; }
+    .choose-grid  { grid-template-columns: repeat(3, 1fr); }
+    .swiper       { width: 72%; }
+}
+
 @media (max-width: 768px) {
-    .swiper { width: 90%; }
-    .story-content { flex-direction: column; }
+    .swiper         { width: 80%; }
+    .story-content  { flex-direction: column; }
     .journey-grid::before { display: none; }
-    .hero { height: auto; padding: 56px 6%; }
+    .hero           { height: auto; padding: 56px 6%; }
+    .team-grid      { grid-template-columns: repeat(2, 1fr); }
+    .choose-grid    { grid-template-columns: repeat(2, 1fr); }
+    .testi-arrow    { width: 40px; height: 40px; }
+    .testi-arrow img { width: 16px; height: 16px; }
+}
+
+@media (max-width: 480px) {
+    .team-grid      { grid-template-columns: 1fr; }
+    .choose-grid    { grid-template-columns: 1fr 1fr; }
+    .swiper         { width: 78%; }
+    .testi-arrow    { width: 34px; height: 34px; }
 }

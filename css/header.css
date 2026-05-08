@@ -17,13 +17,13 @@ body {
 
 /* ---------- Sticky Header ---------- */
 .site-header {
-    background: linear-gradient(135deg, #0d3b66 0%, #1a6fa8 50%, #134f78 100%);
+    background: linear-gradient(135deg, #1C6EA4 0%, #2484c1 50%, #154D71 100%);
     color: #fff;
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 4px 24px rgba(13, 59, 102, 0.35);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 4px 24px rgba(21, 77, 113, 0.4);
+    border-bottom: 1px solid rgba(255,255,255,0.12);
 }
 
 .containerer {
@@ -173,7 +173,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid #0d3b66;
+    border: 2px solid #1C6EA4;
     line-height: 1;
     box-shadow: 0 2px 8px rgba(240, 96, 48, 0.4);
 }
@@ -233,7 +233,7 @@ body {
         top: 100%;
         left: 0;
         right: 0;
-        background: linear-gradient(135deg, #0d3b66, #1a6fa8);
+        background: linear-gradient(135deg, #1C6EA4, #154D71);
         padding: 1rem 1.5rem;
         box-shadow: 0 8px 24px rgba(0,0,0,0.2);
         z-index: 999;

@@ -327,15 +327,15 @@ section h2::after {
 /* ---------- Categories Grid ---------- */
 .categories-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1.8rem;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.4rem;
     margin: 2rem 0;
 }
 
 .category-item {
     background: var(--surface);
     border: 1px solid var(--border);
-    padding: 2.2rem 1.8rem;
+    padding: 2rem 1.2rem;
     border-radius: var(--radius-lg);
     text-align: center;
     box-shadow: var(--shadow-sm);
@@ -535,7 +535,7 @@ section h2::after {
 @media (max-width: 768px) {
     .products-grid { grid-template-columns: repeat(2, 1fr); gap: 1.4rem; }
     .contact-info  { grid-template-columns: 1fr; }
-    .categories-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+    .categories-grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
     .container { padding: 0 20px; }
 }
 

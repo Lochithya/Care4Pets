@@ -54,7 +54,7 @@
         <div class="header-icons">
             <!-- Cart Icon -->
             <div class="icon-wrapper cart-icon" onclick="window.location.href='cart.php'" title="View Cart">
-                <img src = "/Care4Pets/images/index/shopping-cart.png" width="25" height="25">
+                <img src = "/Care4Pets/images/index/shopping-cart.png" width="20" height="20">
                 <span class="cart-label">Cart</span>
                 <span class="cart-count"><?php echo $count; ?></span>
             </div>

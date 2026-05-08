@@ -56,6 +56,10 @@ footer::before {
     color: #94b3c9;
 }
 
+.footer-section-company {
+    margin-left: 90px;
+}
+
 .footer-section ul {
     list-style: none;
     padding: 0;
@@ -72,12 +76,35 @@ footer::before {
     transition: color 0.25s ease, padding-left 0.25s ease;
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
 }
 
 .footer-section ul li a:hover {
     color: #f06030;
     padding-left: 6px;
+}
+
+/* Footer Icons */
+.footer-icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    opacity: 0.85;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.footer-section ul li a:hover .footer-icon {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.footer-icon-inline {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    vertical-align: middle;
+    margin-right: 6px;
+    opacity: 0.85;
 }
 
 /* ---------- Social Row ---------- */
@@ -110,20 +137,29 @@ footer::before {
     width: 46px;
     height: 46px;
     border-radius: 50%;
+    overflow: hidden;
     background: rgba(255,255,255,0.08);
-    color: #c8dae8;
-    font-size: 1.15rem;
     border: 1px solid rgba(255,255,255,0.14);
     transition: all 0.3s ease;
     text-decoration: none;
 }
 
+.social-icons a img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
 .social-icons a:hover {
-    background: #f06030;
-    color: #fff;
-    border-color: #f06030;
-    transform: translateY(-4px) scale(1.05);
-    box-shadow: 0 8px 24px rgba(240,96,48,0.4);
+    border-color: rgba(255,255,255,0.45);
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.social-icons a:hover img {
+    transform: scale(1.08);
 }
 
 /* ---------- Footer Bottom ---------- */
@@ -157,6 +193,10 @@ footer::before {
         min-width: 160px;
         max-width: 50%;
     }
+
+    .footer-section-company {
+        margin-left: 0;
+    }
 }
 
 @media (max-width: 480px) {
@@ -164,5 +204,9 @@ footer::before {
         min-width: 100%;
         max-width: 100%;
         padding: 0 0 24px;
+    }
+
+    .footer-section-company {
+        margin-left: 0;
     }
 }

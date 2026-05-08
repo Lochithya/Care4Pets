@@ -27,7 +27,7 @@ $petTypes = getAllPetTypes();
    <?php include 'header.php'; ?>
    <div id="message-bar" class="message-bar"></div>
    
-  <?php include 'slider.html'  ?>
+  <?php include 'slider.php'  ?>
 
         <section class="featured-products">
             <div class="container">
@@ -43,14 +43,37 @@ $petTypes = getAllPetTypes();
                                 <div class="product-info">
                                     <h3><?php echo htmlspecialchars($product['name']); ?></h3>
                                     <p class="category"><?php echo htmlspecialchars($product['pet_type_name']); ?> - <?php echo htmlspecialchars($product['product_type_name']); ?></p>
+                                    <p class="description"><?php echo htmlspecialchars($product['description']); ?></p>
                                     <p class="price">$<?php echo number_format($product['price'], 2); ?></p>
-                                    <?php if (isLoggedIn()): ?>
-                                        <button class="add-to-cart-btn" data-product-id="<?php echo $product['id']; ?>">
-                                            Add to Cart
-                                        </button>
-                                    <?php else: ?>
-                                        <a href="login.php" class="btn">Login to Purchase</a>
-                                    <?php endif; ?>
+                                    <div class="stock-rating">
+                                        <span class="rating">
+                                            <?php
+                                            $rating = $product['ratings'];
+                                            $fullStars = floor($rating);
+                                            $emptyStars = 5 - $fullStars;
+                                            
+                                            for ($i = 0; $i < $fullStars; $i++) {
+                                                echo '★';
+                                            }
+                                            for ($i = 0; $i < $emptyStars; $i++) {
+                                                echo '☆';
+                                            }
+                                            echo " (" . number_format($rating, 1) . ")";
+                                            ?>
+                                        </span>
+                                    </div>
+                                    <div class="options">
+                                        <a href="product-des.php?id=<?php echo $product['id']; ?>">
+                                            <button class="view-more">View More</button>
+                                        </a>
+                                        <?php if (isLoggedIn()): ?>
+                                            <button class="add-to-cart-btn" data-product-id="<?php echo $product['id']; ?>">
+                                                Add to Cart
+                                            </button>
+                                        <?php else: ?>
+                                            <a href="login.php" class="btn-login">Login to Purchase</a>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
                             </div>  
                         <?php endforeach; ?>
