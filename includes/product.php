@@ -24,7 +24,7 @@ function getAllProducts() {
 
 // Get products by pet type and product type
 /* === Replace the existing getProductsByFilters(...) with this === */
-function getProductsByFilters($petTypeId, $productTypeId, $sort = 'default') {
+function getProductsByFilters($petTypeId, $productTypeId, $sort = 'default', $search = null) {
     $conn = getConnection();
 
     $sql = "SELECT p.*, pt.name as pet_type_name, prt.name as product_type_name
@@ -48,26 +48,31 @@ function getProductsByFilters($petTypeId, $productTypeId, $sort = 'default') {
         $types .= 'i';
     }
 
-    // Add sorting (safe — we only use controlled values)
+    if ($search !== null && $search !== '') {
+        $sql .= " AND (p.name LIKE ? OR p.description LIKE ?)";
+        $like = '%' . $search . '%';
+        $params[] = $like;
+        $params[] = $like;
+        $types .= 'ss';
+    }
+
+    // Add sorting
     if ($sort === 'low') {
         $sql .= " ORDER BY p.price ASC";
     } elseif ($sort === 'high') {
         $sql .= " ORDER BY p.price DESC";
     } else {
-        // default ordering (you can change to created_at or id)
         $sql .= " ORDER BY p.id DESC";
     }
 
     $stmt = $conn->prepare($sql);
     if ($stmt === false) {
-        // prepare failed, return empty array (or log error)
         error_log("Prepare failed in getProductsByFilters: " . $conn->error);
         $conn->close();
         return [];
     }
 
     if (!empty($params)) {
-        // uses argument unpacking (PHP 5.6+) to bind dynamically
         $stmt->bind_param($types, ...$params);
     }
 

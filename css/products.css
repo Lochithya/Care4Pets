@@ -67,89 +67,155 @@ main.container > h2 {
     padding-top: 0 !important;
 }
 
-/* ---------- Search Bar ---------- */
-.search-bar {
-    display: flex;
-    align-items: center;
-    max-width: 400px;
-    margin: 0 auto 1.4rem;
+/* ---------- Unified Filter Container ---------- */
+.filters-container {
     background: #fff;
-    border-radius: 50px;
-    padding: 5px 5px 5px 16px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    border: 1.5px solid #e4e9f0;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    padding: 24px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border: 1.5px solid #e2e8f0;
+    margin-bottom: 2.5rem;
 }
 
-.search-bar:focus-within {
-    border-color: #1a6fa8;
-    box-shadow: 0 0 0 3px rgba(26,111,168,0.11);
-}
-
-.search-bar input {
-    flex: 1;
-    border: none;
-    outline: none;
-    font-size: 0.93rem;
-    background: transparent;
-    color: #1a2332;
-    padding: 4px 0;
-    font-family: 'Segoe UI', system-ui, sans-serif;
-}
-
-.search-bar button {
-    background: #1a6fa8;
-    color: #fff;
-    border: none;
-    outline: none;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    font-size: 0.95rem;
-    cursor: pointer;
+.filter-top-row {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.2s, transform 0.2s;
-    flex-shrink: 0;
+    gap: 20px;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1.5px solid #f1f5f9;
 }
 
-.search-bar button:hover {
-    background: #134f78;
-    transform: scale(1.05);
+.filter-search-wrapper {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    max-width: 520px;
 }
 
-/* ---------- Sort Section ---------- */
-.sort-section {
+.search-input-group {
+    position: relative;
+    flex: 1;
+}
+
+.search-input-group input {
+    width: 100%;
+    padding: 10px 40px 10px 18px;
+    border-radius: 50px;
+    border: 1.5px solid #e2e8f0;
+    font-size: 0.9rem;
+    outline: none;
+    transition: all 0.2s;
+    background: #f8fafc;
+}
+
+.search-input-group input:focus {
+    border-color: #1a6fa8;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(26,111,168,0.08);
+}
+
+.clear-search {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.4rem;
+    color: #94a3b8;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.clear-search:hover { color: #ef4444; }
+
+.search-btn {
+    background: #1a6fa8;
+    color: #fff;
+    border: none;
+    padding: 0 24px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.search-btn:hover { background: #134f78; transform: translateY(-1px); }
+
+.filter-sort-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.filter-sort-group h3 {
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
+    color: #1a6fa8;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    margin-top: 10px;
-    gap: 8px;
+    gap: 6px;
+    margin: 0;
 }
 
-.sort-section label {
-    font-weight: 600;
-    font-size: 0.88rem;
-    color: #1a2332;
+.filter-sort-group h3::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #f06030;
 }
 
-.sort-section select {
-    padding: 6px 10px;
-    border-radius: 8px;
-    border: 1.5px solid #e4e9f0;
+.filter-sort-group select {
+    padding: 8px 14px;
+    border-radius: 50px;
+    border: 1.5px solid #d6e8f5;
     font-size: 0.88rem;
     background: #fff;
-    color: #1a2332;
-    outline: none;
     cursor: pointer;
-    transition: border-color 0.2s;
-    font-family: 'Segoe UI', system-ui, sans-serif;
+    outline: none;
+    color: #1a6fa8;
+    font-weight: 600;
+    transition: all 0.2s;
 }
 
-.sort-section select:focus {
+.filter-sort-group select:hover {
     border-color: #1a6fa8;
+    background: #f8fafc;
 }
+
+.filter-action-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2.2rem;
+    width: 100%;
+}
+
+.clear-filters-link {
+    font-size: 0.88rem;
+    font-weight: 800;
+    color: #ef4444;
+    text-decoration: none;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.clear-filters-link:hover { color: #b91c1c; transform: scale(1.05); }
+.clear-filters-link.disabled { color: #cbd5e1; cursor: default; pointer-events: none; }
+
+.filter-section {
+    padding: 12px 0 0 0;
+}
+
+/* Sort section removed as it's now inside the filter-top-row */
 
 /* ---------- Login prompt ---------- */
 .op a {
@@ -183,8 +249,9 @@ main.container > h2 {
 .filter-row {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 0;
+    flex-wrap: wrap;
 }
 
 .filter-group {
@@ -229,7 +296,7 @@ main.container > h2 {
 .filter-divider {
     width: 1.5px;
     background: linear-gradient(180deg, transparent, #c8dff0, transparent);
-    margin: 0 8px;
+    margin: 0 28px;
     align-self: stretch;
     min-height: 60px;
 }

@@ -236,13 +236,18 @@ section h2::after {
 .view-more {
     background: var(--primary);
     color: #fff;
-    padding: 9px 20px;
+    padding: 12px 24px;
     border: none;
     border-radius: 50px;
     cursor: pointer;
     font-size: 0.88rem;
     font-weight: 600;
     transition: all var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    line-height: 1;
 }
 .view-more:hover {
     background: var(--primary-dk);
@@ -253,7 +258,7 @@ section h2::after {
 .add-to-cart-btn {
     background: var(--accent);
     color: #fff;
-    padding: 9px 20px;
+    padding: 12px 24px;
     border: none;
     border-radius: 50px;
     cursor: pointer;
@@ -262,7 +267,10 @@ section h2::after {
     transition: all var(--transition);
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
+    text-decoration: none;
+    line-height: 1;
 }
 .add-to-cart-btn::before {
     content: "\f07a";
@@ -271,6 +279,35 @@ section h2::after {
     font-size: 0.82rem;
 }
 .add-to-cart-btn:hover {
+    background: #d4521f;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(240,96,48,0.35);
+}
+
+.btn-login {
+    background: var(--accent);
+    color: #fff !important;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: all var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-decoration: none;
+    line-height: 1;
+}
+.btn-login::before {
+    content: "\f2f6";
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 0.82rem;
+}
+.btn-login:hover {
     background: #d4521f;
     transform: translateY(-2px);
     box-shadow: 0 6px 18px rgba(240,96,48,0.35);
@@ -571,13 +608,17 @@ section h2::after {
 }
 
 .site-toast.toast-success {
-    background: linear-gradient(135deg, #2e9e56, #1f7a3e);
-    border: 1px solid rgba(255,255,255,0.15);
+    background: #e2f5ea;
+    border: 1px solid #a8e0b9;
+    color: #216e3e;
+    box-shadow: 0 10px 25px rgba(42, 122, 73, 0.15);
 }
 
 .site-toast.toast-error {
-    background: linear-gradient(135deg, #c0392b, #922b21);
-    border: 1px solid rgba(255,255,255,0.15);
+    background: #fdeaea;
+    border: 1px solid #f2b6b6;
+    color: #a82424;
+    box-shadow: 0 10px 25px rgba(176, 42, 42, 0.15);
 }
 
 .toast-inner {
@@ -591,40 +632,44 @@ section h2::after {
     width: 34px;
     height: 34px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.2);
+    background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 800;
-    color: #fff;
+    color: inherit;
     flex-shrink: 0;
 }
 
 .toast-msg {
     flex: 1;
-    color: #fff;
-    font-size: 0.9rem;
+    color: inherit;
+    font-size: 0.95rem;
     font-weight: 600;
     line-height: 1.45;
 }
 
 .toast-close {
-    background: rgba(255,255,255,0.15);
+    background: transparent;
     border: none;
-    color: #fff;
+    color: inherit;
     width: 26px;
     height: 26px;
     border-radius: 50%;
-    font-size: 1rem;
+    font-size: 1.2rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.2s;
+    transition: background 0.2s, opacity 0.2s;
     flex-shrink: 0;
     line-height: 1;
     font-family: inherit;
+    opacity: 0.6;
 }
 
-.toast-close:hover { background: rgba(255,255,255,0.3); }
+.toast-close:hover { 
+    background: rgba(0,0,0,0.05); 
+    opacity: 1;
+}

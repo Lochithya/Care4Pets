@@ -38,9 +38,9 @@ body {
 /* ---------- Cards ---------- */
 .form-section, .order-summary {
     background: #fff;
-    padding: 26px 30px;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    padding: 32px 35px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     border: 1px solid #e4e9f0;
 }
 
@@ -214,9 +214,9 @@ p {
 .back-to-cart {
     background: #1a6fa8;
     color: #fff;
-    padding: 10px 22px;
+    padding: 13px 28px;
     border-radius: 50px;
-    font-size: 0.93rem;
+    font-size: 0.95rem;
     font-weight: 700;
     border: none;
     cursor: pointer;
@@ -237,9 +237,9 @@ p {
 .proceed-to-payment {
     background: #0a8a3c;
     color: #fff;
-    padding: 10px 22px;
+    padding: 13px 28px;
     border-radius: 50px;
-    font-size: 0.93rem;
+    font-size: 0.95rem;
     font-weight: 700;
     border: none;
     cursor: pointer;

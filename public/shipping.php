@@ -41,21 +41,17 @@ $conn->close();
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Shipping Details - Pet Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipping Information - Care4Pets</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="styleshet" href="shipping.css">
+    <link rel="stylesheet" href="../css/shipping.css">
 </head>
 <body>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shipping Information</title>
-   <link rel="stylesheet" href="../css/shipping.css">
-</head>
-<body>
+    <?php include 'header.php'; ?>
+    <div id="message-bar" class="message-bar"></div>
   <div class="container">
     <div class="row">
       <!-- Shipping Form -->
@@ -164,10 +160,10 @@ $conn->close();
 
             <p class="total">Total : <span class="total-price">$<?php echo number_format((float)($_SESSION['checkout']['cart_total']) , 2) ?></span></p><br>
             <div class="row buttons">
-                <a href="cart.php" ><input type="button" class="back-to-cart" value="Back to cart"></a>
-                <a href="payments.php"><button type="submit" class="proceed-to-payment" onclick="checkInfo()">
-                Proceed to pay
-                </button></a>
+                <a href="cart.php" class="back-to-cart">Back to Cart</a>
+                <button type="submit" class="proceed-to-payment" id="proceedBtn">
+                    Proceed to Pay
+                </button>
             </div>
         </form>                                  <!-- this is where the form ends inroder to check the empty attributes -->
 
@@ -186,24 +182,42 @@ $conn->close();
         unset($_SESSION['shipping']['alt_phone']) ;
     ?>
 
-</body>
-<script>
-    document.getElementById('alt_phone').addEventListener('input', function (e) {
-        // Get the input value and remove any non-digit characters
-        let phoneNumber = e.target.value.replace(/\D/g, '');
+    <?php include 'footer.php'; ?>
 
-        // Check if the number has enough digits to be formatted
-        if (phoneNumber.length > 3 && phoneNumber.length <= 7) {
-            // Format as 3-4 digits
-            phoneNumber = phoneNumber.replace(/(\d{3})(\d{1,4})/, '$1-$2');
-        } else if (phoneNumber.length > 7) {
-            // Format as 3-4-4 digits
-            phoneNumber = phoneNumber.replace(/(\d{3})(\d{4})(\d{1,4})/, '$1-$2-$3');
-        }
-
-        // Update the input field with the formatted number
-        e.target.value = phoneNumber;
+    <script>
+        // Phone formatting
+        document.getElementById('alt_phone').addEventListener('input', function (e) {
+            let phoneNumber = e.target.value.replace(/\D/g, '');
+            if (phoneNumber.length > 3 && phoneNumber.length <= 7) {
+                phoneNumber = phoneNumber.replace(/(\d{3})(\d{1,4})/, '$1-$2');
+            } else if (phoneNumber.length > 7) {
+                phoneNumber = phoneNumber.replace(/(\d{3})(\d{4})(\d{1,4})/, '$1-$2-$3');
+            }
+            e.target.value = phoneNumber;
         });
- </script>
 
+        // Form submission with confirmation
+        const shippingForm = document.getElementById('shippingForm');
+
+        shippingForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!shippingForm.checkValidity()) {
+                shippingForm.reportValidity();
+                return;
+            }
+
+            if (window.showGlobalConfirmation) {
+                window.showGlobalConfirmation(
+                    '💳 Payment Confirmation',
+                    'Are you sure you want to proceed to the payment section with these shipping details?',
+                    '💳',
+                    () => { shippingForm.submit(); }
+                );
+            } else {
+                if (confirm('Proceed to payment?')) { shippingForm.submit(); }
+            }
+        });
+    </script>
+</body>
 </html>

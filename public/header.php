@@ -69,8 +69,7 @@
                     <?php endif; ?>
                     <span class="greeting">Hi !<br><?php echo htmlspecialchars($_SESSION['username']); ?></span>
                 <?php else: ?>
-                    <i class="fas fa-user-circle"></i>
-                    <span class="greeting">Guest</span>
+                    <span class="greeting">Hi ! Guest</span>
                 <?php endif; ?>
             </div>
         </div>
@@ -101,14 +100,63 @@
         }
     });
 
+    // Global Confirmation Function
+    window.showGlobalConfirmation = function(title, message, icon, onConfirm, onCancel) {
+        let overlay = document.getElementById('confirmOverlay');
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.className = 'confirm-overlay';
+            overlay.id = 'confirmOverlay';
+            overlay.innerHTML = `
+                <div class="confirm-modal">
+                    <div class="confirm-icon" id="confirmIcon"></div>
+                    <h4 id="confirmTitle"></h4>
+                    <p id="confirmMessage"></p>
+                    <div class="confirm-buttons">
+                        <button type="button" class="confirm-cancel" id="confirmCancel">Cancel</button>
+                        <button type="button" class="confirm-ok" id="confirmOk">Confirm</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+        }
+        
+        document.getElementById('confirmTitle').textContent = title;
+        document.getElementById('confirmMessage').textContent = message;
+        document.getElementById('confirmIcon').textContent = icon;
+        
+        overlay.classList.add('active');
+        
+        const confirmBtn = document.getElementById('confirmOk');
+        const cancelBtn = document.getElementById('confirmCancel');
+        
+        const newConfirmBtn = confirmBtn.cloneNode(true);
+        const newCancelBtn = cancelBtn.cloneNode(true);
+        confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
+        cancelBtn.parentNode.replaceChild(newCancelBtn, cancelBtn);
+        
+        newConfirmBtn.addEventListener('click', function() {
+            overlay.classList.remove('active');
+            if (onConfirm) onConfirm();
+        });
+        
+        newCancelBtn.addEventListener('click', function() {
+            overlay.classList.remove('active');
+            if (onCancel) onCancel();
+        });
+    };
+
     // Logout confirmation
     const logoutLink = document.querySelector('.logout');
     if (logoutLink) {
         logoutLink.addEventListener("click", (e) => {
             e.preventDefault();
-            if (confirm("Do you actually want to log out?")) {
-                window.location.href = "logout.php";
-            }
+            showGlobalConfirmation(
+                '🚪 Logout',
+                'Are you sure you want to log out of your account?',
+                '🚪',
+                () => { window.location.href = "logout.php"; }
+            );
         });
     }
 </script>
