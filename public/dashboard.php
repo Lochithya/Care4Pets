@@ -111,7 +111,7 @@ $stmtItems = $conn->prepare("
     <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 <body>
-<div id="ajaxMessage" style="display:none;"></div>
+<div id="ajaxMessage"></div>
 <div class="dashboard-container">
     <div class="tabs">
         <button class="tab active" type="button" data-target="profile">My Profile</button>
@@ -120,28 +120,36 @@ $stmtItems = $conn->prepare("
 
     <!-- PROFILE -->
     <section id="profile" class="tab-content active">
-    <form method="POST" enctype="multipart/form-data" class="profile-form">
+    <form method="POST" enctype="multipart/form-data" class="profile-form" id="profileForm">
 
-        <!-- Avatar & Name -->
-        <div class="profile-grid">
-            <div class="profile-card">
+        <!-- Profile Header Card -->
+        <div class="profile-header-card">
+            <div class="profile-avatar-wrap">
                 <div class="profile-avatar">
                     <?php if (!empty($user['avatar'])): ?>
                         <img src="<?php echo htmlspecialchars($user['avatar']); ?>" alt="avatar">
                     <?php else: ?>
-                        <span><?php echo strtoupper(substr($user['first_name'] ?? 'U',0,1)); ?></span>
+                        <span><?php echo strtoupper(substr($user['first_name'] ?? 'U', 0, 1)); ?></span>
                     <?php endif; ?>
                 </div>
-                <div class="profile-details">
-                    <div class="profile-name"><?php echo htmlspecialchars(($user['first_name'] ?? '') . ' ' . ($user['last_name'] ?? '')); ?></div>
-                    <div class="profile-sub">@<?php echo htmlspecialchars($user['username'] ?? ''); ?></div>
-                    <label class="edit-avatar-button" for="avatar">Change Profie-Pic</label>
-                    <input type="file" name="avatar" id="avatar" accept="image/*" style="display:none;">
+                <label class="edit-avatar-button" for="avatar" title="Change profile picture">
+                    <img src="../images/dashboard/pencil.png" alt="Edit" class="pencil-icon">
+                </label>
+                <input type="file" name="avatar" id="avatar" accept="image/*" style="display:none;">
+            </div>
+            <div class="profile-header-info">
+                <div class="profile-name"><?php echo htmlspecialchars(($user['first_name'] ?? '') . ' ' . ($user['last_name'] ?? '')); ?></div>
+                <div class="profile-sub">@<?php echo htmlspecialchars($user['username'] ?? ''); ?></div>
+                <div class="profile-joined">
+                    Member since <?php echo date('F Y', strtotime($user['created_at'] ?? 'now')); ?>
                 </div>
             </div>
         </div>
 
-        <div class="edit-details">Edit Details</div>
+        <!-- Edit Details Section -->
+        <div class="section-divider">
+            <span>Edit Profile Details</span>
+        </div>
 
         <!-- User Info Fields -->
         <div class="profile-info">
@@ -166,25 +174,64 @@ $stmtItems = $conn->prepare("
                 <input class="info-value" type="text" name="phone" id="phone" value="<?php echo htmlspecialchars($user['phone'] ?? ''); ?>" required>
             </div>
             <div class="info-pair">
-                <label class="info-label" for="password">Password</label>
-                <input class="info-value" type="password" name="password" id="password" placeholder="**************">
-            </div>
-            <div class="info-pair">
-                <label class="info-label">Joined</label>
-                <div class="info-value"><?php echo htmlspecialchars($user['created_at'] ?? '-'); ?></div>
-            </div>
-            <div class="info-pair">
-                <label class="info-label" for="confirm_password">Confirm Password</label>
-                <input class="info-value" type="password" name="confirm_Password" id="confirm_password" placeholder="Re-enter new password">
+                <label class="info-label">Member Since</label>
+                <div class="info-value info-readonly"><?php echo htmlspecialchars($user['created_at'] ?? '-'); ?></div>
             </div>
         </div>
 
-        <!-- Submit Button -->
-        <div style="display:flex; justify-content:flex-end; margin-top:20px;">
-            <button type="submit" class="button">Update Profile</button>
+        <!-- Password Section -->
+        <div class="section-divider section-divider-gap">
+            <span>Change Password <span class="optional-tag">optional</span></span>
+        </div>
+
+        <div class="profile-info">
+            <div class="info-pair">
+                <label class="info-label" for="current_password">Current Password</label>
+                <div class="password-wrap">
+                    <input class="info-value" type="password" name="current_password" id="current_password"
+                           placeholder="<?php echo str_repeat('●', max(8, strlen($user['phone'] ?? '12345678'))); ?>">
+                    <button type="button" class="toggle-pw" data-target="current_password" tabindex="-1">&#128065;</button>
+                </div>
+            </div>
+            <div class="info-pair">
+                <!-- spacer -->
+            </div>
+            <div class="info-pair">
+                <label class="info-label" for="password">New Password</label>
+                <div class="password-wrap">
+                    <input class="info-value" type="password" name="password" id="password" placeholder="Leave blank to keep current">
+                    <button type="button" class="toggle-pw" data-target="password" tabindex="-1">&#128065;</button>
+                </div>
+            </div>
+            <div class="info-pair">
+                <label class="info-label" for="confirm_password">Confirm New Password</label>
+                <div class="password-wrap">
+                    <input class="info-value" type="password" name="confirm_Password" id="confirm_password" placeholder="Re-enter new password">
+                    <button type="button" class="toggle-pw" data-target="confirm_password" tabindex="-1">&#128065;</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="profile-submit">
+            <button type="button" class="button" id="saveChangesBtn">Save Changes</button>
         </div>
 
     </form>
+
+    <!-- Confirmation Modal -->
+    <div class="confirm-overlay" id="confirmOverlay">
+        <div class="confirm-modal">
+            <div class="confirm-icon">💾</div>
+            <h4>Save Changes?</h4>
+            <p>Are you sure you want to update your profile? This will overwrite your current information.</p>
+            <div class="confirm-buttons">
+                <button type="button" class="confirm-cancel" id="confirmCancel">Cancel</button>
+                <button type="button" class="confirm-ok" id="confirmOk">Confirm</button>
+            </div>
+        </div>
+    </div>
+
 </section>
 
 
@@ -201,11 +248,12 @@ $stmtItems = $conn->prepare("
                     <div class="order-header">
                         <div>
                             <div class="order-title" id="order-<?php echo (int)$order['id']; ?>">Order #<?php echo (int)$order['id']; ?></div>
-                            <div class="order-meta">Placed on <?php echo htmlspecialchars($order['order_date']); ?> <?php echo !empty($order['order_time']) ? htmlspecialchars($order['order_time']) : ''; ?></div>
+                            <div class="order-meta">Placed on: <strong><?php echo htmlspecialchars($order['order_date']); ?></strong> <span style="margin: 0 8px; color: #cbd5e1;">|</span> Time: <strong><?php echo !empty($order['order_time']) ? htmlspecialchars($order['order_time']) : 'N/A'; ?></strong></div>
                         </div>
-                        <div style="text-align:right;">
-                            <div class="order-meta">Expected Delivery: <?php echo htmlspecialchars($order['delivery_date'] ?: 'N/A'); ?></div>
-                            <div style="font-weight:700;font-size:20px; color:#0b66d1;">Total: Rs. <?php echo number_format($order['total_amount'], 2); ?></div>
+                        <div class="order-total-block">
+                            <div class="order-total-label">Total Amount</div>
+                            <div class="order-total-amount">Rs. <?php echo number_format($order['total_amount'], 2); ?></div>
+                            <div class="order-meta" style="margin-top:4px; justify-content: flex-end;">Expected: <?php echo htmlspecialchars($order['delivery_date'] ?: 'N/A'); ?></div>
                         </div>
                     </div>
 
@@ -223,13 +271,13 @@ $stmtItems = $conn->prepare("
                                     <div class="item-img">
                                         <img src="<?php echo htmlspecialchars($item['image_url'])?>" alt="<?php echo htmlspecialchars($item['name']); ?>">
                                     </div>
-                                    <div class="item-info" style="flex:1;">
+                                    <div class="item-info">
                                         <h4><?php echo htmlspecialchars($item['name']); ?></h4>
-                                        <p style="margin-top:6px; color:#475569; font-size:17px;">Seller: <?php echo htmlspecialchars($item['sup_name'] ?: 'Unknown'); ?></p>
+                                        <p class="item-seller">Seller: <?php echo htmlspecialchars($item['sup_name'] ?: 'Unknown'); ?></p>
                                     </div>
-                                    <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px;">
-                                        <div class="item-qty">Qty: <?php echo (int)$item['quantity']; ?></div>
+                                    <div class="item-meta-right">
                                         <div class="item-price">Rs. <?php echo number_format($item['price'], 2); ?></div>
+                                        <div class="item-qty">Qty: <?php echo (int)$item['quantity']; ?></div>
                                     </div>
                                 </div>
                             <?php endwhile;
@@ -240,18 +288,23 @@ $stmtItems = $conn->prepare("
                     </div>
 
                     <div class="order-footer">
-                        <div style="font-size:15px;">Status : <span class="status <?php echo strtolower(htmlspecialchars($order['status'])); ?>"><?php echo htmlspecialchars(($order['status'])); ?></span></div>
-                        <div>Order ID: <strong>#<?php echo (int)$order['id']; ?></strong></div>
-                        <div style="font-size:15px;">Items : <strong><?php
-                            // quick count: fetch count of items
-                            $countStmt = $conn->prepare("SELECT SUM(quantity) AS total_qty FROM order_items WHERE order_id = ?");
-                            $countStmt->bind_param("i", $order['id']);
-                            $countStmt->execute();
-                            $cr = $countStmt->get_result()->fetch_assoc();
-                            $totalQty = $cr['total_qty'] ?: 0;
-                            $countStmt->close();
-                            echo (int)$totalQty;
-                        ?></strong></div>
+                        <div class="order-status-wrap">
+                            <span class="order-status-label">Status:</span>
+                            <span class="status <?php echo strtolower(htmlspecialchars($order['status'])); ?>"><?php echo htmlspecialchars(($order['status'])); ?></span>
+                        </div>
+                        <div class="order-footer-details">
+                            <div>ID: <strong><?php echo (int)$order['id']; ?></strong></div>
+                            <div>Items: <strong><?php
+                                // quick count: fetch count of items
+                                $countStmt = $conn->prepare("SELECT SUM(quantity) AS total_qty FROM order_items WHERE order_id = ?");
+                                $countStmt->bind_param("i", $order['id']);
+                                $countStmt->execute();
+                                $cr = $countStmt->get_result()->fetch_assoc();
+                                $totalQty = $cr['total_qty'] ?: 0;
+                                $countStmt->close();
+                                echo (int)$totalQty;
+                            ?></strong></div>
+                        </div>
                     </div>
                 </article>
             <?php endforeach; ?>

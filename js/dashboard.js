@@ -38,6 +38,45 @@ document.addEventListener('DOMContentLoaded', function () {
         if (t) activateTab(t);
     }
 
+    // ---------- Confirmation Modal ----------
+    const saveBtn       = document.getElementById('saveChangesBtn');
+    const confirmOverlay = document.getElementById('confirmOverlay');
+    const confirmOk     = document.getElementById('confirmOk');
+    const confirmCancel = document.getElementById('confirmCancel');
+    const profileForm   = document.getElementById('profileForm');
+
+    if (saveBtn && confirmOverlay) {
+        saveBtn.addEventListener('click', () => {
+            confirmOverlay.classList.add('active');
+        });
+
+        confirmCancel.addEventListener('click', () => {
+            confirmOverlay.classList.remove('active');
+        });
+
+        // Close on overlay background click
+        confirmOverlay.addEventListener('click', (e) => {
+            if (e.target === confirmOverlay) confirmOverlay.classList.remove('active');
+        });
+
+        confirmOk.addEventListener('click', () => {
+            confirmOverlay.classList.remove('active');
+            // Fire the submit event so the AJAX handler runs (not a native POST)
+            form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+        });
+    }
+
+    // ---------- Password visibility toggles ----------
+    document.querySelectorAll('.toggle-pw').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const input = document.getElementById(btn.dataset.target);
+            if (!input) return;
+            const isHidden = input.type === 'password';
+            input.type = isHidden ? 'text' : 'password';
+            btn.innerHTML = isHidden ? '&#128064;' : '&#128065;';
+        });
+    });
+
     const form = document.querySelector('.profile-form');
     const username = document.getElementById('username');
     const email = document.getElementById('email');
@@ -49,19 +88,41 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Show message
     const showMsg = (html, isError = true) => {
-        msgBox.innerHTML = html + ' <span id="dismissMsg" style="cursor:pointer;font-weight:bold">&nbsp;&nbsp;✕</span>';
+        msgBox.innerHTML = `
+            <div class="msg-inner">
+                <div class="msg-icon">${isError ? '✕' : '✓'}</div>
+                <div class="msg-text">${html}</div>
+                <button class="msg-close" id="dismissMsg">&times;</button>
+            </div>
+        `;
+        msgBox.className = isError ? 'ajax-toast toast-error' : 'ajax-toast toast-success';
         msgBox.style.display = 'block';
-        msgBox.style.backgroundColor = isError ? '#e9cac7ff' : '#c0e9c2ff';
-        msgBox.style.padding = '10px';
-        msgBox.style.borderRadius = '8px';
-        msgBox.style.textAlign = 'center';
-        document.getElementById('dismissMsg').addEventListener('click', () => { 
-            msgBox.style.display='none'; 
-            if(!isError){
-                window.location.reload();
-            }
+
+        // Animate in
+        requestAnimationFrame(() => msgBox.classList.add('toast-visible'));
+
+        document.getElementById('dismissMsg').addEventListener('click', () => {
+            msgBox.classList.remove('toast-visible');
+            setTimeout(() => {
+                msgBox.style.display = 'none';
+                if (!isError) window.location.reload();
+            }, 300);
         });
-        window.scrollTo({ top: 0, behavior: 'smooth' });                     // auto scrolling
+
+        // Auto-dismiss success after 4s
+        if (!isError) {
+            setTimeout(() => {
+                if (msgBox.style.display !== 'none') {
+                    msgBox.classList.remove('toast-visible');
+                    setTimeout(() => {
+                        msgBox.style.display = 'none';
+                        window.location.reload();
+                    }, 300);
+                }
+            }, 4000);
+        }
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     let timer;

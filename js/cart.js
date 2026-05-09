@@ -199,28 +199,40 @@ function updateSelectedTotal(){
 
 
 function showMessage(message, type) {
-    const messageBar = document.getElementById('message-bar');
-    messageBar.innerHTML = `
-        <span>${message}</span>
-        <button class="close-btn">❌ </button>       
-    `;                                                   // adding the button along with the mesagebar
+    // Remove any existing toast
+    const existing = document.getElementById('site-toast');
+    if (existing) existing.remove();
 
-    messageBar.className = 'message-bar ' + type; // reset + apply type , then two classes are included
-    messageBar.style.display = 'block';
+    const isSuccess = type === 'success';
+    const toast = document.createElement('div');
+    toast.id = 'site-toast';
+    toast.className = 'site-toast ' + (isSuccess ? 'toast-success' : 'toast-error');
+    toast.innerHTML = `
+        <div class="toast-inner">
+            <div class="toast-icon">${isSuccess ? '&#10003;' : '&#10007;'}</div>
+            <div class="toast-msg">${message}</div>
+            <button class="toast-close" id="toast-close-btn">&times;</button>
+        </div>
+    `;
+    document.body.appendChild(toast);
 
-    // Attach close button event
-    const closeBtn = messageBar.querySelector('.close-btn');
-    closeBtn.addEventListener('click', () => {
-    messageBar.style.display = 'none';
+    // Animate in
+    requestAnimationFrame(() => toast.classList.add('toast-visible'));
 
-    // 🟢 delay එකක් දීලා reload
-    setTimeout(()=>{
-        location.reload();
-    }, 500);  // 0.5 seconds delay, userට UI effect එක smooth
-});
-  
+    function dismissToast() {
+        toast.classList.remove('toast-visible');
+        setTimeout(() => {
+            toast.remove();
+            location.reload();
+        }, 300);
+    }
 
-}    
+    // Close button triggers reload
+    document.getElementById('toast-close-btn').addEventListener('click', dismissToast);
+
+    // Auto-dismiss after 3.5s also reloads
+    setTimeout(dismissToast, 3500);
+}
 
 
 

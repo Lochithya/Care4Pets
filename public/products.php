@@ -155,21 +155,30 @@ $products = getProductsByFilters($selectedPetType, $selectedProductType, $sort);
     <script>
         // Message bar functionality
         function showMessage(message, type) {
-            const messageBar = document.getElementById('message-bar');
-            messageBar.innerHTML = `
-                <span>${message}</span>
-                <button class="close-btn">❌</button>       
-            `;
-            
-            messageBar.className = 'message-bar ' + type;
-            messageBar.style.display = 'block';
+            const existing = document.getElementById('site-toast');
+            if (existing) existing.remove();
 
-            // Attach close button event
-            const closeBtn = messageBar.querySelector('.close-btn');
-            closeBtn.addEventListener('click', () => {
-                messageBar.style.display = 'none';
-                window.location.reload();  // to refresh the page after closing the message bar
-            });
+            const isSuccess = type === 'success';
+            const toast = document.createElement('div');
+            toast.id = 'site-toast';
+            toast.className = 'site-toast ' + (isSuccess ? 'toast-success' : 'toast-error');
+            toast.innerHTML = `
+                <div class="toast-inner">
+                    <div class="toast-icon">${isSuccess ? '&#10003;' : '&#10007;'}</div>
+                    <div class="toast-msg">${message}</div>
+                    <button class="toast-close" id="toast-close-btn">&times;</button>
+                </div>
+            `;
+            document.body.appendChild(toast);
+            requestAnimationFrame(() => toast.classList.add('toast-visible'));
+
+            function dismissToast() {
+                toast.classList.remove('toast-visible');
+                setTimeout(() => { toast.remove(); location.reload(); }, 300);
+            }
+
+            document.getElementById('toast-close-btn').addEventListener('click', dismissToast);
+            setTimeout(dismissToast, 3500);
         }
 
         // Add to cart functionality for index.php

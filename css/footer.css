@@ -3,11 +3,11 @@
    ============================================================ */
 
 footer {
-    background: linear-gradient(135deg, #1C6EA4 0%, #2484c1 50%, #154D71 100%);
+    background: linear-gradient(135deg, #0f3d5c 0%, #15517a 50%, #092c44 100%);
     color: #e8f3fb;
     font-family: 'Segoe UI', system-ui, sans-serif;
     margin-top: 0;
-    box-shadow: 0 -6px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 -6px 30px rgba(0,0,0,0.3);
     position: relative;
 }
 
@@ -112,7 +112,7 @@ footer::before {
     width: 100%;
     text-align: center;
     padding: 28px 0 12px;
-    border-top: 1px solid rgba(255,255,255,0.08);
+    border-top: 2px solid rgba(255,255,255,0.75);
 }
 
 .social-label {

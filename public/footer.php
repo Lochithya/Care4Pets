@@ -68,9 +68,9 @@
             +94 112 359 359
           </p>
           <p>
-            <a href="mailto:info@petstore.com" class="link">
+            <a href="mailto:info@care4pets.com" class="link">
               <img src="../images/footer/mail.png" alt="Email" class="footer-icon-inline">
-              info@petstore.com
+              info@care4pets.com
             </a>
           </p>
         </div>
