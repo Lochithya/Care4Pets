@@ -1,5 +1,63 @@
 // Cart functionality
 const messageBar = document.getElementById('message-bar');
+let pendingAction = null;
+let previousState = null;
+
+// Confirmation Modal Functions
+function showConfirmation(title, message, icon, onConfirm, onCancel) {
+    const overlay = document.getElementById('confirmOverlay');
+    document.getElementById('confirmTitle').textContent = title;
+    document.getElementById('confirmMessage').textContent = message;
+    document.getElementById('confirmIcon').textContent = icon;
+    
+    overlay.classList.add('active');
+    
+    const confirmBtn = document.getElementById('confirmOk');
+    const cancelBtn = document.getElementById('confirmCancel');
+    
+    // Remove previous listeners by cloning
+    const newConfirmBtn = confirmBtn.cloneNode(true);
+    const newCancelBtn = cancelBtn.cloneNode(true);
+    confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
+    cancelBtn.parentNode.replaceChild(newCancelBtn, cancelBtn);
+    
+    newConfirmBtn.addEventListener('click', function() {
+        overlay.classList.remove('active');
+        if (onConfirm) onConfirm();
+    });
+    
+    newCancelBtn.addEventListener('click', function() {
+        overlay.classList.remove('active');
+        if (onCancel) onCancel();
+    });
+}
+
+// Save cart item state
+function saveCartItemState(cartItem) {
+    return {
+        quantity: cartItem.querySelector('.item-quantity-section .quantity').value,
+        totalPrice: cartItem.querySelector('.item-total-section .total-price').textContent
+    };
+}
+
+// Restore cart item state
+function restoreCartItemState(cartItem, state) {
+    cartItem.querySelector('.item-quantity-section .quantity').value = state.quantity;
+    cartItem.querySelector('.item-total-section .total-price').textContent = state.totalPrice;
+}
+
+// Update total price display for a quantity input
+function updateTotalPrice(quantityInput) {
+    const cartItem = quantityInput.closest('.cart-item');
+    const totalPrice = cartItem.querySelector('.item-total-section .total-price');
+    const unitPrice = parseFloat(quantityInput.dataset.price);
+    
+    let qty = parseInt(quantityInput.value) || 1;
+    if (qty < 1) {
+        qty = 1;
+    }
+    totalPrice.textContent = "$" + (unitPrice * qty).toFixed(2);
+}
 
 document.addEventListener('DOMContentLoaded', function() {
     // Add to cart buttons
@@ -14,74 +72,134 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update quantity buttons
     const updateQuantityButtons = document.querySelectorAll('.update-quantity-btn');
     updateQuantityButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
             const productId = this.getAttribute('data-product-id');
-            
-            // get the parent cart item container instead of always the first one
-            const cartItem = this.closest(".carts");
-
-            const quantityInput = cartItem.querySelector(".quantity");
+            const cartItem = this.closest(".cart-item");
+            const quantityInput = cartItem.querySelector(".item-quantity-section .quantity");
             const quantity = parseInt(quantityInput.value);
-            updateCartQuantity(productId,quantity);
+            const originalQuantity = quantityInput.getAttribute('data-original-quantity');
+            
+            showConfirmation(
+                '📝 Update Quantity',
+                `Are you sure you want to update the quantity to ${quantity} for this item?`,
+                '📝',
+                () => {
+                    // ONLY execute fetch after confirmation
+                    updateCartQuantity(productId, quantity);
+                },
+                () => {
+                    // Restore original value on cancel
+                    quantityInput.value = originalQuantity;
+                    updateTotalPrice(quantityInput);
+                }
+            );
         });
     });
 
     // Remove item buttons
     const removeItemButtons = document.querySelectorAll('.remove-item-btn');
     removeItemButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
             const productId = this.getAttribute('data-product-id');
-            removeFromCart(productId);
+            const cartItem = this.closest(".cart-item");
+            const productName = cartItem.querySelector('.item-details h3').textContent;
+            
+            showConfirmation(
+                '🗑️ Remove Item',
+                `Are you sure you want to remove "${productName}" from your cart?`,
+                '🗑️',
+                () => {
+                    // ONLY execute fetch after confirmation
+                    removeFromCart(productId);
+                },
+                () => {
+                    // Nothing to restore on cancel
+                }
+            );
         });
     });
 
+    // Delete cart button
+    const deleteCartBtn = document.querySelector('.delete-cart');
+    if (deleteCartBtn && deleteCartBtn.offsetParent !== null) { // Check if visible (not empty cart page)
+        deleteCartBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            showConfirmation(
+                '⚠️ Clear Cart',
+                'Are you sure you want to delete all items from your cart? This action cannot be undone.',
+                '⚠️',
+                () => {
+                    // ONLY execute fetch after confirmation
+                    clearCart();
+                },
+                () => {
+                    // Nothing to restore, just close modal
+                }
+            );
+        });
+    }
+
     // for cartTotal 
     document.querySelectorAll('.select-item').forEach(checkbox => {
-        checkbox.addEventListener("change",updateSelectedTotal) ;                       // for updating total for selected items
+        checkbox.addEventListener("change", updateSelectedTotal);
     })
 
     // Checkout button
     const checkoutButton = document.querySelector('.checkout');
-    checkoutButton.addEventListener("click", function(){
-        const selectedIds = []; 
-        
-        document.querySelectorAll('.select-item:checked').forEach(
-            checkbox => selectedIds.push(checkbox.value)                         // pushing the ids of the selected products to the array
-        )
-        if(selectedIds.length === 0 ){
-            alert("You must select at least a product to proceed");
-        }
-        else{
-            if(confirm('Do you actually want to proceed?')){
-                const cartTotal = document.querySelector('.cart-total-amount').textContent ;          //current cartTotal in summary section 
-                
-                const form = document.createElement('form');                 // creation of the form to pass in to the server
-                form.method = 'POST' ;                                       // POST method since using sensitive data
-                form.action = 'shipping.php' ; 
-
-                selectedIds.forEach( id => {
-                    const input = document.createElement('input') ;             // for each product id , creating input element
-                    input.type = 'hidden'                                      // makes input field invisibe to the user because we are not actually showing the form to the user
-                    input.name = 'product_ids[]';                 // to treat all inputs with this name as an array 
-                    input.value = id ;                            
-                    form.appendChild(input) ;                     // each input is appended as childs to the form
-                })
-
-                const total = document.createElement('input');                   // element for the total to be passed
-                total.type = 'hidden' ;  
-                total.name = 'cart_total' ; 
-                total.value = cartTotal ;                               // assigning the last cart total to the element
-                form.appendChild(total) ;
-                
-                document.body.appendChild(form);                    // adding the created form to the HTML document's body
-                form.submit() ;                                     // submitting the form to the respective location using repsective method
-
-
+    if (checkoutButton) {
+        checkoutButton.addEventListener("click", function(e) {
+            e.preventDefault();
+            const selectedIds = []; 
+            
+            document.querySelectorAll('.select-item:checked').forEach(
+                checkbox => selectedIds.push(checkbox.value)
+            );
+            
+            if(selectedIds.length === 0) {
+                showConfirmation(
+                    '⚠️ No Items Selected',
+                    'You must select at least one product to proceed to checkout.',
+                    '⚠️',
+                    () => {
+                        document.getElementById('confirmOverlay').classList.remove('active');
+                    }
+                );
             }
-        }
+            else {
+                showConfirmation(
+                    '✓ Proceed to Checkout',
+                    'Are you sure you want to proceed to checkout with the selected items?',
+                    '✓',
+                    () => {
+                        const cartTotal = document.querySelector('.cart-total-amount').textContent;
+                        
+                        const form = document.createElement('form');
+                        form.method = 'POST';
+                        form.action = 'shipping.php';
 
+                        selectedIds.forEach( id => {
+                            const input = document.createElement('input');
+                            input.type = 'hidden';
+                            input.name = 'product_ids[]';
+                            input.value = id;
+                            form.appendChild(input);
+                        })
 
-    })
+                        const total = document.createElement('input');
+                        total.type = 'hidden';
+                        total.name = 'cart_total';
+                        total.value = cartTotal;
+                        form.appendChild(total);
+                        
+                        document.body.appendChild(form);
+                        form.submit();
+                    }
+                );
+            }
+        });
+    }
 });
 
 // Add item to cart
@@ -96,9 +214,9 @@ function addToCart(productId, quantity) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            showMessage(data.message , 'success');   // for successful messages
+            showMessage(data.message , 'success');
         } else {
-            showMessage(data.message,'error') ;     // for error messages
+            showMessage(data.message,'error') ;
         }
     })
     .catch(() => {
@@ -106,7 +224,7 @@ function addToCart(productId, quantity) {
     });
 }
 
-// Update cart item quantity
+// Update cart item quantity - ONLY called after confirmation
 function updateCartQuantity(productId, quantity) {
     fetch('../api/cart_actions.php', {
         method: 'POST',
@@ -118,80 +236,78 @@ function updateCartQuantity(productId, quantity) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            showMessage(data.message,'success') ;   // for successful messages
+            showMessage(data.message,'success') ;
         } else {
-            showMessage(data.message,'error') ;     // for error messages
+            showMessage(data.message,'error') ;
         }
     })
     .catch(() => {
-        showMessage('Error updating the cart !','error') ;   
+        showMessage('Error updating the cart !','error') ;
     });
 }
 
-// Remove item from cart
+// Remove item from cart - ONLY called after confirmation
 function removeFromCart(productId) {
-    if (confirm('Are you sure you want to remove this item ?')) {
-        fetch('../api/cart_actions.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'action=remove&product_id=' + productId
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                showMessage(data.message,'success') ;   // for successful messages
-            } else {
-                showMessage(data.message,'error') ;     // for error messages
-            }
-        })
-        .catch(() => {
-            showMessage('Error removing from the cart !','error') ;   
-        });
-    }
+    fetch('../api/cart_actions.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'action=remove&product_id=' + productId
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showMessage(data.message,'success') ;
+        } else {
+            showMessage(data.message,'error') ;
+        }
+    })
+    .catch(() => {
+        showMessage('Error removing from the cart !','error') ;   
+    });
 }
+
+// Clear cart - ONLY called after confirmation
 function clearCart(){
-    if(confirm('Are you sure you want to clear the cart.This process can not be undone ?')){
-        fetch('../api/cart_actions.php',{
-            method: 'POST',
-            headers : {
-                'Content-type': 'application/x-www-form-urlencoded',
-            },
-            body: 'action=clear'
-        })
-        .then(response => response.json())
-        .then(data=>{                                            // this is the response sent from cart_actions.php
-            if(data.success){
-                showMessage(data.message,'success');
-            }
-            else{
-                showMessage(data.message,'error');
-            }
-        })
-        .catch(() =>{
-            showMessage('Error deleting the cart !','error');
-        })
-    }
+    fetch('../api/cart_actions.php',{
+        method: 'POST',
+        headers : {
+            'Content-type': 'application/x-www-form-urlencoded',
+        },
+        body: 'action=clear'
+    })
+    .then(response => response.json())
+    .then(data=>{
+        if(data.success){
+            showMessage(data.message,'success');
+        }
+        else{
+            showMessage(data.message,'error');
+        }
+    })
+    .catch(() =>{
+        showMessage('Error deleting the cart !','error');
+    })
 }
 
 //updateSelectedTotal
 function updateSelectedTotal(){
-    const selectedIds = [];                      // for making an array for selected arrays
+    const selectedIds = [];
 
     document.querySelectorAll('.select-item:checked').forEach(checkbox=>{
-        selectedIds.push(checkbox.value);                                            // if checked , pushing the product_id to array
+        selectedIds.push(checkbox.value);
     })
 
-    let newSelectedIds = selectedIds.map( id => 'product_ids[]='+id).join('&') ;            // should have like product_ids[]=1&product_ids[]=2&...
+    let newSelectedIds = selectedIds.map( id => 'product_ids[]='+id).join('&') ;
 
     fetch('../api/cart_actions.php' , {
         method : 'POST',
         headers : {'Content-type' : 'application/x-www-form-urlencoded'},
-        body : 'action=selected&'+newSelectedIds           //new URLSearchParams({'product_ids[]' : selectedIds}) will not work because only selects the first element  
+        body : 'action=selected&'+newSelectedIds
     })
     .then(response => response.json())
-    .then( data => {                                    // part of the repsonse object
+    .then( data => {
         cartTotal = document.querySelector('.cart-total-amount') ;  
         cartTotal.textContent = parseFloat(data.message).toFixed(2) ;
     }) ;
@@ -233,6 +349,5 @@ function showMessage(message, type) {
     // Auto-dismiss after 3.5s also reloads
     setTimeout(dismissToast, 3500);
 }
-
 
 

@@ -103,112 +103,115 @@ document.addEventListener('DOMContentLoaded',function(){
     })
 
 
-// now the complete validation upon submitting the 'complete order' button
+    // Toast message helper
+    function showToast(msg, type = 'error') {
+        if (window.showMessage) {
+            window.showMessage(msg, type);
+        } else {
+            const bar = document.getElementById('message-bar');
+            if (bar) {
+                bar.textContent = msg;
+                bar.className = 'message-bar ' + type;
+                bar.style.display = 'block';
+                setTimeout(() => { bar.style.display = 'none'; }, 3500);
+            } else {
+                alert(msg);
+            }
+        }
+    }
 
-    form.addEventListener('submit',function(e){
+    form.addEventListener('submit', function(e){
         e.preventDefault();
         const payment_type = document.querySelector('input[name="payment_type"]:checked').value ;
-        let finalCardNumber = document.getElementById('card_number').value ;        // has spaces
-        finalCardNumber = finalCardNumber.replace(/\D/g , '');
-        finalCardNumber = finalCardNumber.length ;                        // after removing the white spaces and get the length
-
-        if(payment_type === 'card'){                     // actual validation starts from
+        
+        if(payment_type === 'card'){
+            let finalCardNumber = document.getElementById('card_number').value.replace(/\D/g , '');
             
             if(!cardType.value){
-                alert('Please select a card type');
+                showToast('Please select a card type');
                 cardType.focus();
                 return ;
             }
             
-            switch(cardType.value){
-                case 'visa' :  case 'mastercard' : 
-                    if(finalCardNumber !== 16){
-                        alert(cardType.value+' card must have 16 digits'); 
-                        cardNumber.focus(); 
-                        return ;
-                    } 
-                    break ;
+            const expectedLength = {
+                'visa': 16,
+                'mastercard': 16,
+                'american-express': 15,
+                'maestro': 19
+            };
 
-                case 'american-express' : 
-                    if(finalCardNumber !==15){
-                        alert(cardType.value+' card must have 15 digits');
-                        cardNumber.focus();
-                        return ;
-                    }
-                    break ;
-
-                case 'maestro' :
-                    if(finalCardNumber !== 19){
-                        alert(cardType.value+' card must have 19 digits');
-                        cardNumber.focus();
-                        return;
-                    } 
-                    break ;
-                    
-                default : alert('Please select a card first') ; cardNumber.focus(); break ;
+            if(finalCardNumber.length !== expectedLength[cardType.value]){
+                showToast(`${cardType.value.charAt(0).toUpperCase() + cardType.value.slice(1)} card must have ${expectedLength[cardType.value]} digits`);
+                cardNumber.focus(); 
+                return ;
             }
-            
 
-            // for expiry validation
             const finalExpiry = expiry.value ;                     
-            
             if(!/^\d{2}\/\d{2}$/.test(finalExpiry)){
-                alert("Invalid format. Use MM/YY");
+                showToast("Invalid expiry format. Use MM/YY");
                 expiry.focus();
                 return ; 
             }
 
-            const [mm,yy] = finalExpiry.split('/').map( e => parseInt(e,10)) ;        // dividing into an array
-            
-            if(mm<1 || mm>12){
-                alert('Invalid month. Should be between 01-12');
+            const [mm,yy] = finalExpiry.split('/').map( e => parseInt(e,10)) ;
+            if(mm < 1 || mm > 12){
+                showToast('Invalid month. Should be between 01-12');
                 expiry.focus();
                 return ;
             }
 
             const now = new Date();
-            const currentMonth = now.getMonth()+1 ;         // between 1-12
-            const currentYear = now.getFullYear()%100 ;      // for last 2 digits
+            const currentMonth = now.getMonth()+1 ;
+            const currentYear = now.getFullYear()%100 ;
 
-            if(yy < currentYear || (yy == currentYear && mm<currentMonth)){
-                alert('card expired. Enter a valid card');
+            if(yy < currentYear || (yy == currentYear && mm < currentMonth)){
+                showToast('This card has expired. Please use a valid card.');
                 expiry.focus();
                 return ; 
             }
 
-            // ------------------------------------
-
-            // for ccv code
-
-            if(ccv.value.length !==3 && ccv.value.length !==4 ){
-                alert('Enter a valid ccv code for the card');
+            if(ccv.value.length !== 3 && ccv.value.length !== 4 ){
+                showToast('Enter a valid CVV code (3 or 4 digits)');
                 ccv.focus();
                 return ;
             }
-            //--------------
-
-        }
-        if(confirm('Do you want to complete the order ?')){
-
-            fetch('../includes/payment_process.php',{
-                method : "post", 
-                body : new FormData(form) 
-            })
-            .then(response => response.json())
-            .then(data=> {
-                if (data.success){
-                    window.location.href = 'order_successful.php?order_id=' +data.order_id ;
-                }
-                else{
-                    alert('Error saving order : '+(data.message || 'Unknown error'));
-                }
-            })
-            .catch(() =>{
-                alert('Something went wrong while saving your order');
-            });
         }
 
-    })
+        // Professional Confirmation Modal
+        if (window.showGlobalConfirmation) {
+            window.showGlobalConfirmation(
+                '🛍️ Complete Your Order',
+                'Are you sure you want to finalize your purchase? This will process your payment and place the order.',
+                '🛍️',
+                () => {
+                    // Show processing toast
+                    showToast('Processing your order...', 'success');
+                    
+                    fetch('../includes/payment_process.php',{
+                        method : "post", 
+                        body : new FormData(form) 
+                    })
+                    .then(response => response.json())
+                    .then(data=> {
+                        if (data.success){
+                            window.location.href = 'order_successful.php?order_id=' +data.order_id ;
+                        }
+                        else{
+                            showToast('Error saving order : '+(data.message || 'Unknown error'), 'error');
+                        }
+                    })
+                    .catch(() =>{
+                        showToast('Something went wrong while saving your order', 'error');
+                    });
+                }
+            );
+        } else {
+            // Fallback
+            if(confirm('Do you want to complete the order?')){
+                form.submit();
+            }
+        }
+    });
 
 });
 

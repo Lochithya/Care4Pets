@@ -59,218 +59,250 @@ $totalAmount = number_format($order['total_amount'], 2);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Order Confirmation</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background: #f0ecf7;
-        margin: 0;
-        padding: 0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Successful - Care4Pets</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .success-page {
+            background: #f8fafc;
+            padding: 60px 0;
+            min-height: 80vh;
+        }
+        .success-card {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        .success-header {
+            background: linear-gradient(135deg, #1C6EA4, #154D71);
+            color: #fff;
+            text-align: center;
+            padding: 50px 20px;
+            position: relative;
+        }
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: #fff;
+            color: #1a8a3c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            animation: scaleIn 0.5s ease-out;
+        }
+        @keyframes scaleIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .success-header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        .order-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            backdrop-filter: blur(4px);
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 30px;
+            background: #fdfdfd;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .info-item {
+            text-align: center;
+        }
+        .info-item label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .info-item span {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+        .summary-section {
+            padding: 30px;
+        }
+        .summary-section h3 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .order-table th {
+            text-align: left;
+            font-size: 0.85rem;
+            color: #64748b;
+            padding: 12px;
+            border-bottom: 2px solid #f1f5f9;
+        }
+        .order-table td {
+            padding: 16px 12px;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 0.95rem;
+        }
+        .product-name { font-weight: 700; color: #1e293b; }
+        .product-qty { color: #64748b; font-weight: 600; }
+        .product-price { font-weight: 700; color: #0a8a3c; }
 
-    .order-container { 
-        background: #ffffff; 
-        width: 750px; 
-        margin: 20px auto; 
-        border-radius: 12px; 
-        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-        overflow: hidden;
-    }
+        .total-row {
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px 30px;
+            background: #f8fafc;
+            align-items: center;
+            gap: 15px;
+        }
+        .total-label { font-size: 1.1rem; font-weight: 700; color: #64748b; }
+        .total-value { font-size: 1.6rem; font-weight: 800; color: #1a6fa8; }
 
-    .header { 
-        background: #154D71; 
-        color: #fff; 
-        text-align: center; 
-        padding: 30px 20px; 
-    }
+        .success-footer {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .redirect-msg {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        .btn-home {
+            background: #1a6fa8;
+            color: #fff;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(26,111,168,0.2);
+        }
+        .btn-home:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(26,111,168,0.3);
+        }
 
-    .header .logo { 
-        font-size: 20px; 
-        letter-spacing: 2px; 
-    }
-
-    .header .checkmark { 
-        font-size: 28px; 
-        background: #fff; 
-        color: #2e3062; 
-        border-radius: 50%; 
-        width: 40px; 
-        height: 40px; 
-        line-height: 40px; 
-        display: inline-block; 
-        margin: 15px 0; 
-    }
-
-    .order-id { 
-        background: #33A1E0; 
-        color: #000; 
-        display: inline-block; 
-        padding: 6px 12px; 
-        border-radius: 4px; 
-        margin-top: 15px; 
-        font-weight: bold; 
-    }
-
-    /* Refined Details Section */
-    .details { 
-        display: flex; 
-        justify-content: space-between; 
-        background: #fafafa; 
-        padding: 20px; 
-        font-size: 14px; 
-        gap: 20px; 
-    }
-
-    .details div { 
-        flex: 1; 
-        text-align: left; 
-        background: #fff; 
-        padding: 12px 15px; 
-        border-radius: 6px; 
-        box-shadow: 0 2px 6px rgba(0,0,0,0.05); 
-    }
-
-    .details strong { 
-        display: block; 
-        font-size: 13px; 
-        color: #555; 
-        margin-bottom: 6px; 
-    }
-
-    .details span { 
-        font-size: 15px; 
-        font-weight: bold; 
-        color: #154D71; 
-        line-height: 1.4; 
-        display: block;
-    }
-
-    .summary-title {
-        font-size: 20px;
-        font-weight: bold;
-        padding: 15px 20px 5px 20px;
-        color: #333;
-        text-align:center;
-        padding-bottom:15px;
-        padding-top:20px;
-    }
-
-    .order-summary { 
-        width: 100%; 
-        border-collapse: collapse; 
-        margin: 0 0 20px 0;
-        
-    }
-
-    .order-summary th { 
-        background: #D4EBF8; 
-        font-weight: normal; 
-        padding: 12px; 
-        text-align: left; 
-        border-bottom: 1px solid #ddd; 
-    }
-
-    .order-summary td { 
-        padding: 12px; 
-        text-align: left; 
-        border-bottom: 1px solid #ddd; 
-        font-weight: bold; 
-    }
-
-    .order-summary tbody tr:nth-child(even) {
-        background: #f9f9f9;
-    }
-
-    .subtotal { 
-        color: #e70b03ff; 
-        text-align: right; 
-        padding: 15px 20px; 
-        font-size: 16px; 
-        font-weight: bold; 
-    }
-
-    .subtotal span { 
-        color: #198754; 
-    }
-
-    .order-success { 
-        border-radius: 0; 
-        background: #1C6EA4; 
-        color: white; 
-        text-align: center; 
-        padding: 12px; 
-        font-size: 16px; 
-        font-weight: bold; 
-    }
-</style>
+        @media (max-width: 600px) {
+            .info-grid { grid-template-columns: 1fr; }
+            .success-card { margin: 0 15px; }
+        }
+    </style>
 </head>
 <body>
-<div class="order-container">
-    <div class="header">
-        <h2 class="logo">Care4Pets</h2>
-        <div class="checkmark">✔</div>
-        <h2>Thanks for your Order!</h2>
-        <div class="order-id">Order Id: <span>#<?php echo $orderId; ?></span></div>
-    </div>
+    <?php include 'header.php'; ?>
 
-    <div class="details">
-        <div>
-            <strong style="text-align:center;font-size:15px;margin-bottom:26px;">Date</strong>
-            <span style="text-align:center;"><?php echo $date; ?></span>
+    <div class="success-page">
+        <div class="success-card">
+            <div class="success-header">
+                <div class="success-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h1>Order Successful!</h1>
+                <p>Thank you for shopping with Care4Pets.</p>
+                <div class="order-badge">Order ID: #<?php echo $orderId; ?></div>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-item">
+                    <label>Date</label>
+                    <span><?php echo $date; ?></span>
+                </div>
+                <div class="info-item">
+                    <label>Payment</label>
+                    <span><?php echo ucfirst($paymentMethod); ?></span>
+                </div>
+                <div class="info-item">
+                    <label>Shipping To</label>
+                    <span><?php echo htmlspecialchars($billingAddress); ?></span>
+                </div>
+            </div>
+
+            <div class="summary-section">
+                <h3><i class="fas fa-list"></i> Order Summary</h3>
+                <table class="order-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Qty</th>
+                            <th style="text-align: right;">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($orderItems as $item): ?>
+                        <tr>
+                            <td class="product-name"><?php echo htmlspecialchars($item['name']); ?></td>
+                            <td class="product-qty">x<?php echo $item['quantity']; ?></td>
+                            <td class="product-price" style="text-align: right;">$<?php echo number_format($item['price'], 2); ?></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="total-row">
+                <span class="total-label">Amount Paid</span>
+                <span class="total-value">$<?php echo $totalAmount; ?></span>
+            </div>
+
+            <div class="success-footer">
+                <p class="redirect-msg">Redirecting to shop in <strong id="count">7</strong> seconds...</p>
+                <a href="products.php" class="btn-home">
+                    <i class="fas fa-shopping-bag"></i> Continue Shopping
+                </a>
+            </div>
         </div>
-        <div>
-            <strong style="text-align:center;font-size:15px;margin-bottom:10px;">Billing Address</strong>
-            <span style="text-align:center;"><?php echo $billingAddress; ?></span>
-        </div>
-        <div>
-            <strong style="text-align:center;font-size:15px;margin-bottom:26px;">Payment Method</strong>
-            <span style="text-align:center;"><?php echo $paymentMethod; ?></span>
-        </div>
     </div>
 
-    <div class="summary-title">Order Summary</div>
-    <table class="order-summary">
-        <thead>
-            <tr>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($orderItems as $item): ?>
-            <tr>
-                <td><?php echo htmlspecialchars($item['name']); ?></td>
-                <td style="color:#154D71;">x<?php echo $item['quantity']; ?></td>
-                <td style="color:#198754;">$<?php echo number_format($item['price'], 2); ?></td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+    <?php include 'footer.php'; ?>
 
-    <div class="subtotal">
-        Sub-total: <span>$<?php echo $totalAmount; ?></span>
-    </div>
-
-    <div class="order-success">
-        Redirecting back to cart in <span id="count">5</span>
-    </div>
-</div>
-
-<script>
-    // Simple countdown redirect
-    let count = 7;
-    const counter = document.getElementById("count");
-    const interval = setInterval(() => {
-        count--;
-        counter.textContent = count;
-        if (count <= 0) {
-            clearInterval(interval);
-            window.location.href = "cart.php"; // redirect page
-        }
-    }, 1000);
-</script>
+    <script>
+        // Confetti effect (subtle CSS version)
+        document.addEventListener('DOMContentLoaded', () => {
+            // Countdown
+            let count = 7;
+            const counter = document.getElementById("count");
+            const interval = setInterval(() => {
+                count--;
+                if (counter) counter.textContent = count;
+                if (count <= 0) {
+                    clearInterval(interval);
+                    window.location.href = "products.php";
+                }
+            }, 1000);
+        });
+    </script>
 </body>
 </html>
 

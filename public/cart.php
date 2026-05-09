@@ -38,7 +38,7 @@ $cartTotal = $_SESSION['checkout']['cart_total'] ??  00.00 ;
     <main class="container">
         <div class="top-section">
             <h2>Your Shopping Cart</h2>
-            <button class="delete-cart" onclick="<?php echo empty($cartItems) ? '' : 'clearCart()' ;?>">Delete cart</button>
+            <button class="delete-cart">Delete cart</button>
         </div>
         <br>
         <?php if (empty($cartItems)): ?>
@@ -86,21 +86,22 @@ $cartTotal = $_SESSION['checkout']['cart_total'] ??  00.00 ;
                             <div class="stock">( <?php echo $item['stock_quantity'];?>&nbsp;)</div>
 
                             <!-- Quantity -->
-                            <div class="carts">
+                            <div class="item-quantity-section">
                                 <div class="item-quantity">
                                     <div class="quantity-controls">
                                         <button type="button" class="controls" onclick="adjustQuantity(this,-1)">-</button>
-                                        <input type="number" class="quantity" name="quantity" value="<?php echo $item['quantity'] ; ?>" min="1" data-price="<?php echo $item['price']; ?>">
+                                        <input type="number" class="quantity" name="quantity" value="<?php echo $item['quantity'] ; ?>" min="1" data-price="<?php echo $item['price']; ?>" data-original-quantity="<?php echo $item['quantity']; ?>">
                                         <button type="button" class="controls" onclick="adjustQuantity(this,1)">+</button>
                                     </div>
                                     <button class="update-quantity-btn" data-product-id="<?php echo $item['product_id']; ?>">
                                         Update
                                     </button>
                                 </div>
-                                 <!-- Total -->
-                                <div>
-                                    <p class="total-price">$<?php echo number_format($item['price'] * $item['quantity'], 2); ?></p>
-                                </div>
+                            </div>
+                                 
+                            <!-- Total -->
+                            <div class="item-total-section">
+                                <p class="total-price">$<?php echo number_format($item['price'] * $item['quantity'], 2); ?></p>
                             </div>
                             
                            
@@ -128,6 +129,20 @@ $cartTotal = $_SESSION['checkout']['cart_total'] ??  00.00 ;
         <?php endif; ?>
 
     </main>
+
+    <!-- Confirmation Modal -->
+    <div class="confirm-overlay" id="confirmOverlay">
+        <div class="confirm-modal">
+            <div class="confirm-icon" id="confirmIcon">💾</div>
+            <h4 id="confirmTitle">Confirm Action</h4>
+            <p id="confirmMessage">Are you sure you want to proceed?</p>
+            <div class="confirm-buttons">
+                <button type="button" class="confirm-cancel" id="confirmCancel">Cancel</button>
+                <button type="button" class="confirm-ok" id="confirmOk">Confirm</button>
+            </div>
+        </div>
+    </div>
+
     <?php unset($_SESSION['checkout']['product_ids']); ?>                <!-- to clear the session so next reload will not have anything checked  -->
     <?php unset($_SESSION['checkout']['cart_total']); ?>
     <?php include 'footer.php' ?>
@@ -136,9 +151,9 @@ $cartTotal = $_SESSION['checkout']['cart_total'] ??  00.00 ;
     <script>
 
         function adjustQuantity(button , amount) {                                 // for +,- button functionality
-            const cartItem = button.closest(".carts") ;                          // to find the cart item that the button belongs to
+            const itemQuantitySection = button.closest(".item-quantity-section") ;                          // to find the cart item that the button belongs to
             
-            let qtyInput = cartItem.querySelector(".quantity");
+            let qtyInput = itemQuantitySection.querySelector(".quantity");
             let current = parseInt(qtyInput.value)||1 ;
             if (isNaN(current)) 
                 current = 1;
@@ -146,18 +161,19 @@ $cartTotal = $_SESSION['checkout']['cart_total'] ??  00.00 ;
             if (newQty < 1) 
                 newQty = 1;
             qtyInput.value = newQty;
-            updateTotal(cartItem) ;                              // passing the cart item for necessary upate of total-price
+            updateTotal(itemQuantitySection) ;                              // passing the cart item for necessary upate of total-price
             }
 
         //For manual updates
         document.querySelectorAll(".quantity").forEach(input =>{
             input.addEventListener("input",function(){
-                updateTotal(this.closest(".carts"));           // respective cart item only
+                updateTotal(this.closest(".item-quantity-section"));           // respective cart item only
             })
         })
 
-        function updateTotal(cartItem){
-            const qtyInput = cartItem.querySelector(".quantity");
+        function updateTotal(itemQuantitySection){
+            const qtyInput = itemQuantitySection.querySelector(".quantity");
+            const cartItem = itemQuantitySection.closest(".cart-item");
             const totalPrice = cartItem.querySelector(".total-price");
             const unitPrice = parseFloat(qtyInput.dataset.price);
             

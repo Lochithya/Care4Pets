@@ -33,40 +33,83 @@ if ($productIds) {
     $items = getProductInfo($userId, $productIds);
 }
 ?>
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Payment</title>
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/payments.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout - Care4Pets</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/payments.css">
 </head>
 <body>
+    <?php include 'header.php'; ?>
+    <div id="message-bar" class="message-bar"></div>
 <div class="wrap">
-  <!-- Products -->
+  <!-- Products & Summary -->
   <div class="box left">
-    <h3>Products</h3>
-    <?php if (!$items): ?>
-      <p>No items - go back to cart.</p>
-    <?php else: ?>
-      <?php foreach ($items as $it): ?>
-        <div class="product-row">
-          <div class="product-info">
-            <img src="<?php echo htmlspecialchars($it['image_url']); ?>" alt="">
-            <div>
-              <div class="product-name"><?php echo htmlspecialchars($it['name']); ?></div>
-              <div>( Qty: <?php echo (int)$it['quantity']; ?> )</div>
-            </div>
-          </div>
-          <div class="price">$<?php echo number_format($it['price']*$it['quantity'],2); ?></div>
+    <div class="checkout-header">
+        <h3>Order Review</h3>
+        <span class="item-count"><?php echo count($items); ?> Items</span>
+    </div>
+    
+    <div class="shipping-summary">
+        <h4>Shipping To</h4>
+        <?php 
+        $ship = $_SESSION['shipping'] ?? [];
+        $fullName = trim(($ship['first_name'] ?? '') . ' ' . ($ship['last_name'] ?? ''));
+        ?>
+        <div class="address-pill">
+            <strong><?php echo htmlspecialchars($fullName ?: 'Guest'); ?></strong><br>
+            <?php echo htmlspecialchars($ship['address1'] ?? 'No address provided'); ?><br>
+            <?php echo htmlspecialchars(($ship['city'] ?? '') . ' ' . ($ship['state'] ?? '') . ' ' . ($ship['zipcode'] ?? '')); ?><br>
+            <?php echo htmlspecialchars($ship['phone'] ?? ''); ?>
         </div>
-      <?php endforeach; ?>
-      <div class="total-section">
-        <div class="text">Sub Total  </div>
-        <div class="total">$<?php echo number_format($cartTotal,2); ?></div>
-      </div>
-      
-    <?php endif; ?>
+    </div>
+
+    <div class="product-list-mini">
+        <?php if (!$items): ?>
+          <p>No items found.</p>
+        <?php else: ?>
+          <?php foreach ($items as $it): ?>
+            <div class="product-row">
+              <div class="product-info">
+                <img src="<?php echo htmlspecialchars($it['image_url']); ?>" alt="">
+                <div class="details">
+                  <div class="product-name"><?php echo htmlspecialchars($it['name']); ?></div>
+                  <div class="qty">Quantity: <?php echo (int)$it['quantity']; ?></div>
+                </div>
+              </div>
+              <div class="price">$<?php echo number_format($it['price']*$it['quantity'],2); ?></div>
+            </div>
+          <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+
+    <div class="cost-summary">
+        <div class="cost-row">
+            <span>Subtotal</span>
+            <span>$<?php echo number_format($cartTotal, 2); ?></span>
+        </div>
+        <div class="cost-row">
+            <span>Shipping</span>
+            <span class="free">FREE</span>
+        </div>
+        <div class="cost-row">
+            <span>Tax (Included)</span>
+            <span>$0.00</span>
+        </div>
+        <div class="total-section">
+            <div class="text">Order Total</div>
+            <div class="total">$<?php echo number_format($cartTotal, 2); ?></div>
+        </div>
+    </div>
+    <div class="security-note">
+        Your transaction is secured with SSL encryption.
+    </div>
   </div>
 
   <!-- Payment -->
@@ -136,6 +179,7 @@ if ($productIds) {
     </form>
   </div>
 </div>
+    <?php include 'footer.php'; ?>
 </body>
 <script src="../js/payments.js"></script>
 </html>

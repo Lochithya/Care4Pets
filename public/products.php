@@ -8,12 +8,27 @@ $productTypes = getAllProductTypes();
 $selectedPetType = isset($_GET['pet_type']) && $_GET['pet_type'] !== '' ? $_GET['pet_type'] : null;                         // when refreshing , default values will be shown( set to null )
 $selectedProductType = isset($_GET['product_type']) && $_GET['product_type'] !== '' ? $_GET['product_type'] : null;
 
-$sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
-
-
-// Allow sort param: default | low | high
 $sort = isset($_GET['sort']) && in_array($_GET['sort'], ['default','low','high']) ? $_GET['sort'] : 'default';
-$products = getProductsByFilters($selectedPetType, $selectedProductType, $sort);
+$search = isset($_GET['search']) ? trim($_GET['search']) : null;
+
+// Smart keyword matching to update filters automatically
+if ($search) {
+    $searchLower = strtolower($search);
+    foreach ($petTypes as $pt) {
+        if (strpos($searchLower, strtolower($pt['name'])) !== false) {
+            $selectedPetType = $pt['id'];
+            break;
+        }
+    }
+    foreach ($productTypes as $prt) {
+        if (strpos($searchLower, strtolower($prt['name'])) !== false) {
+            $selectedProductType = $prt['id'];
+            break;
+        }
+    }
+}
+
+$products = getProductsByFilters($selectedPetType, $selectedProductType, $sort, $search);
 
     
 ?>
@@ -40,54 +55,91 @@ $products = getProductsByFilters($selectedPetType, $selectedProductType, $sort);
     <div class="products-layout">
         <!-- LEFT: product list -->
         <section class="product-list">
-            <!-- keep local product search (optional) -->
+            
             <div class="filters-container">
-                <div class="filter-section">
-                  <div class="filter-row">
-                    <div class="filter-group">
-                        <h3>Filter by Pet Type:</h3>
-                        <div class="category-filters">
-                            <a href="products.php?product_type=<?php echo htmlspecialchars($selectedProductType ?? ''); ?>&sort=<?php echo $sort; ?>"
-                            class="filter-btn <?php echo $selectedPetType === null ? 'active' : ''; ?>">All Pets</a>
+                <form action="products.php" method="GET" class="filter-main-form" id="filterForm">
+                    <div class="filter-top-row">
+                        <!-- Search Box (Centered & Shorter) -->
+                        <div class="filter-search-wrapper">
+                            <div class="search-input-group">
+                                <input type="text" name="search" id="searchInput" placeholder="Search products..." value="<?php echo htmlspecialchars($search ?? ''); ?>">
+                                <?php if ($search): ?>
+                                    <span class="clear-search" onclick="clearSearchInput()">&times;</span>
+                                <?php endif; ?>
+                            </div>
+                            <button type="submit" class="search-btn">Search</button>
+                        </div>
+                    </div>
 
-                            <?php foreach ($petTypes as $petType): ?>
-                                <a href="products.php?pet_type=<?php echo $petType['id']; ?>&product_type=<?php echo htmlspecialchars($selectedProductType ?? ''); ?>&sort=<?php echo $sort; ?>"
-                                class="filter-btn <?php echo $selectedPetType == $petType['id'] ? 'active' : ''; ?>">
-                                    <?php echo htmlspecialchars($petType['name']); ?>
+                    <div class="filter-section">
+                      <div class="filter-row">
+                        <!-- Pet Types -->
+                        <div class="filter-group">
+                            <h3>Pet Type:</h3>
+                            <div class="category-filters">
+                                <a href="products.php?product_type=<?php echo htmlspecialchars($selectedProductType ?? ''); ?>&sort=<?php echo $sort; ?>&search=<?php echo urlencode($search ?? ''); ?>"
+                                class="filter-btn <?php echo $selectedPetType === null ? 'active' : ''; ?>">All Pets</a>
+
+                                <?php foreach ($petTypes as $petType): ?>
+                                    <a href="products.php?pet_type=<?php echo $petType['id']; ?>&product_type=<?php echo htmlspecialchars($selectedProductType ?? ''); ?>&sort=<?php echo $sort; ?>&search=<?php echo urlencode($search ?? ''); ?>"
+                                    class="filter-btn <?php echo $selectedPetType == $petType['id'] ? 'active' : ''; ?>">
+                                        <?php echo htmlspecialchars($petType['name']); ?>
+                                    </a>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+
+                        <div class="filter-divider"></div>
+
+                        <!-- Product Types -->
+                        <div class="filter-group">
+                            <h3>Product Type:</h3>
+                            <div class="category-filters">
+                                <a href="products.php?pet_type=<?php echo htmlspecialchars($selectedPetType ?? ''); ?>&sort=<?php echo $sort; ?>&search=<?php echo urlencode($search ?? ''); ?>"
+                                class="filter-btn <?php echo $selectedProductType === null ? 'active' : ''; ?>">All Types</a>
+
+                                <?php foreach ($productTypes as $productType): ?>
+                                <a href="products.php?product_type=<?php echo $productType['id']; ?>&pet_type=<?php echo htmlspecialchars($selectedPetType ?? ''); ?>&sort=<?php echo $sort; ?>&search=<?php echo urlencode($search ?? ''); ?>"
+                                    class="filter-btn <?php echo $selectedProductType == $productType['id'] ? 'active' : ''; ?>">
+                                    <?php echo htmlspecialchars($productType['name']); ?>
                                 </a>
-                            <?php endforeach; ?>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
+
+                        <div class="filter-divider"></div>
+
+                        <!-- Sort Options (Moved here) -->
+                        <div class="filter-sort-group">
+                            <h3>Sort by Price:</h3>
+                            <select id="sort" name="sort" onchange="this.form.submit()">
+                                <option value="default" <?php echo $sort === 'default' ? 'selected' : ''; ?>>Default</option>
+                                <option value="low" <?php echo $sort === 'low' ? 'selected' : ''; ?>>Low to High</option>
+                                <option value="high" <?php echo $sort === 'high' ? 'selected' : ''; ?>>High to Low</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-divider"></div>
+
+                        <!-- Clear Filters (Moved here) -->
+                        <div class="filter-action-group">
+                            <?php if ($selectedPetType || $selectedProductType || $search || $sort !== 'default'): ?>
+                                <a href="products.php" class="clear-filters-link">Clear Filters</a>
+                            <?php else: ?>
+                                <span class="clear-filters-link disabled">Clear Filters</span>
+                            <?php endif; ?>
+                        </div>
+                      </div>
                     </div>
 
-                    <div class="filter-divider"></div>
-
-                    <div class="filter-group">
-                        <h3>Filter by Product Type:</h3>
-                        <div class="category-filters">
-                            <a href="products.php?pet_type=<?php echo htmlspecialchars($selectedPetType ?? ''); ?>&sort=<?php echo $sort; ?>"
-                            class="filter-btn <?php echo $selectedProductType === null ? 'active' : ''; ?>">All Types</a>
-
-                            <?php foreach ($productTypes as $productType): ?>
-                            <a href="products.php?product_type=<?php echo $productType['id']; ?>&pet_type=<?php echo htmlspecialchars($selectedPetType ?? ''); ?>&sort=<?php echo $sort; ?>"
-                                class="filter-btn <?php echo $selectedProductType == $productType['id'] ? 'active' : ''; ?>">
-                                <?php echo htmlspecialchars($productType['name']); ?>
-                            </a>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 🔽 Sort By Price Dropdown (aligned horizontally) -->
-                <div class="sort-section" style="display: flex; align-items: center; justify-content: flex-end; margin-top: 10px; gap: 8px;">
-                    <label for="sort" style="font-weight: bold;">Sort by Price:</label>
-                    <select id="sort" name="sort" onchange="applySort()" 
-                            style="padding: 6px 10px; border-radius: 8px; border: 1px solid #ccc;">
-                        <option value="default" <?php echo $sort === 'default' ? 'selected' : ''; ?>>Default</option>
-                        <option value="low" <?php echo $sort === 'low' ? 'selected' : ''; ?>>Low to High</option>
-                        <option value="high" <?php echo $sort === 'high' ? 'selected' : ''; ?>>High to Low</option>
-                    </select>
-                </div>
+                    <!-- Hidden inputs to persist filters during search submission -->
+                    <?php if ($selectedPetType): ?>
+                        <input type="hidden" name="pet_type" value="<?php echo $selectedPetType; ?>">
+                    <?php endif; ?>
+                    <?php if ($selectedProductType): ?>
+                        <input type="hidden" name="product_type" value="<?php echo $selectedProductType; ?>">
+                    <?php endif; ?>
+                </form>
             </div>
 
             <div class="products-grid">
@@ -135,7 +187,7 @@ $products = getProductsByFilters($selectedPetType, $selectedProductType, $sort);
                                         Add to Cart
                                     </button>
                                 <?php else: ?>
-                                    <div class="op"><p><a href="login.php">Login to purchase</a></p></div>
+                                    <a href="login.php" class="btn-login">Login to Purchase</a>
                                 <?php endif; ?>
                             </div>
                         
@@ -214,11 +266,24 @@ $products = getProductsByFilters($selectedPetType, $selectedProductType, $sort);
             });
         }
         
+// Reset on refresh logic
+if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_RELOAD) {
+    if (window.location.search !== "") {
+        window.location.href = window.location.pathname;
+    }
+}
+
+function clearSearchInput() {
+    const input = document.getElementById('searchInput');
+    input.value = '';
+    document.getElementById('filterForm').submit();
+}
+
 function applySort() {
-  const sort = document.getElementById('sort').value;
-  const params = new URLSearchParams(window.location.search);
-  params.set('sort', sort);
-  window.location.href = window.location.pathname + '?' + params.toString();
+    const sort = document.getElementById('sort').value;
+    const params = new URLSearchParams(window.location.search);
+    params.set('sort', sort);
+    window.location.href = window.location.pathname + '?' + params.toString();
 }
 
 
