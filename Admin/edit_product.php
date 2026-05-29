@@ -245,62 +245,7 @@ function confirmUpdate(e) {
     return false;
 }
 
-function showConfirmation(title, message, icon, onConfirm, onCancel) {
-    const overlay = document.getElementById('confirmOverlay');
-    if (!overlay) {
-        if (confirm(message)) onConfirm();
-        else if (onCancel) onCancel();
-        return;
-    }
-    
-    document.getElementById('confirmTitle').textContent = title;
-    document.getElementById('confirmMessage').textContent = message;
-    document.getElementById('confirmIcon').textContent = icon;
-    
-    overlay.classList.add('active');
-    
-    const confirmBtn = document.getElementById('confirmOk');
-    const cancelBtn = document.getElementById('confirmCancel');
-    
-    const newConfirmBtn = confirmBtn.cloneNode(true);
-    const newCancelBtn = cancelBtn.cloneNode(true);
-    confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
-    cancelBtn.parentNode.replaceChild(newCancelBtn, cancelBtn);
-    
-    newConfirmBtn.addEventListener('click', function() {
-        overlay.classList.remove('active');
-        if (onConfirm) onConfirm();
-    });
-    
-    newCancelBtn.addEventListener('click', function() {
-        overlay.classList.remove('active');
-        if (onCancel) onCancel();
-    });
-}
-
-function showMessageBar(message, type) {
-    const toast = document.createElement('div');
-    toast.className = 'admin-toast';
-    toast.innerHTML = `
-        <div class="toast-icon-check"><i class="fas fa-check"></i></div>
-        <div class="toast-message">${message}</div>
-    `;
-    document.body.appendChild(toast);
-    
-    // Trigger animation
-    setTimeout(() => toast.classList.add('visible'), 10);
-    
-    const dismiss = () => {
-        toast.classList.remove('visible');
-        setTimeout(() => {
-            toast.remove();
-            location.href = 'product.php';
-        }, 400);
-    };
-    
-    // Auto reload after 3s
-    setTimeout(dismiss, 3000);
-}
+    showMessageBar("<?php echo $success; ?>", "success", "product.php");
 </script>
 
 <?php include 'footer.php'; ?>

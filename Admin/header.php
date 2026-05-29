@@ -27,7 +27,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 <li><a href="suppliers.php" class="<?php echo $current_page == 'suppliers.php' ? 'active' : ''; ?>"><i class="fas fa-truck"></i> Suppliers</a></li>
                 <li><a href="pet_types.php" class="<?php echo $current_page == 'pet_types.php' ? 'active' : ''; ?>"><i class="fas fa-dog"></i> Pet Types</a></li>
                 <li><a href="product_types.php" class="<?php echo $current_page == 'product_types.php' ? 'active' : ''; ?>"><i class="fas fa-tags"></i> Product Types</a></li>
-                <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                <li><a href="logout.php" onclick="return confirmLogout(event)"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
         </div>
         <div class="main-content">

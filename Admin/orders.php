@@ -33,7 +33,7 @@ include 'header.php';
             <p>Manage and track all customer orders</p>
         </div>
         <div class="header-stats">
-            <div class="stat-card-orders">
+            <div class="stat-card">
                 <div class="stat-number"><?php echo mysqli_num_rows($orders_result); ?></div>
                 <div class="stat-label">Total Orders</div>
             </div>
@@ -127,7 +127,7 @@ include 'header.php';
                         <form method="POST" class="status-form-inline">
                             <input type="hidden" name="order_id" value="<?php echo $order['id']; ?>">
                             <div class="select-wrapper">
-                                <select name="status" class="status-select-inline" onchange="this.form.submit()">
+                                <select name="status" class="status-select-inline" data-original="<?php echo $order['status']; ?>" onchange="confirmStatusChange(this)">
                                     <option value="pending" <?php echo $order['status'] == 'pending' ? 'selected' : ''; ?>>Confirmed</option>
                                     <option value="processing" <?php echo $order['status'] == 'processing' ? 'selected' : ''; ?>>Processing</option>
                                     <option value="shipped" <?php echo $order['status'] == 'shipped' ? 'selected' : ''; ?>>Shipped</option>
@@ -156,5 +156,26 @@ include 'header.php';
         </div>
     <?php endif; ?>
 </div>
+
+<script>
+function confirmStatusChange(selectElement) {
+    const form = selectElement.form;
+    const newStatusText = selectElement.options[selectElement.selectedIndex].text;
+    const originalValue = selectElement.getAttribute('data-original');
+    
+    showConfirmation(
+        '📦 Update Order Status',
+        `Are you sure you want to change the status of this order to "${newStatusText}"?`,
+        '📦',
+        () => {
+            form.submit();
+        },
+        () => {
+            // Revert back to original value if cancelled
+            selectElement.value = originalValue;
+        }
+    );
+}
+</script>
 
 <?php include 'footer.php'; ?>
