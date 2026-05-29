@@ -141,6 +141,7 @@ body {
     border: 1px solid rgba(255,255,255,0.18);
     color: #fff;
     text-decoration: none;
+    overflow: visible;
 }
 
 .icon-wrapper:hover,
@@ -189,6 +190,12 @@ body {
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid rgba(255,255,255,0.5);
+    /* Visually enlarge the avatar without changing layout size */
+    transform: scale(1.45);
+    transform-origin: center left;
+    display: block;
+    /* Pull the scaled image slightly left so the greeting text isn't pushed */
+    margin-left: -6px;
 }
 
 .greeting {
