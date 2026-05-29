@@ -1,141 +1,500 @@
--- Database: pet_store
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
 --
--- Table: users
-CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    first_name VARCHAR(100) NOT NULL,
-    last_name VARCHAR(100) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    phone VARCHAR(20) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    avatar VARCHAR(255)
-);
+-- Host: 127.0.0.1
+-- Generation Time: May 29, 2026 at 11:39 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
--- Table: products
-CREATE TABLE products (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    description TEXT,
-    price DECIMAL(10, 2) NOT NULL,
-    stock_quantity INT NOT NULL DEFAULT 0,
-    image_url VARCHAR(255),
-    pet_type_id INT NOT NULL ; 
-    product_type_id INT NOT NULL ;
-    ratings INT NOT NULL ;
-    img1 VARCHAR(100),
-    img2 VARCHAR(100), 
-    img3 VARCHAR(100),
-    supplier_id INT NOT NULL ; 
-    FOREIGN KEY (pet_type_id) REFERENCES pet_types(id) ;
-    FOREIGN KEY (product_type_id) REFERENCES product_types(id) ;
-);
-
---Table : pet_types
-CREATE TABLE pet_types(
-    id INT AUTO_INCREMENT PRIMARY KEY ;
-    name VARCHAR(50) NOT NULL ;
-)
-
---Table : product_types 
-CREATE TABLE product_types(
-    id INT AUTO_INCREMENT PRIMARY KEY ; 
-    name VARCHAR(50) NOT NULL ; 
-)
-
---Table : suppliers
-CREATE TABLE suppliers (
-    sup_id INT AUTO_INCREMENT PRIMARY KEY,
-    sup_name VARCHAR(50) NOT NULL,
-    sup_phone VARCHAR(100),
-    sup_email VARCHAR(100),
-    sup_address VARCHAR(100)
-);
-
--- Table: orders
-CREATE TABLE orders (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    order_date DATE DEFAULT CURRENT_DATE ;
-    order_time TIME DEFAULT CURRENT_TIME ; 
-    delivery_date DATE ;
-    total_amount DECIMAL(10, 2) NOT NULL,
-    status VARCHAR(50) NOT NULL DEFAULT 'pending',
-    FOREIGN KEY (user_id) REFERENCES users(id)
-);
-
--- Table: order_items
-CREATE TABLE order_items (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    order_id INT NOT NULL,
-    product_id INT NOT NULL,
-    quantity INT NOT NULL,
-    price DECIMAL(10, 2) NOT NULL,
-    FOREIGN KEY (order_id) REFERENCES orders(id),
-    FOREIGN KEY (product_id) REFERENCES products(id)
-);
-
--- Table: cart (for temporary storage of user's cart items)
-CREATE TABLE cart (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    product_id INT NOT NULL,
-    quantity INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (product_id) REFERENCES products(id)
-);
-
--- Table: shipping (to store the shipping information of a particular order)
-CREATE TABLE shipping (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    order_id INT NOT NULL,
-    first_name VARCHAR(100) NOT NULL,
-    last_name VARCHAR(100) NOT NULL,
-    address_line1 VARCHAR(255) NOT NULL,
-    address_line2 VARCHAR(255),
-    city VARCHAR(100) NOT NULL,
-    state VARCHAR(100),
-    postal_code VARCHAR(20),
-    country VARCHAR(100) NOT NULL,
-    phone VARCHAR(20) not NULL,
-    add_phone VARCHAR(20),
-    FOREIGN KEY (order_id) REFERENCES orders(id)
-);
-
--- Table payments(To store the payment information of a particular order)
-CREATE TABLE payments (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    order_id INT NOT NULL,
-    payment_type ENUM('cash', 'card') NOT NULL,
-    amount DECIMAL(10,2) NOT NULL,
-    payment_date DATE NULL,
-    payment_time DATE NULL ,
-
-    -- For card payments
-    masked_card_number CHAR(16),   -- e.g. 4111********1234
-    cardholder_name VARCHAR(100),
-    expiry_date CHAR(5),           -- MM/YY
-    card_type VARCHAR(30)
-    transaction_status VARCHAR(20) ;
-
-    FOREIGN KEY (order_id) REFERENCES orders(id)
-);
-
-CREATE TABLE messages(
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NULL, -- nullable for guests
-    firstname VARCHAR(50),
-    lastname VARCHAR(50),
-    email VARCHAR(100),
-    subject VARCHAR(150),
-    message TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id)
-);
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
+--
+-- Database: `pet_store`
+--
 
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `admin`
+--
 
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `username`, `password`) VALUES
+(1, 'chinthana', '$2y$10$zrxJ0ymo0z2YNphX9huCKuR6cZ54PFxuqoX53XUSEL4tl7322Mfp.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `messages`
+--
+
+CREATE TABLE `messages` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `firstname` varchar(50) DEFAULT NULL,
+  `lastname` varchar(50) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `subject` varchar(150) DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `total_amount` decimal(10,2) NOT NULL,
+  `status` varchar(50) NOT NULL DEFAULT 'pending',
+  `order_date` date DEFAULT curdate(),
+  `order_time` time DEFAULT curtime(),
+  `delivery_date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_items`
+--
+
+CREATE TABLE `order_items` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `price` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `payment_type` enum('cash','card') NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `masked_card_number` char(16) DEFAULT NULL,
+  `cardholder_name` varchar(100) DEFAULT NULL,
+  `expiry_date` char(5) DEFAULT NULL,
+  `card_type` varchar(30) DEFAULT NULL,
+  `transaction_status` varchar(20) DEFAULT NULL,
+  `payment_date` date DEFAULT NULL,
+  `payment_time` time DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pet_types`
+--
+
+CREATE TABLE `pet_types` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pet_types`
+--
+
+INSERT INTO `pet_types` (`id`, `name`, `created_at`) VALUES
+(1, 'Dogs', '2026-05-29 08:54:09'),
+(2, 'Cats', '2026-05-29 08:54:09'),
+(3, 'Birds', '2026-05-29 08:54:09'),
+(4, 'Small Pets', '2026-05-29 08:54:09'),
+(5, 'rabbits', '2026-05-29 08:54:09');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `description` text DEFAULT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `stock_quantity` int(11) NOT NULL DEFAULT 0,
+  `image_url` varchar(255) DEFAULT NULL,
+  `pet_type_id` int(11) DEFAULT NULL,
+  `product_type_id` int(11) DEFAULT NULL,
+  `ratings` decimal(10,1) DEFAULT NULL,
+  `img1` varchar(100) DEFAULT NULL,
+  `img2` varchar(100) DEFAULT NULL,
+  `img3` varchar(100) DEFAULT NULL,
+  `supplier_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `description`, `price`, `stock_quantity`, `image_url`, `pet_type_id`, `product_type_id`, `ratings`, `img1`, `img2`, `img3`, `supplier_id`) VALUES
+(1, 'Premium Dog Food', 'High-quality dry dog food with natural ingredients for optimal nutrition', 29.99, 4, '../images/products/Product 01/img 01.jpg', 1, 2, 4.0, '../images/products/Product 01/img 02.avif', '../images/products/Product 01/img 03.webp', '../images/products/Product 01/img 04.jpg', 2),
+(2, 'Natural Cat Food', 'Nutritious cat food made with real meat and vegetables', 24.99, 39, '../images/products/Product 02/img 01.jpg', 2, 2, 4.2, '../images/products/Product 02/img 02.webp', '../images/products/Product 02/img 03.jpg', '../images/products/Product 02/img 04.webp', 4),
+(3, 'Waterproof Dog Collar', 'Durable and comfortable waterproof collar for dogs of all sizes', 15.99, 22, '../images/products/Product 03/img 01.jpg', 1, 4, 4.3, '../images/products/Product 03/img 02.webp', '../images/products/Product 03/img 03.webp', '../images/products/Product 03/img 04.jpg', 1),
+(4, 'Premium Dog Leash', 'Strong and stylish leash perfect for daily walks', 19.99, 23, '../images/products/Product 04/img 01.jpg', 1, 4, 4.9, '../images/products/Product 04/img 02.png', '../images/products/Product 04/img 03.webp', '../images/products/Product 04/img 04.jpg', 6),
+(5, 'Cat Scratching Post', 'Multi-level scratching post to keep your cat entertained', 39.99, 18, '../images/products/Product 05/img 01.jpg', 2, 3, 4.6, '../images/products/Product 05/img 02.webp', '../images/products/Product 05/img 03.jpg', '../images/products/Product 05/img 04.jpg', 1),
+(7, 'Hamster Wheel', 'Silent running exercise wheel designed for hamsters and other small pets', 12.99, 39, '../images/products/Product 07/img 01.jpg', 4, 3, 4.9, '../images/products/Product 07/img 02.jpg', '../images/products/Product 07/img 03.webp', '../images/products/Product 07/img 04.jpg', 3),
+(8, 'Dog Toy Set', 'Set of 5 interactive toys to keep your dog engaged', 22.99, 35, '../images/products/Product 08/img 01.webp', 1, 3, 4.6, '../images/products/Product 08/img 02.jpg', '../images/products/Product 08/img 03.jpg', '../images/products/Product 08/img 04.jpg', 2),
+(9, 'Cat Litter Premium', 'Odor-control cat litter that clumps for easy cleaning', 16.99, 57, '../images/products/Product 09/img 01.webp', 2, 4, 5.0, '../images/products/Product 09/img 02.webp', '../images/products/Product 09/img 03.jpg', '../images/products/Product 09/img 04.webp', 1),
+(10, 'Bird Food Mix', 'Nutritious seed mix for various bird species', 8.99, 43, '../images/products/Product 10/img 01.avif', 3, 2, 4.8, '../images/products/Product 10/img 02.jpg', '../images/products/Product 10/img 03.webp', '../images/products/Product 10/img 04.jpg', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_types`
+--
+
+CREATE TABLE `product_types` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `product_types`
+--
+
+INSERT INTO `product_types` (`id`, `name`, `created_at`) VALUES
+(1, 'Pets', '2026-05-29 08:54:23'),
+(2, 'Food', '2026-05-29 08:54:23'),
+(3, 'Toys', '2026-05-29 08:54:23'),
+(4, 'Accessories', '2026-05-29 08:54:23');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shipping`
+--
+
+CREATE TABLE `shipping` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `address_line1` varchar(255) NOT NULL,
+  `address_line2` varchar(255) DEFAULT NULL,
+  `city` varchar(100) NOT NULL,
+  `state` varchar(100) DEFAULT NULL,
+  `postal_code` varchar(20) DEFAULT NULL,
+  `country` varchar(100) NOT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `add_phone` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `suppliers`
+--
+
+CREATE TABLE `suppliers` (
+  `supplier_id` int(11) NOT NULL,
+  `sup_name` varchar(100) NOT NULL,
+  `sup_phone` varchar(100) NOT NULL,
+  `sup_email` varchar(100) NOT NULL,
+  `sup_address` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `suppliers`
+--
+
+INSERT INTO `suppliers` (`supplier_id`, `sup_name`, `sup_phone`, `sup_email`, `sup_address`) VALUES
+(1, 'Global Pet Supplies Ltd.', '011-2456789', 'contact@globalpetsupplies.com', 'No. 120, Union Place, Colombo 02'),
+(2, 'Elite Pet Distributors Pvt. Ltd.', '011-2987654', 'info@elitepetdistributors.com', '45/3 Main Street, Kandy'),
+(3, 'PetCare International', '011-3344556', 'support@petcareintl.com', '78 Galle Road, Galle'),
+(4, 'Animal Essentials Pvt. Ltd.', '011-2765432', 'sales@animalessentials.com', '22 Central Road, Jaffna'),
+(5, 'Premium Pet Traders', '011-2233445', 'enquiries@premiumpettraders.com', '56 Negombo Road, Negombo'),
+(6, 'United Pet Products Co.', '011-2121212', 'service@unitedpetproducts.com', '89 Matara Road, Matara'),
+(7, 'GlodenPet.PVT.LTD', '0777006582', 'chinthanasandeepa123@gmail.com', 'Ranasooriya Mawatha,paniyana');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `first_name` varchar(100) DEFAULT NULL,
+  `last_name` varchar(100) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `avtar` varchar(255) DEFAULT NULL,
+  `avatar` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wishlist`
+--
+
+CREATE TABLE `wishlist` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`);
+
+--
+-- Indexes for table `pet_types`
+--
+ALTER TABLE `pet_types`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_products_pet_type` (`pet_type_id`),
+  ADD KEY `fk_products_product_type` (`product_type_id`),
+  ADD KEY `fk_supplier` (`supplier_id`);
+
+--
+-- Indexes for table `product_types`
+--
+ALTER TABLE `product_types`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `product_type` (`name`);
+
+--
+-- Indexes for table `shipping`
+--
+ALTER TABLE `shipping`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`);
+
+--
+-- Indexes for table `suppliers`
+--
+ALTER TABLE `suppliers`
+  ADD PRIMARY KEY (`supplier_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_wishlist_item` (`user_id`,`product_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+
+--
+-- AUTO_INCREMENT for table `order_items`
+--
+ALTER TABLE `order_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `pet_types`
+--
+ALTER TABLE `pet_types`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `product_types`
+--
+ALTER TABLE `product_types`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `shipping`
+--
+ALTER TABLE `shipping`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT for table `suppliers`
+--
+ALTER TABLE `suppliers`
+  MODIFY `supplier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
+
+--
+-- Constraints for table `messages`
+--
+ALTER TABLE `messages`
+  ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  ADD CONSTRAINT `wishlist_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `wishlist_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

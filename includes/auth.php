@@ -58,7 +58,31 @@ function logoutUser() {
 
 // Check if user is logged in
 function isLoggedIn() {
-    return isset($_SESSION['user_id']);           // initialized in password verify method
+    static $isValid = null;
+    if ($isValid !== null) return $isValid;
+
+    if (isset($_SESSION['user_id'])) {
+        $conn = getConnection();
+        $stmt = $conn->prepare("SELECT id FROM users WHERE id = ?");
+        $stmt->bind_param("i", $_SESSION['user_id']);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows == 1) {
+            $isValid = true;
+        } else {
+            // User was deleted
+            session_destroy();
+            unset($_SESSION['user_id']);
+            $isValid = false;
+        }
+        $stmt->close();
+        
+        return $isValid;
+    }
+    
+    $isValid = false;
+    return false;
 }
 
 // Get current user ID
