@@ -35,8 +35,8 @@ include 'header.php';
                 $count_res = mysqli_query($conn, "SELECT COUNT(*) as total FROM messages");
                 $total_msgs = mysqli_fetch_assoc($count_res)['total'];
             ?>
-            <div class="stat-card-orders" style="background: #fff; border: 1px solid #e2e8f0;">
-                <div class="stat-number" style="color: #1a6fa8;"><?php echo $total_msgs; ?></div>
+            <div class="stat-card">
+                <div class="stat-number"><?php echo $total_msgs; ?></div>
                 <div class="stat-label">Total Inquiries</div>
             </div>
         </div>
@@ -107,7 +107,7 @@ include 'header.php';
                             <a href="mailto:<?php echo $row['email']; ?>?subject=Re: <?php echo urlencode($row['subject']); ?>" class="btn-primary" style="padding: 10px 22px; font-size: 0.85rem; text-decoration: none; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(26,111,168,0.15);">
                                 <i class="fas fa-reply"></i> Reply to Customer
                             </a>
-                            <a href="?delete_id=<?php echo $row['id']; ?>" class="btn-clear" style="padding: 10px 22px; font-size: 0.85rem; text-decoration: none; border-radius: 8px; border: 1px solid #fee2e2; color: #dc2626; display: inline-flex; align-items: center; gap: 8px; background: white;" onclick="return confirm('Archive and delete this inquiry?')">
+                            <a href="?delete_id=<?php echo $row['id']; ?>" class="btn-clear" style="padding: 10px 22px; font-size: 0.85rem; text-decoration: none; border-radius: 8px; border: 1px solid #fee2e2; color: #dc2626; display: inline-flex; align-items: center; gap: 8px; background: white;" onclick="return confirmDeletion(event, this.href, '🗑️ Archive Message', 'Are you sure you want to permanently remove this customer inquiry from your inbox?')">
                                 <i class="fas fa-trash-alt"></i> Delete Message
                             </a>
                         </div>

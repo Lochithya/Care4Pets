@@ -29,10 +29,24 @@ function initDeleteConfirmations() {
     const deleteLinks = document.querySelectorAll('a[onclick*="confirm"], a[href*="delete"]');
     
     deleteLinks.forEach(link => {
+        // If it's already using the custom confirmation, skip it
+        if (link.getAttribute('onclick') && link.getAttribute('onclick').includes('confirmDeletion')) return;
+
         link.addEventListener('click', function(e) {
-            if (!confirm('Are you sure you want to delete this item? This action cannot be undone.')) {
-                e.preventDefault();
-            }
+            e.preventDefault();
+            const url = this.href;
+            
+            showConfirmation(
+                '🗑️ Confirm Deletion',
+                'Are you sure you want to delete this item? This action cannot be undone.',
+                '🗑️',
+                () => {
+                    window.location.href = url;
+                },
+                () => {
+                    // Cancelled
+                }
+            );
         });
     });
 }
@@ -317,6 +331,126 @@ window.AdminDashboard = {
     formatCurrency,
     formatDate
 };
+
+// --- Custom Confirmation Modal Logic ---
+function showConfirmation(title, message, icon, onConfirm, onCancel) {
+    const overlay = document.getElementById('confirmOverlay');
+    if (!overlay) {
+        if (confirm(message)) onConfirm();
+        else if (onCancel) onCancel();
+        return;
+    }
+    
+    document.getElementById('confirmTitle').textContent = title;
+    document.getElementById('confirmMessage').textContent = message;
+    document.getElementById('confirmIcon').textContent = icon;
+    
+    overlay.classList.add('active');
+    
+    const confirmBtn = document.getElementById('confirmOk');
+    const cancelBtn = document.getElementById('confirmCancel');
+    
+    // Clone to remove previous event listeners
+    const newConfirmBtn = confirmBtn.cloneNode(true);
+    const newCancelBtn = cancelBtn.cloneNode(true);
+    confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
+    cancelBtn.parentNode.replaceChild(newCancelBtn, cancelBtn);
+    
+    newConfirmBtn.addEventListener('click', function() {
+        overlay.classList.remove('active');
+        if (onConfirm) onConfirm();
+    });
+    
+    newCancelBtn.addEventListener('click', function() {
+        overlay.classList.remove('active');
+        if (onCancel) onCancel();
+    });
+}
+
+// --- Generic Deletion Confirmation ---
+function confirmDeletion(e, url, title = '🗑️ Confirm Deletion', message = 'Are you sure you want to delete this item? This action cannot be undone.') {
+    if (e) e.preventDefault();
+    
+    showConfirmation(
+        title,
+        message,
+        '🗑️',
+        () => {
+            window.location.href = url;
+        },
+        () => {
+            // Cancelled
+        }
+    );
+    return false;
+}
+
+// --- Global Logout Confirmation ---
+function confirmLogout(e) {
+    e.preventDefault();
+    const logoutUrl = e.currentTarget.href;
+    
+    showConfirmation(
+        '🚪 Admin Logout',
+        'Are you sure you want to end your current session and logout?',
+        '🚪',
+        () => {
+            // Show a quick success bar before redirecting
+            const toast = document.createElement('div');
+            toast.className = 'admin-toast';
+            toast.style.borderColor = '#3b82f6';
+            toast.style.background = '#eff6ff';
+            toast.style.color = '#1d4ed8';
+            toast.innerHTML = `
+                <div class="toast-icon-check" style="background:#3b82f6;"><i class="fas fa-sign-out-alt"></i></div>
+                <div class="toast-message">Logging you out securely...</div>
+            `;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.classList.add('visible'), 10);
+            
+            setTimeout(() => {
+                window.location.href = logoutUrl;
+            }, 800);
+        },
+        () => {
+            // Optional: console.log('Logout cancelled');
+        }
+    );
+    return false;
+}
+
+// --- Global Message Bar (Toast) ---
+function showMessageBar(message, type = 'success', redirectUrl = null) {
+    const toast = document.createElement('div');
+    toast.className = `admin-toast ${type}`;
+    
+    let icon = '<i class="fas fa-check"></i>';
+    if (type === 'error') icon = '<i class="fas fa-exclamation-triangle"></i>';
+    if (type === 'warning') icon = '<i class="fas fa-exclamation-circle"></i>';
+    if (type === 'info') icon = '<i class="fas fa-info-circle"></i>';
+    
+    toast.innerHTML = `
+        <div class="toast-icon">${icon}</div>
+        <div class="toast-message">${message}</div>
+    `;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => toast.classList.add('visible'), 10);
+    
+    const dismiss = () => {
+        toast.classList.remove('visible');
+        setTimeout(() => {
+            toast.remove();
+            if (redirectUrl) {
+                location.href = redirectUrl;
+            }
+        }, 400);
+    };
+    
+    // Auto dismiss after 4s (longer for errors)
+    const duration = type === 'error' ? 5000 : 3500;
+    setTimeout(dismiss, duration);
+}
 
 // Auto-initialize when DOM is loaded
 if (document.readyState === 'loading') {

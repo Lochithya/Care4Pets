@@ -3,7 +3,7 @@ include 'config.php';
 checkLogin();
 
 if (!isset($_GET['id'])) {
-    header('Location: product.php');
+    header('Location: product.php?tab=viewProducts');
     exit();
 }
 
@@ -14,7 +14,7 @@ $check_query = "SELECT * FROM products WHERE id = $product_id";
 $check_result = mysqli_query($conn, $check_query);
 
 if (mysqli_num_rows($check_result) == 0) {
-    header('Location: product.php');
+    header('Location: product.php?tab=viewProducts');
     exit();
 }
 
@@ -26,6 +26,6 @@ if (mysqli_query($conn, $delete_query)) {
     $_SESSION['error'] = "Error deleting product: " . mysqli_error($conn);
 }
 
-header('Location: product.php');
+header('Location: product.php?tab=viewProducts');
 exit();
 ?>

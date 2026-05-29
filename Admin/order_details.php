@@ -49,7 +49,9 @@ include 'header.php';
                 <h2>Order Details</h2>
                 <div class="count-badge">Order #<?php echo htmlspecialchars($order_id); ?></div>
             </div>
-            <a href="orders.php" class="button" style="background-color: #fff; color: #1a6fa8; border: 1px solid #e2e8f0; font-weight: 700; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#1a6fa8'; this.style.color='#fff';" onmouseout="this.style.backgroundColor='#fff'; this.style.color='#1a6fa8';">← Back to Orders</a>
+            <a href="orders.php" class="button" style="background-color: #f0f9ff; color: #1a6fa8; border: 1px solid #1a6fa8; font-weight: 700; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 8px;" onmouseover="this.style.backgroundColor='#1a6fa8'; this.style.color='#fff';" onmouseout="this.style.backgroundColor='#f0f9ff'; this.style.color='#1a6fa8';">
+                <i class="fas fa-arrow-left"></i> Back to Orders
+            </a>
         </div>
 
         <?php if (!empty($not_found)): ?>
@@ -179,7 +181,9 @@ include 'header.php';
 
             <!-- Action Buttons -->
             <div style="display: flex; gap: 12px; justify-content: flex-end; padding-top: 24px; border-top: 1px solid #f1f5f9;">
-                <a href="orders.php" class="btn-clear">Back to Orders</a>
+                <a href="orders.php" class="button" style="background-color: #f0f9ff; color: #1a6fa8; border: 1px solid #1a6fa8; font-weight: 700; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 8px;" onmouseover="this.style.backgroundColor='#1a6fa8'; this.style.color='#fff';" onmouseout="this.style.backgroundColor='#f0f9ff'; this.style.color='#1a6fa8';">
+                    <i class="fas fa-arrow-left"></i> Back to Orders
+                </a>
                 <a href="edit_order.php?id=<?php echo $order_id; ?>" class="btn-primary">Edit Order Status</a>
             </div>
 
