@@ -142,6 +142,7 @@ body {
     color: #fff;
     text-decoration: none;
     overflow: visible;
+    min-height: 48px;
 }
 
 .icon-wrapper:hover,
@@ -181,7 +182,10 @@ body {
 }
 
 /* Profile */
-.profile-icon { gap: 9px; }
+.profile-icon { 
+    gap: 9px;
+    align-items: center;
+}
 .profile-icon i { font-size: 1.35rem; }
 
 .image {
@@ -190,19 +194,16 @@ body {
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid rgba(255,255,255,0.5);
-    /* Visually enlarge the avatar without changing layout size */
-    transform: scale(1.45);
-    transform-origin: center left;
     display: block;
-    /* Pull the scaled image slightly left so the greeting text isn't pushed */
-    margin-left: -6px;
+    flex-shrink: 0;
 }
 
 .greeting {
     font-size: 0.9rem;
     font-weight: 600;
-    line-height: 1.3;
+    line-height: 1.2;
     color: rgba(255,255,255,0.92);
+    white-space: nowrap;
 }
 
 /* Cart label */
